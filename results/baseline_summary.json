@@ -1,0 +1,21 @@
+{
+  "dataset_root": "C:\\Users\\houdh\\Desktop\\Data Science\\IOT\\PFA\\IOT_Project\\data\\archive",
+  "class_names": [
+    "mr_IXI_480i",
+    "mri_IXI_480_2"
+  ],
+  "slices_per_volume": 8,
+  "train_volumes": 1081,
+  "val_volumes": 232,
+  "test_volumes": 232,
+  "train_samples": 8648,
+  "val_samples": 1856,
+  "test_samples": 1856,
+  "total_samples": 12360,
+  "device": "cpu",
+  "accuracy": 0.99246,
+  "f1_weighted": 0.99246,
+  "model_size_mb": 8.727,
+  "inference_mean_ms_100_images": 10.668,
+  "peak_ram_mb": 881.38
+}

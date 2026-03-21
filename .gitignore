@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Large/raw medical data
+/data/archive/
+*.nii
+*.nii.gz
+
+# OS/editor junk
+.DS_Store
+Thumbs.db

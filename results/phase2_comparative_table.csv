@@ -1,0 +1,9 @@
+technique,status,accuracy,f1_weighted,model_size_mb,inference_mean_ms,peak_ram_mb,note,family,effective_model_size_mb,sparsity,compression_ratio
+Q1,ok,0.995,0.995,8.717,127.098,707.33,Dynamic quantization on Linear layers (int8).,quantization,8.717,,
+Q2,ok,0.995,0.995,2.518,39.004,750.0,PTQ static via FX graph mode (int8 weights+activations).,quantization,2.518,,
+Q3,ok,0.995,0.995,2.518,43.294,1570.34,QAT with short fine-tuning then conversion to quantized model.,quantization,2.518,,
+Q4,ok,0.995,0.995,8.724,124.478,1565.83,"Weight-only simulation (int8 QDQ on weights, fp32 activations).",quantization,8.724,,
+Q5,ok,0.995,0.995,8.724,126.066,1561.61,"Mixed precision simulation (8-bit sensitive layers, 4-bit others).",quantization,8.724,,
+P1,ok,0.5225,0.35863,8.724,122.957,736.86,"Unstructured global L1 pruning, amount=0.5",pruning,4.429,0.49234,1.97
+P2,ok,0.4775,0.30864,8.724,116.936,735.24,"Structured channel pruning on Conv2d, amount=0.3",pruning,6.149,0.29518,1.419
+P3,ok,0.5225,0.35863,8.724,121.989,753.21,"Iterative magnitude pruning, steps=3, step_amount=0.2",pruning,4.532,0.48052,1.925

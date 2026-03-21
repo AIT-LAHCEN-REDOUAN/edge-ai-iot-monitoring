@@ -1,0 +1,29 @@
+{
+  "slices_per_volume": 8,
+  "skipped_corrupted_files": 24,
+  "total_samples": 12360,
+  "split_counts": {
+    "train": 8648,
+    "val": 1856,
+    "test": 1856
+  },
+  "split_ratios": {
+    "train": 0.6997,
+    "val": 0.1502,
+    "test": 0.1502
+  },
+  "class_distribution": {
+    "train": {
+      "mr_IXI_480i": 4304,
+      "mri_IXI_480_2": 4344
+    },
+    "val": {
+      "mr_IXI_480i": 920,
+      "mri_IXI_480_2": 936
+    },
+    "test": {
+      "mr_IXI_480i": 928,
+      "mri_IXI_480_2": 928
+    }
+  }
+}

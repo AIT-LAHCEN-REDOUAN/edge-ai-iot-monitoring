@@ -1,0 +1,2 @@
+accuracy,f1_weighted,model_size_mb,inference_mean_ms_100_images,peak_ram_mb,train_samples,val_samples,test_samples
+0.99246,0.99246,8.727,10.668,881.38,8648,1856,1856

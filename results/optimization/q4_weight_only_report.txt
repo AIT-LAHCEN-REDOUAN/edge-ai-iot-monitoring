@@ -1,0 +1,15 @@
+=== Q4 WEIGHT-ONLY QUANTIZATION REPORT ===
+
+Device: cpu
+Baseline model path: D:\github\IOT_Project\models\baseline\best_model.pth
+Q4 model path: D:\github\IOT_Project\models\optimized\q4_weight_only_fp16_model.pth
+
+Baseline model size (MB): 42.6916
+Q4 model size (MB): 21.3633
+Size reduction (MB): 21.3283
+Compression ratio: 1.9984
+
+Q4 test accuracy: 0.987013
+Average batch inference time (sec): 0.219783
+Average image inference time (sec): 0.003434
+Throughput (images/sec): 291.20

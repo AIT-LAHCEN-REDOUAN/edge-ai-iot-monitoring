@@ -1,0 +1,15 @@
+=== Q1 DYNAMIC QUANTIZATION REPORT ===
+
+Device: cpu
+Baseline model path: D:\github\IOT_Project\models\baseline\best_model.pth
+Quantized model path: D:\github\IOT_Project\models\optimized\q1_dynamic_quantized_model.pth
+
+Baseline model size (MB): 42.6916
+Quantized model size (MB): 42.6899
+Size reduction (MB): 0.0017
+Compression ratio: 1.0000
+
+Q1 test accuracy: 0.987013
+Average batch inference time (sec): 0.268068
+Average image inference time (sec): 0.004189
+Throughput (images/sec): 238.75

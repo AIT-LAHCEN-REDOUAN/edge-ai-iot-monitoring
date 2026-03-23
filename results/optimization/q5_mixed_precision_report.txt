@@ -1,0 +1,23 @@
+=== Q5 MIXED PRECISION REPORT ===
+
+Device: cuda
+Baseline model path: D:\github\IOT_Project\models\baseline\best_model.pth
+Q5 FP16 checkpoint path: D:\github\IOT_Project\models\optimized\q5_mixed_precision_fp16_checkpoint.pth
+
+Baseline checkpoint size (MB): 42.6916
+Q5 FP16 checkpoint size (MB): 21.3644
+Checkpoint size reduction (MB): 21.3273
+Checkpoint compression ratio: 1.9983
+
+FP32 test accuracy: 0.987013
+AMP test accuracy: 0.987013
+
+FP32 avg batch inference time (sec): 0.012182
+FP32 avg image inference time (sec): 0.000190
+FP32 throughput (images/sec): 5253.51
+FP32 peak GPU memory (MB): 182.79
+
+AMP avg batch inference time (sec): 0.008243
+AMP avg image inference time (sec): 0.000129
+AMP throughput (images/sec): 7764.18
+AMP peak GPU memory (MB): 126.80

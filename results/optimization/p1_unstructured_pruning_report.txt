@@ -1,0 +1,24 @@
+=== P1 UNSTRUCTURED PRUNING REPORT ===
+
+Training device: cuda
+Evaluation device: cpu
+Baseline model path: D:\github\IOT_Project\models\baseline\best_model.pth
+P1 model path: D:\github\IOT_Project\models\optimized\p1_unstructured_pruned_model.pth
+
+Baseline model size (MB): 42.6916
+P1 model size (MB): 42.6923
+Size reduction (MB): -0.0006
+Compression ratio: 1.0000
+
+Prune amount target: 0.30
+Zero weights: 3348499
+Total weights: 11171266
+Measured sparsity: 0.299742
+
+Fine-tuning epochs: 2
+Fine-tuning time (sec): 111.73
+
+P1 test accuracy: 0.987013
+Average batch inference time (sec): 0.285021
+Average image inference time (sec): 0.004453
+Throughput (images/sec): 224.55

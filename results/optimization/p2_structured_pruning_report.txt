@@ -1,0 +1,24 @@
+=== P2 STRUCTURED PRUNING REPORT ===
+
+Training device: cuda
+Evaluation device: cpu
+Baseline model path: D:\github\IOT_Project\models\baseline\best_model.pth
+P2 model path: D:\github\IOT_Project\models\optimized\p2_structured_pruned_model.pth
+
+Baseline model size (MB): 42.6916
+P2 model size (MB): 42.6920
+Size reduction (MB): -0.0004
+Compression ratio: 1.0000
+
+Structured prune amount target: 0.20
+Zero weights: 2226045
+Total weights: 11171266
+Measured sparsity: 0.199265
+
+Fine-tuning epochs: 2
+Fine-tuning time (sec): 112.62
+
+P2 test accuracy: 0.987013
+Average batch inference time (sec): 0.272728
+Average image inference time (sec): 0.004261
+Throughput (images/sec): 234.67

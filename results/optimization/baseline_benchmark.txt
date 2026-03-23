@@ -1,0 +1,11 @@
+=== BASELINE MODEL BENCHMARK ===
+
+Device: cuda
+Model path: D:\github\IOT_Project\models\baseline\best_model.pth
+Model size (MB): 42.6916
+Test accuracy: 0.987013
+
+Average batch inference time (sec): 0.012023
+Average image inference time (sec): 0.000188
+Throughput (images/sec): 5323.26
+Peak GPU memory (MB): 182.79

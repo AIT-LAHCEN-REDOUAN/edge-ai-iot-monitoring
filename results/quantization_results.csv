@@ -1,6 +1,0 @@
-technique,status,accuracy,f1_weighted,model_size_mb,inference_mean_ms,peak_ram_mb,note
-Q1,ok,0.995,0.995,8.717,127.098,707.33,Dynamic quantization on Linear layers (int8).
-Q2,ok,0.995,0.995,2.518,39.004,750.0,PTQ static via FX graph mode (int8 weights+activations).
-Q3,ok,0.995,0.995,2.518,43.294,1570.34,QAT with short fine-tuning then conversion to quantized model.
-Q4,ok,0.995,0.995,8.724,124.478,1565.83,"Weight-only simulation (int8 QDQ on weights, fp32 activations)."
-Q5,ok,0.995,0.995,8.724,126.066,1561.61,"Mixed precision simulation (8-bit sensitive layers, 4-bit others)."

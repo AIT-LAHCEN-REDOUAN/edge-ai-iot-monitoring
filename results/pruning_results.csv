@@ -1,4 +1,0 @@
-technique,status,accuracy,f1_weighted,model_size_mb,effective_model_size_mb,sparsity,compression_ratio,inference_mean_ms,peak_ram_mb,note
-P1,ok,0.5225,0.35863,8.724,4.429,0.49234,1.97,122.957,736.86,"Unstructured global L1 pruning, amount=0.5"
-P2,ok,0.4775,0.30864,8.724,6.149,0.29518,1.419,116.936,735.24,"Structured channel pruning on Conv2d, amount=0.3"
-P3,ok,0.5225,0.35863,8.724,4.532,0.48052,1.925,121.989,753.21,"Iterative magnitude pruning, steps=3, step_amount=0.2"

@@ -12,3 +12,5 @@ __pycache__/
 # OS/editor junk
 .DS_Store
 Thumbs.db
+/data/processed/
+/dataset/

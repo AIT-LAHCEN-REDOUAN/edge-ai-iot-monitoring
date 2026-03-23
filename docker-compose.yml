@@ -1,23 +1,45 @@
-version: "3.9"
-
 services:
   vm1:
-    build: .
+    image: iot_project-vm1:latest
     container_name: vm1_container
     command: python scripts/run_vm_inference.py
+    environment:
+      VM_NAME: vm1
     cpus: 1.0
     mem_limit: 512m
+    volumes:
+      - ./scripts:/app/scripts
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./results:/app/results
 
   vm2:
-    build: .
+    image: iot_project-vm2:latest
     container_name: vm2_container
     command: python scripts/run_vm_inference.py
+    environment:
+      VM_NAME: vm2
     cpus: 2.0
     mem_limit: 1024m
+    volumes:
+      - ./scripts:/app/scripts
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./results:/app/results
 
   vm3:
-    build: .
+    image: iot_project-vm3:latest
     container_name: vm3_container
     command: python scripts/run_vm_inference.py
+    environment:
+      VM_NAME: vm3
     cpus: 2.0
     mem_limit: 2048m
+    volumes:
+      - ./scripts:/app/scripts
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./results:/app/results

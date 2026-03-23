@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  vm1:
+    build: .
+    container_name: vm1_container
+    command: python scripts/run_vm_inference.py
+    cpus: 1.0
+    mem_limit: 512m
+
+  vm2:
+    build: .
+    container_name: vm2_container
+    command: python scripts/run_vm_inference.py
+    cpus: 2.0
+    mem_limit: 1024m
+
+  vm3:
+    build: .
+    container_name: vm3_container
+    command: python scripts/run_vm_inference.py
+    cpus: 2.0
+    mem_limit: 2048m

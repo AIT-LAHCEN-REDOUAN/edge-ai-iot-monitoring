@@ -1,10 +1,9 @@
-torch
-torchvision
 numpy
 pandas
+scipy
+nibabel
+tqdm
 scikit-learn
 matplotlib
-psutil
-paho-mqtt
-pypdf
-nibabel
+torch
+torchvision

@@ -1,0 +1,38 @@
+{
+    "vm1": {
+        "profile_name": "highly_constrained",
+        "cpu_limit": 1,
+        "memory_limit_mb": 512,
+        "selected_technique": "q3_qat",
+        "device_context": "cpu",
+        "effective_size_mb": 10.7809,
+        "accuracy": 0.99053,
+        "avg_image_time_sec": 0.001545,
+        "throughput_img_sec": 647.38,
+        "selection_score": 0.885372622840672
+    },
+    "vm2": {
+        "profile_name": "balanced",
+        "cpu_limit": 2,
+        "memory_limit_mb": 1024,
+        "selected_technique": "q3_qat",
+        "device_context": "cpu",
+        "effective_size_mb": 10.7809,
+        "accuracy": 0.99053,
+        "avg_image_time_sec": 0.001545,
+        "throughput_img_sec": 647.38,
+        "selection_score": 0.901750111187645
+    },
+    "vm3": {
+        "profile_name": "accuracy_first",
+        "cpu_limit": 2,
+        "memory_limit_mb": 2048,
+        "selected_technique": "q3_qat",
+        "device_context": "cpu",
+        "effective_size_mb": 10.7809,
+        "accuracy": 0.99053,
+        "avg_image_time_sec": 0.001545,
+        "throughput_img_sec": 647.38,
+        "selection_score": 0.9345000741250968
+    }
+}

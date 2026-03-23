@@ -1,0 +1,35 @@
+=== BEST TECHNIQUES PER VM PROFILE ===
+
+VM1 (highly constrained / size-speed priority)
+Selected technique: q3_qat
+Score: 0.885373
+Size (MB): 10.7809
+Accuracy: 0.990530
+Avg image time (sec): 0.001545
+
+VM2 (balanced profile)
+Selected technique: q3_qat
+Score: 0.901750
+Size (MB): 10.7809
+Accuracy: 0.990530
+Avg image time (sec): 0.001545
+
+VM3 (accuracy-first profile)
+Selected technique: q3_qat
+Score: 0.934500
+Size (MB): 10.7809
+Accuracy: 0.990530
+Avg image time (sec): 0.001545
+
+=== FULL SCORED TABLE ===
+              technique device_context  effective_size_mb  accuracy  avg_image_time_sec  size_score  speed_score  accuracy_score  vm1_score  vm2_score  vm3_score
+           baseline_cpu            cpu            42.6916  0.987013            0.003811    0.000022     0.148474             0.0   0.051976   0.044549   0.029699
+           baseline_gpu            gpu            42.6916  0.987013            0.000188    0.000022     0.986355             0.0   0.345234   0.295913   0.197275
+q1_dynamic_quantization            cpu            42.6899  0.987013            0.004189    0.000075     0.061055             0.0   0.021403   0.018339   0.012226
+       q2_static_ptq_fx            cpu            10.7801  0.987013            0.001170    1.000000     0.759251             0.0   0.715738   0.527775   0.351850
+                 q3_qat            cpu            10.7809  0.990530            0.001545    0.999975     0.672525             1.0   0.885373   0.901750   0.934500
+         q4_weight_only            cpu            21.3633  0.987013            0.003434    0.668365     0.235661             0.0   0.383246   0.271208   0.180805
+     q5_mixed_precision            gpu            21.3644  0.987013            0.000129    0.668331     1.000000             0.0   0.650749   0.500499   0.333666
+p1_unstructured_pruning            cpu            42.6923  0.987013            0.004453    0.000000     0.000000             0.0   0.000000   0.000000   0.000000
+  p2_structured_pruning            cpu            42.6920  0.987013            0.004261    0.000009     0.044403             0.0   0.015545   0.013324   0.008883
+   p3_magnitude_pruning            cpu            42.6919  0.987013            0.004286    0.000013     0.038622             0.0   0.013523   0.011590   0.007727

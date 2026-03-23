@@ -1,0 +1,38 @@
+=== VM DEPLOYMENT PROFILES ===
+
+VM1
+Profile: highly_constrained
+CPU limit: 1
+Memory limit (MB): 512
+Selected technique: q3_qat
+Device context: cpu
+Model size (MB): 10.7809
+Accuracy: 0.990530
+Avg image time (sec): 0.001545
+Throughput (img/sec): 647.38
+Selection score: 0.885373
+
+VM2
+Profile: balanced
+CPU limit: 2
+Memory limit (MB): 1024
+Selected technique: q3_qat
+Device context: cpu
+Model size (MB): 10.7809
+Accuracy: 0.990530
+Avg image time (sec): 0.001545
+Throughput (img/sec): 647.38
+Selection score: 0.901750
+
+VM3
+Profile: accuracy_first
+CPU limit: 2
+Memory limit (MB): 2048
+Selected technique: q3_qat
+Device context: cpu
+Model size (MB): 10.7809
+Accuracy: 0.990530
+Avg image time (sec): 0.001545
+Throughput (img/sec): 647.38
+Selection score: 0.934500
+

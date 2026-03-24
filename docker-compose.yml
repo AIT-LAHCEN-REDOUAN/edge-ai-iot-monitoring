@@ -1,10 +1,12 @@
 services:
   vm1:
+    build: .
     image: iot_project-vm1:latest
     container_name: vm1_container
-    command: python scripts/run_vm_inference.py
+    command: python scripts/vm_server.py
     environment:
       VM_NAME: vm1
+      PORT: 5000
     cpus: 1.0
     mem_limit: 512m
     volumes:
@@ -13,13 +15,17 @@ services:
       - ./data:/app/data
       - ./models:/app/models
       - ./results:/app/results
+    ports:
+      - "5001:5000"
 
   vm2:
+    build: .
     image: iot_project-vm2:latest
     container_name: vm2_container
-    command: python scripts/run_vm_inference.py
+    command: python scripts/vm_server.py
     environment:
       VM_NAME: vm2
+      PORT: 5000
     cpus: 2.0
     mem_limit: 1024m
     volumes:
@@ -28,13 +34,17 @@ services:
       - ./data:/app/data
       - ./models:/app/models
       - ./results:/app/results
+    ports:
+      - "5002:5000"
 
   vm3:
+    build: .
     image: iot_project-vm3:latest
     container_name: vm3_container
-    command: python scripts/run_vm_inference.py
+    command: python scripts/vm_server.py
     environment:
       VM_NAME: vm3
+      PORT: 5000
     cpus: 2.0
     mem_limit: 2048m
     volumes:
@@ -43,3 +53,5 @@ services:
       - ./data:/app/data
       - ./models:/app/models
       - ./results:/app/results
+    ports:
+      - "5003:5000"

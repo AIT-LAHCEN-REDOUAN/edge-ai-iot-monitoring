@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 COPY . /app
 
-CMD ["python", "scripts/run_vm_inference.py"]
+CMD ["python", "scripts/vm_server.py"]

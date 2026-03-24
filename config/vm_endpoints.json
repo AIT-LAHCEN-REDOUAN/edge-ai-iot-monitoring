@@ -1,0 +1,5 @@
+{
+  "vm1": "http://localhost:5001",
+  "vm2": "http://localhost:5002",
+  "vm3": "http://localhost:5003"
+}

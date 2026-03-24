@@ -10,3 +10,4 @@ torchvision
 flask
 psutil
 requests
+paho-mqtt

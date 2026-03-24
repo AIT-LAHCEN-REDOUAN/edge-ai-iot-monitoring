@@ -50,9 +50,12 @@ def sample_test_slices(n=10):
         df = df.sample(n, random_state=42)
     return df
 
-def request_infer(url, slice_path):
+def request_infer(url, slice_path, patient_id=None):
     t0 = time.perf_counter()
-    r = requests.post(url + "/infer", json={"slice_path": slice_path}, timeout=60)
+    payload = {"slice_path": slice_path}
+    if patient_id is not None:
+        payload["patient_id"] = str(patient_id)
+    r = requests.post(url + "/infer", json=payload, timeout=60)
     dt = (time.perf_counter() - t0) * 1000.0
     if r.status_code != 200:
         return None
@@ -107,11 +110,12 @@ def main():
         y_true = int(r["label"])
         responses = {}
         overloaded = set()
+        patient_id = str(r.get("subject_id", ""))
         for vm in ["vm1", "vm2", "vm3"]:
             url = endpoints.get(vm)
             if not url:
                 continue
-            resp = request_infer(url, slice_cont)
+            resp = request_infer(url, slice_cont, patient_id=patient_id)
             if resp is None:
                 responses[vm] = None
                 continue
@@ -150,7 +154,7 @@ def main():
                     url = endpoints.get(vm)
                     if not url:
                         continue
-                    r2 = request_infer(url, s2)
+                    r2 = request_infer(url, s2, patient_id=patient_id)
                     if r2 is None:
                         continue
                     tech = str(r2.get("technique", "baseline")).lower()

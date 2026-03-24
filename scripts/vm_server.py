@@ -7,6 +7,8 @@ import torch.nn as nn
 from flask import Flask, request, jsonify
 import psutil
 from torchvision import models as tv_models
+from datetime import datetime, timezone
+from src.thingsboard.mqtt_client import TBPublisher
 
 def build_model():
     model = tv_models.resnet18(weights=None)
@@ -86,6 +88,15 @@ model = build_model()
 model, technique_loaded = load_weights(model, vm_name)
 model.eval()
 
+TB_ENABLE = os.environ.get("TB_ENABLE", "false").lower() in ("1", "true", "yes", "on")
+TB_HOST = os.environ.get("TB_HOST", "thingsboard")
+TB_PORT = int(os.environ.get("TB_PORT", "1883"))
+TB_TOKEN = os.environ.get("TB_TOKEN", "").strip()
+tb_publisher = None
+if TB_ENABLE and TB_TOKEN:
+    tb_publisher = TBPublisher(host=TB_HOST, port=TB_PORT, token=TB_TOKEN, client_id=f"{vm_name}-client")
+    tb_publisher.connect()
+
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok", "vm": vm_name, "technique": technique_loaded})
@@ -94,6 +105,7 @@ def health():
 def infer():
     data = request.get_json(force=True)
     slice_path = data.get("slice_path")
+    patient_id = data.get("patient_id", None)
     if not slice_path or not os.path.exists(slice_path):
         return jsonify({"error": "missing_or_invalid_path"}), 400
     x = npy_to_tensor(slice_path)
@@ -109,7 +121,7 @@ def infer():
     mem_info = proc.memory_info()
     ram_mb = mem_info.rss / (1024 * 1024)
     ram_pct = psutil.virtual_memory().percent
-    return jsonify({
+    result = {
         "vm_id": vm_name,
         "technique": technique_loaded,
         "prediction": pred,
@@ -118,7 +130,25 @@ def infer():
         "cpu_usage_pct": cpu_pct,
         "ram_usage_mb": ram_mb,
         "ram_usage_pct": ram_pct
-    })
+    }
+    # ThingsBoard telemetry (optional)
+    if tb_publisher is not None:
+        payload = {
+            "vm_id": vm_name.upper(),
+            "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "technique": technique_loaded,
+            "prediction": pred,
+            "confidence": conf,
+            "inference_time_ms": round(infer_ms, 3),
+            "cpu_usage_pct": round(cpu_pct, 1),
+            "ram_usage_mb": round(ram_mb, 1),
+            "patient_id": patient_id if patient_id is not None else ""
+        }
+        try:
+            tb_publisher.publish_telemetry(payload)
+        except Exception:
+            pass
+    return jsonify(result)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5000"))

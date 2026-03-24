@@ -1,4 +1,16 @@
 services:
+  thingsboard:
+    image: thingsboard/tb-postgres
+    container_name: thingsboard
+    environment:
+      - TB_QUEUE_TYPE=in-memory
+    ports:
+      - "8080:8080"
+      - "1883:1883"
+      - "5683-5688:5683-5688"
+    volumes:
+      - ./tb-data:/data
+      - ./tb-logs:/var/log/thingsboard
   vm1:
     build: .
     image: iot_project-vm1:latest
@@ -7,6 +19,10 @@ services:
     environment:
       VM_NAME: vm1
       PORT: 5000
+      TB_ENABLE: "false"
+      TB_HOST: "thingsboard"
+      TB_PORT: 1883
+      # TB_TOKEN: ""  # set your device token here or via environment
     cpus: 1.0
     mem_limit: 512m
     volumes:
@@ -26,6 +42,10 @@ services:
     environment:
       VM_NAME: vm2
       PORT: 5000
+      TB_ENABLE: "false"
+      TB_HOST: "thingsboard"
+      TB_PORT: 1883
+      # TB_TOKEN: ""  # set your device token here or via environment
     cpus: 2.0
     mem_limit: 1024m
     volumes:
@@ -45,6 +65,10 @@ services:
     environment:
       VM_NAME: vm3
       PORT: 5000
+      TB_ENABLE: "false"
+      TB_HOST: "thingsboard"
+      TB_PORT: 1883
+      # TB_TOKEN: ""  # set your device token here or via environment
     cpus: 2.0
     mem_limit: 2048m
     volumes:

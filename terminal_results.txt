@@ -1,0 +1,711 @@
+IOT_project> docker compose logs -f thingsboard
+time="2026-03-24T13:14:15+01:00" level=warning msg="project has been loaded without an explicit name from a symlink. Using name \"IOT_project\""
+thingsboard  | The files belonging to this database system will be owned by user "thingsboard".
+thingsboard  | This user must also own the server process.
+thingsboard  |
+thingsboard  | The database cluster will be initialized with locale "C.UTF-8".
+thingsboard  | The default database encoding has accordingly been set to "UTF8".
+thingsboard  | The default text search configuration will be set to "english".
+thingsboard  |
+thingsboard  | Data page checksums are disabled.
+thingsboard  |
+thingsboard  | fixing permissions on existing directory /data/db ... ok
+thingsboard  | creating subdirectories ... ok
+thingsboard  | selecting dynamic shared memory implementation ... posix
+thingsboard  | selecting default max_connections ... 100
+thingsboard  | selecting default shared_buffers ... 128MB
+thingsboard  | selecting default time zone ... Etc/UTC
+thingsboard  | creating configuration files ... ok
+thingsboard  | running bootstrap script ... ok
+thingsboard  | performing post-bootstrap initialization ... ok
+thingsboard  | initdb: warning: enabling "trust" authentication for local connections
+thingsboard  | You can change this by editing pg_hba.conf or using the option -A, or
+thingsboard  | --auth-local and --auth-host, the next time you run initdb.
+thingsboard  | syncing data to disk ... ok
+thingsboard  |
+thingsboard  |
+thingsboard  | Success. You can now start the database server using:
+thingsboard  |
+thingsboard  |     /usr/lib/postgresql/12/bin/pg_ctl -D /data/db -l logfile start
+thingsboard  |
+thingsboard  | Starting Postgresql...
+thingsboard  | waiting for server to start....2026-03-24 11:58:48.819 UTC [30] LOG:  starting PostgreSQL 12.22 (Debian 12.22-3.pgdg12+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+thingsboard  | 2026-03-24 11:58:48.820 UTC [30] LOG:  listening on IPv6 address "::1", port 5432
+thingsboard  | 2026-03-24 11:58:48.820 UTC [30] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+thingsboard  | 2026-03-24 11:58:48.830 UTC [30] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+thingsboard  | 2026-03-24 11:58:48.894 UTC [31] LOG:  database system was shut down at 2026-03-24 11:58:46 UTC
+thingsboard  | 2026-03-24 11:58:48.919 UTC [30] LOG:  database system is ready to accept connections
+thingsboard  |  done
+thingsboard  | server started
+thingsboard  | Creating database...
+thingsboard  | CREATE DATABASE
+thingsboard  | Postgresql is ready
+thingsboard  | Starting ThingsBoard installation ...
+thingsboard  | OpenJDK 64-Bit Server VM warning: Option UseBiasedLocking was deprecated in version 15.0 and will likely be removed in a future release.
+thingsboard  | OpenJDK 64-Bit Server VM warning: Option UseBiasedLocking was deprecated in version 15.0 and will likely be removed in a future release.
+thingsboard  | [0.007s][warning][logging] Output options for existing outputs are ignored.
+thingsboard  |   _____ _     _                 ____                      _
+thingsboard  |  |_   _| |__ (_)_ __   __ _ ___| __ )  ___   __ _ _ __ __| |
+thingsboard  |    | | | '_ \| | '_ \ / _` / __|  _ \ / _ \ / _` | '__/ _` |
+thingsboard  |    | | | | | | | | | | (_| \__ \ |_) | (_) | (_| | | | (_| |
+thingsboard  |    |_| |_| |_|_|_| |_|\__, |___/____/ \___/ \__,_|_|  \__,_|
+thingsboard  |                       |___/
+thingsboard  |
+thingsboard  |  ===========================================================
+thingsboard  |  :: ThingsBoard ::       (v4.2.1.1)
+thingsboard  |  ===========================================================
+thingsboard  |
+thingsboard  | Starting ThingsBoard Installation...
+thingsboard  | Installing DataBase schema for entities...
+thingsboard  | Installing SQL DataBase schema part: schema-entities.sql
+thingsboard  | Installing SQL DataBase schema indexes part: schema-entities-idx.sql
+thingsboard  | Installing SQL DataBase schema PostgreSQL specific indexes part: schema-entities-idx-psql-addon.sql
+thingsboard  | Installing SQL DataBase schema views: schema-views.sql
+thingsboard  | Installing SQL DataBase schema functions: schema-functions.sql
+thingsboard  | Successfully executed query: DROP VIEW IF EXISTS device_info_view CASCADE;
+thingsboard  | Successfully executed query: CREATE OR REPLACE VIEW device_info_view AS SELECT * FROM device_info_active_attribute_view;
+thingsboard  | Installing DataBase schema for timeseries...
+thingsboard  | Installing SQL DataBase schema part: schema-ts-psql.sql
+thingsboard  | Successfully executed query: CREATE TABLE IF NOT EXISTS ts_kv_indefinite PARTITION OF ts_kv DEFAULT;
+thingsboard  | Loading system data...
+thingsboard  | Creating JWT admin settings...
+thingsboard  | Loading system widgets
+thingsboard  | 2026-03-24 11:59:37.727 UTC [95] PANIC:  could not write to log file 000000010000000000000002 at offset 6488064, length 57344: Cannot allocate memory
+thingsboard  | 2026-03-24 11:59:37.727 UTC [95] STATEMENT:  COMMIT
+thingsboard  | 2026-03-24 11:59:38.976 UTC [30] LOG:  server process (PID 95) was terminated by signal 6: Aborted
+thingsboard  | 2026-03-24 11:59:38.976 UTC [30] DETAIL:  Failed process was running: COMMIT
+thingsboard  | 2026-03-24 11:59:38.976 UTC [30] LOG:  terminating any other active server processes
+thingsboard  | 2026-03-24 11:59:38.977 UTC [112] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [112] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [112] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [110] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [110] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [110] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [113] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [113] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [113] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [108] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [108] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [108] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [104] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [104] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [104] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [107] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [107] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [107] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [177] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [177] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [177] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [111] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [111] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [111] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [109] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [109] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [109] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [105] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [105] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [105] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [106] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.977 UTC [106] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.977 UTC [106] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.978 UTC [102] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.978 UTC [102] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.978 UTC [102] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.979 UTC [100] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.979 UTC [100] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.979 UTC [100] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.979 UTC [35] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.979 UTC [35] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.979 UTC [35] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.980 UTC [103] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.980 UTC [103] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.980 UTC [103] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.980 UTC [101] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.980 UTC [101] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.980 UTC [101] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.980 UTC [99] WARNING:  terminating connection because of crash of another server process
+thingsboard  | 2026-03-24 11:59:38.980 UTC [99] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+thingsboard  | 2026-03-24 11:59:38.980 UTC [99] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+thingsboard  | 2026-03-24 11:59:38.999 UTC [30] LOG:  all server processes terminated; reinitializing
+thingsboard  | Unable to load widget type from json: [/usr/share/thingsboard/data/json/system/widget_types/nitrogen_dioxide__no2__chart_card.json]
+thingsboard  | Unexpected error during ThingsBoard installation!
+thingsboard  | java.lang.RuntimeException: Unable to load widget type from json
+thingsboard  |  at org.thingsboard.server.service.install.InstallScripts.lambda$loadSystemWidgets$5(InstallScripts.java:252)
+thingsboard  |  at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+thingsboard  |  at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+thingsboard  |  at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+thingsboard  |  at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845)
+thingsboard  |  at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+thingsboard  |  at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+thingsboard  |  at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+thingsboard  |  at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+thingsboard  |  at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+thingsboard  |  at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+thingsboard  |  at org.thingsboard.server.service.install.InstallScripts.loadSystemWidgets(InstallScripts.java:244)
+thingsboard  |  at org.thingsboard.server.service.install.DefaultSystemDataLoaderService.loadSystemWidgets(DefaultSystemDataLoaderService.java:531)
+thingsboard  |  at org.thingsboard.server.install.ThingsboardInstallService.performInstall(ThingsboardInstallService.java:163)
+thingsboard  |  at org.thingsboard.server.ThingsboardInstallApplication.main(ThingsboardInstallApplication.java:48)
+thingsboard  |  at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+thingsboard  |  at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+thingsboard  |  at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+thingsboard  |  at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+thingsboard  |  at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:102)
+thingsboard  |  at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64)
+thingsboard  |  at org.springframework.boot.loader.launch.PropertiesLauncher.main(PropertiesLauncher.java:580)
+thingsboard  | Caused by: org.springframework.dao.DataAccessResourceFailureException: Hibernate transaction: Unable to commit against JDBC Connection; PANIC: could not write to log file 000000010000000000000002 at offset 6488064, length 57344: Cannot allocate memory
+thingsboard  |  at org.springframework.jdbc.support.SQLStateSQLExceptionTranslator.doTranslate(SQLStateSQLExceptionTranslator.java:132)
+thingsboard  |  at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107)
+thingsboard  |  at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:116)
+thingsboard  |  at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:269)
+thingsboard  |  at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:256)
+thingsboard  |  at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+thingsboard  |  at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:567)
+thingsboard  |  at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795)
+thingsboard  |  at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758)
+thingsboard  |  at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:698)
+thingsboard  |  at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:416)
+thingsboard  |  at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+thingsboard  |  at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+thingsboard  |  at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+thingsboard  |  at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+thingsboard  |  at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728)
+thingsboard  |  at org.thingsboard.server.dao.sql.resource.JpaTbResourceDao$$SpringCGLIB$$0.save(<generated>)
+thingsboard  |  at org.thingsboard.server.dao.resource.BaseResourceService.doSaveResource(BaseResourceService.java:154)
+thingsboard  |  at org.thingsboard.server.dao.resource.BaseImageService.saveImage(BaseImageService.java:152)
+thingsboard  |  at jdk.internal.reflect.GeneratedMethodAccessor112.invoke(Unknown Source)
+thingsboard  |  at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+thingsboard  |  at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+thingsboard  |  at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+thingsboard  |  at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724)
+thingsboard  |  at org.thingsboard.server.dao.resource.BaseImageService$$SpringCGLIB$$0.saveImage(<generated>)
+thingsboard  |  at jdk.internal.reflect.GeneratedMethodAccessor111.invoke(Unknown Source)
+thingsboard  |  at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+thingsboard  |  at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+thingsboard  |  at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360)
+thingsboard  |  at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:216)
+thingsboard  |  at jdk.proxy2/jdk.proxy2.$Proxy231.saveImage(Unknown Source)
+thingsboard  |  at org.thingsboard.server.dao.resource.BaseResourceService.importResources(BaseResourceService.java:266)
+thingsboard  |  at org.thingsboard.server.dao.widget.WidgetTypeServiceImpl.saveWidgetType(WidgetTypeServiceImpl.java:111)
+thingsboard  |  at org.thingsboard.server.service.install.InstallScripts.lambda$loadSystemWidgets$5(InstallScripts.java:249)
+thingsboard  |  ... 21 common frames omitted
+thingsboard  | Caused by: org.postgresql.util.PSQLException: PANIC: could not write to log file 000000010000000000000002 at offset 6488064, length 57344: Cannot allocate memory
+thingsboard  |  at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2734)
+thingsboard  |  at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421)
+thingsboard  |  at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372)
+thingsboard  |  at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:330)
+thingsboard  |  at org.postgresql.jdbc.PgConnection.executeTransactionCommand(PgConnection.java:984)
+thingsboard  |  at org.postgresql.jdbc.PgConnection.commit(PgConnection.java:1006)
+thingsboard  |  at com.zaxxer.hikari.pool.ProxyConnection.commit(ProxyConnection.java:378)
+thingsboard  |  at com.zaxxer.hikari.pool.HikariProxyConnection.commit(HikariProxyConnection.java)
+thingsboard  |  at org.hibernate.resource.jdbc.internal.AbstractLogicalConnectionImplementor.commit(AbstractLogicalConnectionImplementor.java:87)
+thingsboard  |  at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:268)
+thingsboard  |  at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)
+thingsboard  |  at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:563)
+thingsboard  |  ... 48 common frames omitted
+thingsboard  | 2026-03-24 11:59:39.090 UTC [182] LOG:  database system was interrupted; last known up at 2026-03-24 11:58:50 UTC
+thingsboard  | 2026-03-24 11:59:39.091 UTC [183] FATAL:  the database system is in recovery mode
+thingsboard  | 2026-03-24 11:59:39.104 UTC [184] FATAL:  the database system is in recovery mode
+thingsboard  | Unexpected error during ThingsBoard installation!
+thingsboard  | ERROR: ThingsBoard is not installed
+thingsboard  | waiting for server to shut down...2026-03-24 11:59:39.450 UTC [30] LOG:  received fast shutdown request
+thingsboard  | ...2026-03-24 11:59:42.579 UTC [182] LOG:  database system was not properly shut down; automatic recovery in progress
+thingsboard  | 2026-03-24 11:59:42.600 UTC [182] LOG:  redo starts at 0/1651698
+thingsboard  | 2026-03-24 11:59:42.604 UTC [30] LOG:  abnormal database system shutdown
+thingsboard  | 2026-03-24 11:59:42.612 UTC [30] LOG:  database system is shut down
+thingsboard  |  done
+thingsboard  | server stopped
+thingsboard  | The files belonging to this database system will be owned by user "thingsboard".
+thingsboard  | This user must also own the server process.
+thingsboard  |
+thingsboard  | The database cluster will be initialized with locale "C.UTF-8".
+thingsboard  | The default database encoding has accordingly been set to "UTF8".
+thingsboard  | The default text search configuration will be set to "english".
+thingsboard  |
+thingsboard  | Data page checksums are disabled.
+thingsboard  |
+thingsboard  | fixing permissions on existing directory /data/db ... ok
+thingsboard  | creating subdirectories ... ok
+thingsboard  | selecting dynamic shared memory implementation ... posix
+thingsboard  | selecting default max_connections ... 100
+thingsboard  | selecting default shared_buffers ... 128MB
+thingsboard  | selecting default time zone ... Etc/UTC
+thingsboard  | creating configuration files ... ok
+thingsboard  | running bootstrap script ... ok
+thingsboard  | performing post-bootstrap initialization ... ok
+thingsboard  | syncing data to disk ... ok
+thingsboard  |
+thingsboard  |
+thingsboard  | Success. You can now start the database server using:
+thingsboard  |
+thingsboard  |     /usr/lib/postgresql/12/bin/pg_ctl -D /data/db -l logfile start
+thingsboard  |
+thingsboard  | initdb: warning: enabling "trust" authentication for local connections
+thingsboard  | You can change this by editing pg_hba.conf or using the option -A, or
+thingsboard  | --auth-local and --auth-host, the next time you run initdb.
+thingsboard  | Starting Postgresql...
+thingsboard  | waiting for server to start....2026-03-24 12:09:45.083 UTC [30] LOG:  starting PostgreSQL 12.22 (Debian 12.22-3.pgdg12+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+thingsboard  | 2026-03-24 12:09:45.084 UTC [30] LOG:  listening on IPv6 address "::1", port 5432
+thingsboard  | 2026-03-24 12:09:45.085 UTC [30] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+thingsboard  | 2026-03-24 12:09:45.089 UTC [30] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+thingsboard  | 2026-03-24 12:09:45.135 UTC [31] LOG:  database system was shut down at 2026-03-24 12:09:42 UTC
+thingsboard  | 2026-03-24 12:09:45.166 UTC [30] LOG:  database system is ready to accept connections
+thingsboard  |  done
+thingsboard  | server started
+thingsboard  | Creating database...
+thingsboard  | CREATE DATABASE
+thingsboard  | Postgresql is ready
+thingsboard  | Starting ThingsBoard installation ...
+thingsboard  | OpenJDK 64-Bit Server VM warning: Option UseBiasedLocking was deprecated in version 15.0 and will likely be removed in a future release.
+thingsboard  | [0.009s][warning][logging] Output options for existing outputs are ignored.
+thingsboard  | OpenJDK 64-Bit Server VM warning: Option UseBiasedLocking was deprecated in version 15.0 and will likely be removed in a future release.
+thingsboard  |   _____ _     _                 ____                      _
+thingsboard  |  |_   _| |__ (_)_ __   __ _ ___| __ )  ___   __ _ _ __ __| |
+thingsboard  |    | | | '_ \| | '_ \ / _` / __|  _ \ / _ \ / _` | '__/ _` |
+thingsboard  |    | | | | | | | | | | (_| \__ \ |_) | (_) | (_| | | | (_| |
+thingsboard  |    |_| |_| |_|_|_| |_|\__, |___/____/ \___/ \__,_|_|  \__,_|
+thingsboard  |                       |___/
+thingsboard  |
+thingsboard  |  ===========================================================
+thingsboard  |  :: ThingsBoard ::       (v4.2.1.1)
+thingsboard  |  ===========================================================
+thingsboard  |
+thingsboard  | Starting ThingsBoard Installation...
+thingsboard  | Installing DataBase schema for entities...
+thingsboard  | Installing SQL DataBase schema part: schema-entities.sql
+thingsboard  | Installing SQL DataBase schema indexes part: schema-entities-idx.sql
+thingsboard  | Installing SQL DataBase schema PostgreSQL specific indexes part: schema-entities-idx-psql-addon.sql
+thingsboard  | Installing SQL DataBase schema views: schema-views.sql
+thingsboard  | Installing SQL DataBase schema functions: schema-functions.sql
+thingsboard  | Successfully executed query: DROP VIEW IF EXISTS device_info_view CASCADE;
+thingsboard  | Successfully executed query: CREATE OR REPLACE VIEW device_info_view AS SELECT * FROM device_info_active_attribute_view;
+thingsboard  | Installing DataBase schema for timeseries...
+thingsboard  | Installing SQL DataBase schema part: schema-ts-psql.sql
+thingsboard  | Successfully executed query: CREATE TABLE IF NOT EXISTS ts_kv_indefinite PARTITION OF ts_kv DEFAULT;
+thingsboard  | Loading system data...
+thingsboard  | Creating JWT admin settings...
+thingsboard  | Loading system widgets
+thingsboard  | Loading system SCADA symbols
+thingsboard  | Creating default notification configs for system admin
+thingsboard  | Creating default notification configs for all tenants
+thingsboard  | Loading system images and resources...
+thingsboard  | Loading demo data...
+thingsboard  | Installation finished successfully!
+thingsboard  | Starting ThingsBoard ...
+thingsboard  | OpenJDK 64-Bit Server VM warning: Option UseBiasedLocking was deprecated in version 15.0 and will likely be removed in a future release.
+thingsboard  |   _____ _     _                 ____                      _
+thingsboard  |  |_   _| |__ (_)_ __   __ _ ___| __ )  ___   __ _ _ __ __| |
+thingsboard  |    | | | '_ \| | '_ \ / _` / __|  _ \ / _ \ / _` | '__/ _` |
+thingsboard  |    | | | | | | | | | | (_| \__ \ |_) | (_) | (_| | | | (_| |
+thingsboard  |    |_| |_| |_|_|_| |_|\__, |___/____/ \___/ \__,_|_|  \__,_|
+thingsboard  |                       |___/
+thingsboard  |
+thingsboard  |  ===========================================================
+thingsboard  |  :: ThingsBoard ::       (v4.2.1.1)
+thingsboard  |  ===========================================================
+thingsboard  |
+thingsboard  | 2026-03-24 12:10:58,964 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.3.Final
+thingsboard  | 2026-03-24 12:10:59,103 [main] INFO  o.t.s.ThingsboardServerApplication - Starting ThingsboardServerApplication v4.2.1.1 using Java 17.0.17 with PID 272 (/usr/share/thingsboard/bin/thingsboard.jar started by thingsboard in /)
+thingsboard  | 2026-03-24 12:10:59,105 [main] INFO  o.t.s.ThingsboardServerApplication - No active profile set, falling back to 1 default profile: "default"
+thingsboard  | 2026-03-24 12:10:59,550 [main] WARN  o.s.c.a.AnnotationTypeMapping - Support for convention-based annotation attribute overrides is deprecated and will be removed in Spring Framework 7.0. Please annotate the following attributes in @org.thingsboard.server.config.annotations.ApiOperation with appropriate @AliasFor declarations: [hidden, requestBody, responses]
+thingsboard  | 2026-03-24 12:11:02,942 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+thingsboard  | 2026-03-24 12:11:02,943 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in LAZY mode.
+thingsboard  | 2026-03-24 12:11:03,147 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 191 ms. Found 7 JPA repository interfaces.
+thingsboard  | 2026-03-24 12:11:03,151 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+thingsboard  | 2026-03-24 12:11:03,152 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in LAZY mode.
+thingsboard  | 2026-03-24 12:11:03,424 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 269 ms. Found 57 JPA repository interfaces.
+thingsboard  | 2026-03-24 12:11:03,426 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+thingsboard  | 2026-03-24 12:11:03,427 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in LAZY mode.
+thingsboard  | 2026-03-24 12:11:03,437 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 1 JPA repository interface.
+thingsboard  | 2026-03-24 12:11:03,438 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+thingsboard  | 2026-03-24 12:11:03,438 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in LAZY mode.
+thingsboard  | 2026-03-24 12:11:03,449 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 1 JPA repository interface.
+thingsboard  | 2026-03-24 12:11:04,767 [main] INFO  o.s.i.c.DefaultConfiguringBeanFactoryPostProcessor - No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+thingsboard  | 2026-03-24 12:11:04,798 [main] INFO  o.s.i.c.DefaultConfiguringBeanFactoryPostProcessor - No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+thingsboard  | 2026-03-24 12:11:06,215 [main] INFO  o.t.s.q.d.DefaultTbServiceInfoProvider - Current Service ID: 8cde2818dd98
+thingsboard  | 2026-03-24 12:11:07,890 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+thingsboard  | 2026-03-24 12:11:08,026 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.29.Final
+thingsboard  | 2026-03-24 12:11:08,102 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+thingsboard  | 2026-03-24 12:11:08,291 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+thingsboard  | 2026-03-24 12:11:08,471 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2e652f4e
+thingsboard  | 2026-03-24 12:11:08,479 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+thingsboard  | 2026-03-24 12:11:08,553 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+thingsboard  |  Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+thingsboard  |  Database driver: undefined/unknown
+thingsboard  |  Database version: 12.0
+thingsboard  |  Autocommit mode: undefined/unknown
+thingsboard  |  Isolation level: undefined/unknown
+thingsboard  |  Minimum pool size: undefined/unknown
+thingsboard  |  Maximum pool size: undefined/unknown
+thingsboard  | 2026-03-24 12:11:09,088 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+thingsboard  | 2026-03-24 12:11:12,249 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+thingsboard  | 2026-03-24 12:11:12,267 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+thingsboard  | 2026-03-24 12:11:12,968 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+thingsboard  | 2026-03-24 12:11:17,447 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 9090 (http)
+thingsboard  | 2026-03-24 12:11:17,470 [main] INFO  o.a.coyote.http11.Http11NioProtocol - The ["http-nio-0.0.0.0-9090"] connector has been configured to support HTTP upgrade to [h2c]
+thingsboard  | 2026-03-24 12:11:17,472 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-0.0.0.0-9090"]
+thingsboard  | 2026-03-24 12:11:17,478 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+thingsboard  | 2026-03-24 12:11:17,479 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.46]
+thingsboard  | 2026-03-24 12:11:17,549 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+thingsboard  | 2026-03-24 12:11:17,550 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 18390 ms
+thingsboard  | 2026-03-24 12:11:17,922 [main] INFO  o.t.s.d.a.CachedAttributesService - Going to use directExecutor for the local cache type caffeine
+thingsboard  | 2026-03-24 12:11:19,297 [main] INFO  o.t.s.s.a.DefaultTbApiUsageStateService - Starting api usage service.
+thingsboard  | 2026-03-24 12:11:19,308 [main] INFO  o.t.s.s.a.DefaultTbApiUsageStateService - Started api usage service.
+thingsboard  | 2026-03-24 12:11:21,870 [main] INFO  o.t.s.t.h.config.PayloadSizeFilter - Initialized payload size filter with configuration: /api/image*/**=52428800;/api/resource/**=52428800;/api/**=16777216
+thingsboard  | 2026-03-24 12:11:21,948 [main] INFO  o.t.s.t.h.config.PayloadSizeFilter - Initialized payload size filter with configuration: /api/v1/*/rpc/**=65536;/api/v1/**=52428800
+thingsboard  | 2026-03-24 12:11:22,128 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: zookeeper.version=3.9.3-c26634f34490bb0ea7a09cc51e05ede3b4e320ee, built on 2024-10-17 23:21 UTC
+thingsboard  | 2026-03-24 12:11:22,129 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: host.name=8cde2818dd98
+thingsboard  | 2026-03-24 12:11:22,129 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: java.version=17.0.17
+thingsboard  | 2026-03-24 12:11:22,129 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: java.vendor=Debian
+thingsboard  | 2026-03-24 12:11:22,129 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: java.home=/usr/lib/jvm/java-17-openjdk-amd64
+thingsboard  | 2026-03-24 12:11:22,129 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: java.class.path=/usr/share/thingsboard/bin/thingsboard.jar
+thingsboard  | 2026-03-24 12:11:22,130 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+thingsboard  | 2026-03-24 12:11:22,130 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: java.io.tmpdir=/tmp
+thingsboard  | 2026-03-24 12:11:22,131 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: java.compiler=<NA>
+thingsboard  | 2026-03-24 12:11:22,131 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: os.name=Linux
+thingsboard  | 2026-03-24 12:11:22,131 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: os.arch=amd64
+thingsboard  | 2026-03-24 12:11:22,132 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: os.version=6.6.87.2-microsoft-standard-WSL2
+thingsboard  | 2026-03-24 12:11:22,132 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: user.name=thingsboard
+thingsboard  | 2026-03-24 12:11:22,132 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: user.home=/home/thingsboard
+thingsboard  | 2026-03-24 12:11:22,133 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: user.dir=/
+thingsboard  | 2026-03-24 12:11:22,133 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: os.memory.free=348MB
+thingsboard  | 2026-03-24 12:11:22,134 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: os.memory.max=3918MB
+thingsboard  | 2026-03-24 12:11:22,134 [main] INFO  o.t.s.q.e.EnvironmentLogService - ThingsBoard server environment: os.memory.total=568MB
+thingsboard  | 2026-03-24 12:11:22,365 [main] INFO  d.n.internal.NashornDetection - Delight-nashorn-sandbox detected that JDK Nashorn is absent and standalone Nashorn is present, and will use Standalone Nashorn
+thingsboard  | 2026-03-24 12:11:23,789 [main] INFO  o.t.s.a.service.DefaultActorService - Initializing actor system.
+thingsboard  | 2026-03-24 12:11:23,806 [main] INFO  o.t.s.a.service.DefaultActorService - Actor system initialized.
+thingsboard  | 2026-03-24 12:11:25,055 [main] INFO  o.t.s.c.t.c.ssl.SslCredentialsConfig - LWM2M Server DTLS Credentials: Skipping initialization of disabled SSL credentials.
+thingsboard  | 2026-03-24 12:11:25,063 [main] INFO  o.t.s.c.t.c.ssl.SslCredentialsConfig - LWM2M Trust Credentials: Skipping initialization of disabled SSL credentials.
+thingsboard  | 2026-03-24 12:11:25,077 [main] INFO  o.t.s.c.t.c.ssl.SslCredentialsConfig - LWM2M Bootstrap DTLS Credentials: Skipping initialization of disabled SSL credentials.
+thingsboard  | 2026-03-24 12:11:25,526 [main] INFO  o.t.s.c.SystemInfoController - System build info: {"version":"4.2.1.1","artifact":"application","name":"ThingsBoard Server Application","type":"CE"}
+thingsboard  | 2026-03-24 12:11:24,242 [main] INFO  o.t.s.c.adaptor.JsonConverterConfig - JSON max string value length = 0
+thingsboard  | 2026-03-24 12:11:24,244 [main] INFO  o.t.s.c.adaptor.JsonConverterConfig - JSON type cast enabled = true
+thingsboard  | 2026-03-24 12:11:24,351 [main] INFO  o.t.s.t.mqtt.MqttTransportService - Setting resource leak detector level to DISABLED
+thingsboard  | 2026-03-24 12:11:24,352 [main] INFO  o.t.s.t.mqtt.MqttTransportService - Starting MQTT transport...
+thingsboard  | 2026-03-24 12:11:24,424 [main] INFO  o.t.s.t.mqtt.MqttTransportService - Mqtt transport started!
+thingsboard  | 2026-03-24 12:11:24,510 [main] INFO  o.e.c.elements.config.Configuration - defaults added COAP.
+thingsboard  | 2026-03-24 12:11:24,528 [main] INFO  o.e.c.elements.config.Configuration - defaults added UDP.
+thingsboard  | 2026-03-24 12:11:24,529 [main] INFO  o.e.c.c.network.RandomTokenGenerator - using tokens of 8 bytes in length
+thingsboard  | 2026-03-24 12:11:24,555 [main] INFO  org.eclipse.californium.ban - Started.
+thingsboard  | 2026-03-24 12:11:24,557 [main] INFO  o.e.c.core.network.CoapEndpoint - coap CoapEndpoint uses udp context
+thingsboard  | 2026-03-24 12:11:24,574 [main] INFO  o.e.c.elements.config.Configuration - defaults added SYS.
+thingsboard  | 2026-03-24 12:11:24,574 [main] INFO  o.e.c.c.network.stack.BlockwiseLayer - coap BlockwiseLayer uses MAX_MESSAGE_SIZE=1024, PREFERRED_BLOCK_SIZE=1024, BLOCKWISE_STATUS_LIFETIME=300000, MAX_RESOURCE_BODY_SIZE=268435456, BLOCKWISE_STRICT_BLOCK2_OPTION=true
+thingsboard  | 2026-03-24 12:11:24,587 [main] INFO  o.e.californium.core.CoapServer - Starting server
+thingsboard  | 2026-03-24 12:11:24,604 [main] INFO  o.e.c.elements.UDPConnector - UDPConnector starts up 1 sender threads and 1 receiver threads
+thingsboard  | 2026-03-24 12:11:24,608 [main] INFO  o.e.c.elements.UDPConnector - UDPConnector listening on /[0:0:0:0:0:0:0:0]:5683, recv buf = 106496, send buf = 106496, recv packet size = 2048
+thingsboard  | 2026-03-24 12:11:24,609 [main] INFO  o.e.c.core.network.CoapEndpoint - coap Started endpoint at coap://[0:0:0:0:0:0:0:0]:5683
+thingsboard  | 2026-03-24 12:11:24,613 [main] INFO  o.t.s.t.coap.CoapTransportService - Starting CoAP transport...
+thingsboard  | 2026-03-24 12:11:24,624 [main] INFO  o.t.s.t.coap.CoapTransportService - CoAP transport started!
+thingsboard  | 2026-03-24 12:11:24,688 [main] INFO  o.t.s.t.l.b.LwM2MTransportBootstrapService - Starting LwM2M transport bootstrap server...
+thingsboard  | 2026-03-24 12:11:24,715 [main] INFO  o.e.c.elements.util.JceProviderUtil - JCE default setup
+thingsboard  | 2026-03-24 12:11:24,739 [main] INFO  o.e.c.elements.util.JceProviderUtil - RSA: true, EC: true, AES: not restricted
+thingsboard  | 2026-03-24 12:11:24,746 [main] INFO  o.e.c.elements.util.JceProviderUtil - EdDSA supported by SunEC, Ed25519: true, Ed448: true
+thingsboard  | 2026-03-24 12:11:24,746 [main] INFO  o.e.c.elements.util.JceProviderUtil - JCE setup: SunEC version 17, ready.
+thingsboard  | 2026-03-24 12:11:24,804 [main] INFO  o.e.c.elements.config.Configuration - defaults added DTLS.
+thingsboard  | 2026-03-24 12:11:25,034 [main] WARN  o.e.l.s.b.LeshanBootstrapServerBuilder - configStore is set but you also provide a custom SessionManager so this store will not be used
+thingsboard  | 2026-03-24 12:11:25,042 [main] INFO  o.e.c.c.network.RandomTokenGenerator - using tokens of 8 bytes in length
+thingsboard  | 2026-03-24 12:11:25,043 [main] INFO  o.e.c.core.network.CoapEndpoint - [Bootstrap Server-coap://0.0.0.0:5687] CoapEndpoint uses udp context
+thingsboard  | 2026-03-24 12:11:25,043 [main] INFO  o.e.c.c.network.stack.BlockwiseLayer - [Bootstrap Server-coap://0.0.0.0:5687] BlockwiseLayer uses MAX_MESSAGE_SIZE=1024, PREFERRED_BLOCK_SIZE=1024, BLOCKWISE_STATUS_LIFETIME=300000, MAX_RESOURCE_BODY_SIZE=268435456, BLOCKWISE_STRICT_BLOCK2_OPTION=true
+thingsboard  | 2026-03-24 12:11:25,051 [main] INFO  o.t.s.t.l.b.LwM2MTransportBootstrapService - Unable to load X509 files for LWM2MServer
+thingsboard  | 2026-03-24 12:11:25,056 [main] WARN  o.e.l.s.c.b.e.c.CoapsBootstrapServerEndpointFactory - PskStore should be automatically set by Leshan. Using a custom implementation is not advised.
+thingsboard  | 2026-03-24 12:11:25,086 [main] INFO  o.e.c.s.d.InMemoryReadWriteLockConnectionStore - Created new InMemoryConnectionStore [capacity: 150000, connection expiration threshold: 1800s]
+thingsboard  | 2026-03-24 12:11:25,090 [main] INFO  o.e.c.c.network.RandomTokenGenerator - using tokens of 8 bytes in length
+thingsboard  | 2026-03-24 12:11:25,091 [main] INFO  o.e.c.core.network.CoapEndpoint - [Bootstrap Server-coaps://0.0.0.0:5688] CoapEndpoint uses lwm2m correlation
+thingsboard  | 2026-03-24 12:11:25,092 [main] INFO  o.e.c.c.network.stack.BlockwiseLayer - [Bootstrap Server-coaps://0.0.0.0:5688] BlockwiseLayer uses MAX_MESSAGE_SIZE=1024, PREFERRED_BLOCK_SIZE=1024, BLOCKWISE_STATUS_LIFETIME=300000, MAX_RESOURCE_BODY_SIZE=268435456, BLOCKWISE_STRICT_BLOCK2_OPTION=true
+thingsboard  | 2026-03-24 12:11:25,097 [main] INFO  o.e.californium.core.CoapServer - Starting server
+thingsboard  | 2026-03-24 12:11:25,102 [main] INFO  o.e.c.elements.UDPConnector - UDPConnector starts up 2 sender threads and 2 receiver threads
+thingsboard  | 2026-03-24 12:11:25,103 [main] INFO  o.e.c.elements.UDPConnector - UDPConnector listening on /[0:0:0:0:0:0:0:0]:5687, recv buf = 106496, send buf = 106496, recv packet size = 2048
+thingsboard  | 2026-03-24 12:11:25,104 [main] INFO  o.e.c.core.network.CoapEndpoint - [Bootstrap Server-coap://0.0.0.0:5687] Started endpoint at coap://[0:0:0:0:0:0:0:0]:5687
+thingsboard  | 2026-03-24 12:11:25,108 [main] INFO  o.e.c.scandium.DTLSConnector - multiple network interfaces, using smallest MTU [IPv4 1500, IPv6 1280]
+thingsboard  | 2026-03-24 12:11:25,112 [DTLS-Receiver-0-/[0:0:0:0:0:0:0:0]:5688] INFO  o.e.c.scandium.DTLSConnector - Starting worker thread [DTLS-Receiver-0-/[0:0:0:0:0:0:0:0]:5688]
+thingsboard  | 2026-03-24 12:11:25,113 [main] INFO  o.e.c.scandium.DTLSConnector - DTLSConnector listening on /[0:0:0:0:0:0:0:0]:5688, recv buf = 106496, send buf = 106496, recv packet size = 16490, MTU = IPv4 1500 / IPv6 1280
+thingsboard  | 2026-03-24 12:11:25,113 [DTLS-Receiver-1-/[0:0:0:0:0:0:0:0]:5688] INFO  o.e.c.scandium.DTLSConnector - Starting worker thread [DTLS-Receiver-1-/[0:0:0:0:0:0:0:0]:5688]
+thingsboard  | 2026-03-24 12:11:25,114 [main] INFO  o.e.c.core.network.CoapEndpoint - [Bootstrap Server-coaps://0.0.0.0:5688] Started endpoint at coaps://[0:0:0:0:0:0:0:0]:5688
+thingsboard  | 2026-03-24 12:11:25,115 [main] INFO  o.e.l.s.b.LeshanBootstrapServer - Bootstrap server started.
+thingsboard  | 2026-03-24 12:11:25,115 [main] INFO  o.e.l.s.b.LeshanBootstrapServer - CoAP over UDP endpoint based on Californium library available at coap://[0:0:0:0:0:0:0:0]:5687.
+thingsboard  | 2026-03-24 12:11:25,115 [main] INFO  o.e.l.s.b.LeshanBootstrapServer - CoAP over DTLS endpoint based on Californium/Scandium library available at coaps://[0:0:0:0:0:0:0:0]:5688.
+thingsboard  | 2026-03-24 12:11:25,116 [main] INFO  o.t.s.t.l.b.LwM2MTransportBootstrapService - Started LwM2M transport bootstrap server.
+thingsboard  | 2026-03-24 12:11:25,377 [main] INFO  o.t.s.t.s.s.SnmpTransportService - SNMP transport service initialized
+thingsboard  | 2026-03-24 12:11:25,408 [main] INFO  o.t.s.d.s.NamedParameterJdbcTemplateConfiguration - Set jdbcTemplate query timeout [30] second(s)
+thingsboard  | 2026-03-24 12:11:25,905 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Found 3 AuthenticationProvider beans, with names [jwtAuthenticationProvider, refreshTokenAuthenticationProvider, restAuthenticationProvider]. Global Authentication Manager will not be configured with AuthenticationProviders. Consider publishing a single AuthenticationProvider bean, or wiring your Providers directly using the DSL.
+thingsboard  | 2026-03-24 12:11:26,150 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [public/index.html]
+thingsboard  | 2026-03-24 12:11:27,012 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+thingsboard  | 2026-03-24 12:11:28,741 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'relations' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,743 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'deviceCredentials' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,744 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'devices' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,745 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'sessions' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,746 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'assets' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,747 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'customers' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,748 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'users' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,749 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'entityViews' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,750 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'claimDevices' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,752 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'securitySettings' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,754 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'tenantProfiles' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,754 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'tenants' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,755 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'tenantsExist' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,756 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'deviceProfiles' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,757 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'assetProfiles' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,759 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'notificationSettings' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,763 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'sentNotifications' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,764 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'attributes' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,766 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'tsLatest' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,767 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'userSessionsInvalidation' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,768 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'otaPackages' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,769 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'otaPackagesData' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,770 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'edges' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,771 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'edgeSessions' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,772 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'relatedEdges' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,773 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'repositorySettings' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,774 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'autoCommitSettings' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,776 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'twoFaVerificationCodes' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,778 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'versionControlTask' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,779 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'userSettings' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,780 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'dashboardTitles' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,780 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'entityCount' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,781 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'resourceInfo' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,781 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'alarmTypes' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,781 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'qrCodeSettings' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,782 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'mobileSecretKey' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,783 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'trendzSettings' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:28,786 [main] WARN  i.m.c.i.b.cache.CaffeineCacheMetrics - The cache 'aiModel' is not recording statistics. No meters except 'cache.size' will be registered. Call 'Caffeine#recordStats()' prior to building the cache for metrics to be recorded.
+thingsboard  | 2026-03-24 12:11:29,299 [main] INFO  o.s.i.endpoint.EventDrivenConsumer - Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+thingsboard  | 2026-03-24 12:11:29,300 [main] INFO  o.s.i.c.PublishSubscribeChannel - Channel 'application.errorChannel' has 1 subscriber(s).
+thingsboard  | 2026-03-24 12:11:29,301 [main] INFO  o.s.i.endpoint.EventDrivenConsumer - started bean '_org.springframework.integration.errorLogger'
+thingsboard  | 2026-03-24 12:11:29,326 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-0.0.0.0-9090"]
+thingsboard  | 2026-03-24 12:11:29,354 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 9090 (http) with context path '/'
+thingsboard  | 2026-03-24 12:11:29,404 [main] INFO  o.t.s.ThingsboardServerApplication - Started ThingsboardServerApplication in 31.354 seconds (process running for 34.964)
+thingsboard  | 2026-03-24 12:11:29,416 [TB-Scheduling-2] INFO  o.t.s.c.t.s.DefaultTransportService - Transport Stats: openConnections [0]
+thingsboard  | 2026-03-24 12:11:29,429 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [TB Version Control] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,430 [main] INFO  o.t.s.q.d.HashPartitionService - Recalculating partitions
+thingsboard  | 2026-03-24 12:11:29,431 [main] INFO  o.t.s.q.d.HashPartitionService - [8cde2818dd98] Found common server: [TB_CORE, TB_RULE_ENGINE, TB_TRANSPORT, JS_EXECUTOR, TB_VC_EXECUTOR, EDQS, TASK_PROCESSOR]
+thingsboard  | 2026-03-24 12:11:29,447 [main] INFO  o.t.s.q.d.HashPartitionService - Partitions changed:
+thingsboard  | [QK(CalculatedFieldStates,TB_RULE_ENGINE,system)] - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | [QK(SequentialByOriginator,TB_RULE_ENGINE,system)] - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | [QK(CalculatedFields,TB_RULE_ENGINE,system)] - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | [QK(Main,TB_RULE_ENGINE,system)] - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | [QK(HighPriority,TB_RULE_ENGINE,system)] - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | 2026-03-24 12:11:29,449 [main] INFO  o.t.s.a.service.DefaultActorService - Received partition change event.
+thingsboard  | 2026-03-24 12:11:29,451 [main] INFO  o.t.s.q.d.HashPartitionService - Partitions changed:
+thingsboard  | [QK(Main,TB_CORE,system)] - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | [QK(Edge,TB_CORE,system)] - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | 2026-03-24 12:11:29,459 [api-usage-scheduled-19-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage] CURRENT PARTITIONS: []
+thingsboard  | 2026-03-24 12:11:29,459 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State] CURRENT PARTITIONS: []
+thingsboard  | 2026-03-24 12:11:29,459 [main] INFO  o.t.s.a.service.DefaultActorService - Received partition change event.
+thingsboard  | 2026-03-24 12:11:29,460 [api-usage-scheduled-19-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage] NEW PARTITIONS: [tb_core.0, tb_core.2, tb_core.4, tb_core.6, tb_core.8, tb_core.1, tb_core.3, tb_core.5, tb_core.7, tb_core.9]
+thingsboard  | 2026-03-24 12:11:29,460 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State] NEW PARTITIONS: [tb_core.0, tb_core.2, tb_core.4, tb_core.6, tb_core.8, tb_core.1, tb_core.3, tb_core.5, tb_core.7, tb_core.9]
+thingsboard  | 2026-03-24 12:11:29,461 [api-usage-scheduled-19-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage] ADDED PARTITIONS: [tb_core.0, tb_core.2, tb_core.4, tb_core.6, tb_core.8, tb_core.1, tb_core.3, tb_core.5, tb_core.7, tb_core.9]
+thingsboard  | 2026-03-24 12:11:29,461 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State] ADDED PARTITIONS: [tb_core.0, tb_core.2, tb_core.4, tb_core.6, tb_core.8, tb_core.1, tb_core.3, tb_core.5, tb_core.7, tb_core.9]
+thingsboard  | 2026-03-24 12:11:29,462 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State] REMOVED PARTITIONS: []
+thingsboard  | 2026-03-24 12:11:29,463 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler] CURRENT PARTITIONS: []
+thingsboard  | 2026-03-24 12:11:29,462 [api-usage-scheduled-19-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage] REMOVED PARTITIONS: []
+thingsboard  | 2026-03-24 12:11:29,463 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler] NEW PARTITIONS: [tb_core.0, tb_core.2, tb_core.4, tb_core.6, tb_core.8, tb_core.1, tb_core.3, tb_core.5, tb_core.7, tb_core.9]
+thingsboard  | 2026-03-24 12:11:29,463 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler] ADDED PARTITIONS: [tb_core.0, tb_core.2, tb_core.4, tb_core.6, tb_core.8, tb_core.1, tb_core.3, tb_core.5, tb_core.7, tb_core.9]
+thingsboard  | 2026-03-24 12:11:29,464 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler] REMOVED PARTITIONS: []
+thingsboard  | 2026-03-24 12:11:29,464 [api-usage-scheduled-19-thread-1] INFO  o.t.s.s.a.DefaultTbApiUsageStateService - Initializing tenant states.
+thingsboard  | 2026-03-24 12:11:29,472 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)] Added partitions: [tb_core.0, tb_core.2, tb_core.4, tb_core.6, tb_core.8, tb_core.1, tb_core.3, tb_core.5, tb_core.7, tb_core.9], removed partitions: []
+thingsboard  | 2026-03-24 12:11:29,473 [main] INFO  o.t.s.q.d.HashPartitionService - Partitions changed:
+thingsboard  | [QK(Main,TB_VC_EXECUTOR,system)] - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | 2026-03-24 12:11:29,473 [tb-edge-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Edge,TB_CORE,system)] New partitions: [tb_edge.0, tb_edge.2, tb_edge.4, tb_edge.6, tb_edge.8, tb_edge.1, tb_edge.3, tb_edge.5, tb_edge.7, tb_edge.9]
+thingsboard  | 2026-03-24 12:11:29,474 [main] INFO  o.t.s.q.d.HashPartitionService - Partitions changed:
+thingsboard  | [QK(Main,EDQS,system)] - [0, 1, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | 2026-03-24 12:11:29,481 [main] INFO  o.t.s.t.s.s.SnmpTransportBalancingService - Recalculating partitions for SNMP transports
+thingsboard  | 2026-03-24 12:11:29,481 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-0] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,482 [tb-edge-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Edge,TB_CORE,system)] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,483 [main] INFO  o.t.s.t.s.s.SnmpTransportBalancingService - SNMP transports partitions have not changed
+thingsboard  | 2026-03-24 12:11:29,483 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-2] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,486 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-4] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,487 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-6] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,488 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-8] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,489 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-1] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,490 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-3] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,492 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-5] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,494 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-7] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,495 [tb-core-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_CORE,system)-9] Launching consumer
+thingsboard  | 2026-03-24 12:11:29,805 [main] INFO  o.t.s.a.service.DefaultActorService - Received application ready event. Sending application init message to actor system
+thingsboard  | 2026-03-24 12:11:29,806 [app-dispatcher-31-thread-1] INFO  o.t.server.actors.app.AppActor - Starting main system actor.
+thingsboard  | 2026-03-24 12:11:29,825 [main] INFO  o.t.s.s.edge.rpc.EdgeGrpcService - Initializing Edge RPC service!
+thingsboard  | 2026-03-24 12:11:30,357 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler] Managing following partitions:
+thingsboard  | 2026-03-24 12:11:30,358 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.4]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,358 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.8]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,359 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.0]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,359 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.3]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,359 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.7]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,359 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.2]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,360 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.6]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,360 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.5]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,361 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.1]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,398 [notifications-scheduler-49-thread-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Notifications scheduler][tb_core.9]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,455 [app-dispatcher-31-thread-1] INFO  o.t.server.actors.app.AppActor - Main system actor started.
+thingsboard  | 2026-03-24 12:11:30,522 [main] INFO  o.t.s.s.edge.rpc.EdgeGrpcService - Going to start Edge RPC server using port: 7070
+thingsboard  | 2026-03-24 12:11:30,557 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.s.DefaultDeviceStateService - [tb_core.9] Submit task for device states: 1
+thingsboard  | 2026-03-24 12:11:30,560 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.s.DefaultDeviceStateService - [tb_core.1] Submit task for device states: 1
+thingsboard  | 2026-03-24 12:11:30,561 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.s.DefaultDeviceStateService - [tb_core.3] Submit task for device states: 1
+thingsboard  | 2026-03-24 12:11:30,562 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.s.DefaultDeviceStateService - [tb_core.4] Submit task for device states: 1
+thingsboard  | 2026-03-24 12:11:30,564 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.s.DefaultDeviceStateService - [tb_core.5] Submit task for device states: 2
+thingsboard  | 2026-03-24 12:11:30,566 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.s.DefaultDeviceStateService - [tb_core.2] Submit task for device states: 1
+thingsboard  | 2026-03-24 12:11:30,568 [device-state-scheduled-21-thread-1] INFO  o.t.s.s.s.DefaultDeviceStateService - [tb_core.6] Submit task for device states: 2
+thingsboard  | 2026-03-24 12:11:30,632 [device-state-0-5] INFO  o.t.s.s.s.DefaultDeviceStateService - [5] Initialized 2 out of 2 device states
+thingsboard  | 2026-03-24 12:11:30,632 [device-state-0-3] INFO  o.t.s.s.s.DefaultDeviceStateService - [3] Initialized 1 out of 1 device states
+thingsboard  | 2026-03-24 12:11:30,632 [device-state-0-4] INFO  o.t.s.s.s.DefaultDeviceStateService - [4] Initialized 1 out of 1 device states
+thingsboard  | 2026-03-24 12:11:30,632 [device-state-0-6] INFO  o.t.s.s.s.DefaultDeviceStateService - [2] Initialized 1 out of 1 device states
+thingsboard  | 2026-03-24 12:11:30,632 [device-state-0-2] INFO  o.t.s.s.s.DefaultDeviceStateService - [1] Initialized 1 out of 1 device states
+thingsboard  | 2026-03-24 12:11:30,632 [device-state-0-1] INFO  o.t.s.s.s.DefaultDeviceStateService - [9] Initialized 1 out of 1 device states
+thingsboard  | 2026-03-24 12:11:30,633 [device-state-0-7] INFO  o.t.s.s.s.DefaultDeviceStateService - [6] Initialized 2 out of 2 device states
+thingsboard  | 2026-03-24 12:11:30,634 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State] Managing following partitions:
+thingsboard  | 2026-03-24 12:11:30,635 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.4]: 1 entities
+thingsboard  | 2026-03-24 12:11:30,636 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.8]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,636 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.0]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,636 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.3]: 1 entities
+thingsboard  | 2026-03-24 12:11:30,637 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.7]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,637 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.2]: 1 entities
+thingsboard  | 2026-03-24 12:11:30,637 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.6]: 2 entities
+thingsboard  | 2026-03-24 12:11:30,638 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.5]: 2 entities
+thingsboard  | 2026-03-24 12:11:30,638 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.1]: 1 entities
+thingsboard  | 2026-03-24 12:11:30,638 [device-state-0-7] INFO  o.t.s.s.p.AbstractPartitionBasedService - [Device State][tb_core.9]: 1 entities
+thingsboard  | 2026-03-24 12:11:30,772 [main] INFO  o.t.s.s.edge.rpc.EdgeGrpcService - Edge RPC service initialized!
+thingsboard  | 2026-03-24 12:11:30,780 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [Housekeeper reprocessing] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,781 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [Housekeeper] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,782 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [job-stats] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,783 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [TB Rule Engine Notifications] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,788 [main] INFO  o.t.s.s.q.DefaultTbCalculatedFieldConsumerService - Handling partition change event: PartitionChangeEvent(super=TbApplicationEvent(sequenceNumber=1), serviceType=TB_RULE_ENGINE, newPartitions={QK(CalculatedFieldStates,TB_RULE_ENGINE,system)=[tb_cf_state.1, tb_cf_state.3, tb_cf_state.5, tb_cf_state.7, tb_cf_state.9, tb_cf_state.0, tb_cf_state.2, tb_cf_state.4, tb_cf_state.6, tb_cf_state.8], QK(SequentialByOriginator,TB_RULE_ENGINE,system)=[tb_rule_engine.sq.0, tb_rule_engine.sq.2, tb_rule_engine.sq.4, tb_rule_engine.sq.6, tb_rule_engine.sq.8, tb_rule_engine.sq.1, tb_rule_engine.sq.3, tb_rule_engine.sq.5, tb_rule_engine.sq.7, tb_rule_engine.sq.9], QK(CalculatedFields,TB_RULE_ENGINE,system)=[tb_cf_event.1, tb_cf_event.3, tb_cf_event.5, tb_cf_event.7, tb_cf_event.9, tb_cf_event.0, tb_cf_event.2, tb_cf_event.4, tb_cf_event.6, tb_cf_event.8], QK(Main,TB_RULE_ENGINE,system)=[tb_rule_engine.main.0, tb_rule_engine.main.2, tb_rule_engine.main.4, tb_rule_engine.main.6, tb_rule_engine.main.8, tb_rule_engine.main.1, tb_rule_engine.main.3, tb_rule_engine.main.5, tb_rule_engine.main.7, tb_rule_engine.main.9], QK(HighPriority,TB_RULE_ENGINE,system)=[tb_rule_engine.hp.1, tb_rule_engine.hp.3, tb_rule_engine.hp.5, tb_rule_engine.hp.7, tb_rule_engine.hp.9, tb_rule_engine.hp.0, tb_rule_engine.hp.2, tb_rule_engine.hp.4, tb_rule_engine.hp.6, tb_rule_engine.hp.8]}, oldPartitions={QK(Main,TB_VC_EXECUTOR,system)=[], QK(CalculatedFieldStates,TB_RULE_ENGINE,system)=[], QK(SequentialByOriginator,TB_RULE_ENGINE,system)=[], QK(CalculatedFields,TB_RULE_ENGINE,system)=[], QK(Main,EDQS,system)=[], QK(Main,TB_CORE,system)=[], QK(Main,TB_RULE_ENGINE,system)=[], QK(HighPriority,TB_RULE_ENGINE,system)=[], QK(Edge,TB_CORE,system)=[]})
+thingsboard  | 2026-03-24 12:11:30,796 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [TB Core Notifications] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,797 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.PartitionedQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)] Added partitions: [tb_cf_event.1, tb_cf_event.3, tb_cf_event.5, tb_cf_event.7, tb_cf_event.9, tb_cf_event.0, tb_cf_event.2, tb_cf_event.4, tb_cf_event.6, tb_cf_event.8]
+thingsboard  | 2026-03-24 12:11:30,797 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage] Managing following partitions:
+thingsboard  | 2026-03-24 12:11:30,800 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [TB Ota Package States] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,800 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-1] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,800 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.4]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,801 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-3] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,801 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [TB Usage Stats] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,802 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.8]: 1 entities
+thingsboard  | 2026-03-24 12:11:30,804 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-5] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,806 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.0]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,806 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [TB Core Notifications] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,807 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-7] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,807 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.3]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,809 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [TB Rule Engine Notifications] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,809 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.7]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,809 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-9] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,810 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.2]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,811 [notifications-tb-core-consumer-52-thread-11] INFO  o.t.s.s.q.DefaultTbCoreConsumerService - [8cde2818dd98] Processing core startup with partitions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+thingsboard  | 2026-03-24 12:11:30,813 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.6]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,814 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-0] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,814 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.5]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,815 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.1]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,815 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.9]: 0 entities
+thingsboard  | 2026-03-24 12:11:30,816 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-2] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,817 [DefaultTbLocalSubscriptionService-0-1] INFO  o.t.s.s.s.DefaultTbLocalSubscriptionService - [8cde2818dd98] Pushed 0 subscriptions to [8cde2818dd98]
+thingsboard  | 2026-03-24 12:11:30,818 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-4] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,820 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-6] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,821 [tb-cf-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(CalculatedFields,TB_RULE_ENGINE,system)-8] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,828 [main] INFO  o.t.s.s.q.DefaultTbRuleEngineConsumerService - Handling partition change event: PartitionChangeEvent(super=TbApplicationEvent(sequenceNumber=1), serviceType=TB_RULE_ENGINE, newPartitions={QK(CalculatedFieldStates,TB_RULE_ENGINE,system)=[tb_cf_state.1, tb_cf_state.3, tb_cf_state.5, tb_cf_state.7, tb_cf_state.9, tb_cf_state.0, tb_cf_state.2, tb_cf_state.4, tb_cf_state.6, tb_cf_state.8], QK(SequentialByOriginator,TB_RULE_ENGINE,system)=[tb_rule_engine.sq.0, tb_rule_engine.sq.2, tb_rule_engine.sq.4, tb_rule_engine.sq.6, tb_rule_engine.sq.8, tb_rule_engine.sq.1, tb_rule_engine.sq.3, tb_rule_engine.sq.5, tb_rule_engine.sq.7, tb_rule_engine.sq.9], QK(CalculatedFields,TB_RULE_ENGINE,system)=[tb_cf_event.1, tb_cf_event.3, tb_cf_event.5, tb_cf_event.7, tb_cf_event.9, tb_cf_event.0, tb_cf_event.2, tb_cf_event.4, tb_cf_event.6, tb_cf_event.8], QK(Main,TB_RULE_ENGINE,system)=[tb_rule_engine.main.0, tb_rule_engine.main.2, tb_rule_engine.main.4, tb_rule_engine.main.6, tb_rule_engine.main.8, tb_rule_engine.main.1, tb_rule_engine.main.3, tb_rule_engine.main.5, tb_rule_engine.main.7, tb_rule_engine.main.9], QK(HighPriority,TB_RULE_ENGINE,system)=[tb_rule_engine.hp.1, tb_rule_engine.hp.3, tb_rule_engine.hp.5, tb_rule_engine.hp.7, tb_rule_engine.hp.9, tb_rule_engine.hp.0, tb_rule_engine.hp.2, tb_rule_engine.hp.4, tb_rule_engine.hp.6, tb_rule_engine.hp.8]}, oldPartitions={QK(Main,TB_VC_EXECUTOR,system)=[], QK(CalculatedFieldStates,TB_RULE_ENGINE,system)=[], QK(SequentialByOriginator,TB_RULE_ENGINE,system)=[], QK(CalculatedFields,TB_RULE_ENGINE,system)=[], QK(Main,EDQS,system)=[], QK(Main,TB_CORE,system)=[], QK(Main,TB_RULE_ENGINE,system)=[], QK(HighPriority,TB_RULE_ENGINE,system)=[], QK(Edge,TB_CORE,system)=[]})
+thingsboard  | 2026-03-24 12:11:30,831 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)] Added partitions: [tb_rule_engine.sq.0, tb_rule_engine.sq.2, tb_rule_engine.sq.4, tb_rule_engine.sq.6, tb_rule_engine.sq.8, tb_rule_engine.sq.1, tb_rule_engine.sq.3, tb_rule_engine.sq.5, tb_rule_engine.sq.7, tb_rule_engine.sq.9], removed partitions: []
+thingsboard  | 2026-03-24 12:11:30,832 [main] INFO  o.t.s.s.t.TbCoreTransportApiService - Received application ready event. Starting polling for events.
+thingsboard  | 2026-03-24 12:11:30,832 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)] Added partitions: [tb_rule_engine.main.0, tb_rule_engine.main.2, tb_rule_engine.main.4, tb_rule_engine.main.6, tb_rule_engine.main.8, tb_rule_engine.main.1, tb_rule_engine.main.3, tb_rule_engine.main.5, tb_rule_engine.main.7, tb_rule_engine.main.9], removed partitions: []
+thingsboard  | 2026-03-24 12:11:30,832 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)] Added partitions: [tb_rule_engine.hp.1, tb_rule_engine.hp.3, tb_rule_engine.hp.5, tb_rule_engine.hp.7, tb_rule_engine.hp.9, tb_rule_engine.hp.0, tb_rule_engine.hp.2, tb_rule_engine.hp.4, tb_rule_engine.hp.6, tb_rule_engine.hp.8], removed partitions: []
+thingsboard  | 2026-03-24 12:11:30,832 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-0] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,832 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-0] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,832 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-1] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,835 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-2] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,834 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-2] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,836 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-3] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,836 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-4] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,836 [main] INFO  o.t.s.q.c.c.QueueConsumerManager - [TB Transport] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,837 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-4] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,837 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-5] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,837 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-6] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,840 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-6] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,840 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-7] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,845 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-8] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,844 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-8] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,845 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-9] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,846 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-1] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,846 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-1] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,846 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-0] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,847 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-3] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,848 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-3] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,848 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-2] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,850 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-5] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,851 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-5] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,852 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-4] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,853 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-7] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,854 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-6] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,856 [tb-rule-engine-mgmt-0-2] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(Main,TB_RULE_ENGINE,system)-9] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,852 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-7] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,857 [tb-rule-engine-mgmt-0-3] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(HighPriority,TB_RULE_ENGINE,system)-8] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,862 [tb-rule-engine-mgmt-0-1] INFO  o.t.s.q.c.c.MainQueueConsumerManager - [QK(SequentialByOriginator,TB_RULE_ENGINE,system)-9] Launching consumer
+thingsboard  | 2026-03-24 12:11:30,924 [main] INFO  o.e.c.c.network.RandomTokenGenerator - using tokens of 8 bytes in length
+thingsboard  | 2026-03-24 12:11:30,925 [main] INFO  o.e.c.core.network.CoapEndpoint - [LWM2M Server-coap://0.0.0.0:5685] CoapEndpoint uses udp context
+thingsboard  | 2026-03-24 12:11:30,925 [main] INFO  o.e.c.c.network.stack.BlockwiseLayer - [LWM2M Server-coap://0.0.0.0:5685] BlockwiseLayer uses MAX_MESSAGE_SIZE=1024, PREFERRED_BLOCK_SIZE=1024, BLOCKWISE_STATUS_LIFETIME=300000, MAX_RESOURCE_BODY_SIZE=268435456, BLOCKWISE_STRICT_BLOCK2_OPTION=true
+thingsboard  | 2026-03-24 12:11:30,934 [main] INFO  o.t.s.t.l.s.DefaultLwM2mTransportService - Unable to load X509 files for LWM2MServer
+thingsboard  | 2026-03-24 12:11:30,936 [main] WARN  o.e.l.s.c.e.c.CoapsServerEndpointFactory - PskStore should be automatically set by Leshan. Using a custom implementation is not advised.
+thingsboard  | 2026-03-24 12:11:30,938 [main] INFO  o.e.c.s.d.InMemoryReadWriteLockConnectionStore - Created new InMemoryConnectionStore [capacity: 150000, connection expiration threshold: 1800s]
+thingsboard  | 2026-03-24 12:11:30,939 [main] INFO  o.e.c.c.network.RandomTokenGenerator - using tokens of 8 bytes in length
+thingsboard  | 2026-03-24 12:11:30,939 [main] INFO  o.e.c.core.network.CoapEndpoint - [LWM2M Server-coaps://0.0.0.0:5686] CoapEndpoint uses lwm2m correlation
+thingsboard  | 2026-03-24 12:11:30,940 [main] INFO  o.e.c.c.network.stack.BlockwiseLayer - [LWM2M Server-coaps://0.0.0.0:5686] BlockwiseLayer uses MAX_MESSAGE_SIZE=1024, PREFERRED_BLOCK_SIZE=1024, BLOCKWISE_STATUS_LIFETIME=300000, MAX_RESOURCE_BODY_SIZE=268435456, BLOCKWISE_STRICT_BLOCK2_OPTION=true
+thingsboard  | 2026-03-24 12:11:30,956 [main] INFO  o.t.s.t.l.s.DefaultLwM2mTransportService - Starting LwM2M transport server...
+thingsboard  | 2026-03-24 12:11:30,958 [main] INFO  o.e.californium.core.CoapServer - Starting server
+thingsboard  | 2026-03-24 12:11:30,962 [main] INFO  o.e.c.elements.UDPConnector - UDPConnector starts up 2 sender threads and 2 receiver threads
+thingsboard  | 2026-03-24 12:11:30,964 [main] INFO  o.e.c.elements.UDPConnector - UDPConnector listening on /[0:0:0:0:0:0:0:0]:5685, recv buf = 106496, send buf = 106496, recv packet size = 2048
+thingsboard  | 2026-03-24 12:11:30,965 [main] INFO  o.e.c.core.network.CoapEndpoint - [LWM2M Server-coap://0.0.0.0:5685] Started endpoint at coap://[0:0:0:0:0:0:0:0]:5685
+thingsboard  | 2026-03-24 12:11:30,966 [main] INFO  o.e.c.scandium.DTLSConnector - multiple network interfaces, using smallest MTU [IPv4 1500, IPv6 1280]
+thingsboard  | 2026-03-24 12:11:30,970 [main] INFO  o.e.c.scandium.DTLSConnector - DTLSConnector listening on /[0:0:0:0:0:0:0:0]:5686, recv buf = 106496, send buf = 106496, recv packet size = 16490, MTU = IPv4 1500 / IPv6 1280
+thingsboard  | 2026-03-24 12:11:30,970 [DTLS-Receiver-0-/[0:0:0:0:0:0:0:0]:5686] INFO  o.e.c.scandium.DTLSConnector - Starting worker thread [DTLS-Receiver-0-/[0:0:0:0:0:0:0:0]:5686]
+thingsboard  | 2026-03-24 12:11:30,970 [DTLS-Receiver-1-/[0:0:0:0:0:0:0:0]:5686] INFO  o.e.c.scandium.DTLSConnector - Starting worker thread [DTLS-Receiver-1-/[0:0:0:0:0:0:0:0]:5686]
+thingsboard  | 2026-03-24 12:11:30,973 [main] INFO  o.e.c.core.network.CoapEndpoint - [LWM2M Server-coaps://0.0.0.0:5686] Started endpoint at coaps://[0:0:0:0:0:0:0:0]:5686
+thingsboard  | 2026-03-24 12:11:30,976 [main] INFO  o.eclipse.leshan.server.LeshanServer - LWM2M server started.
+thingsboard  | 2026-03-24 12:11:30,976 [main] INFO  o.eclipse.leshan.server.LeshanServer - CoAP over UDP endpoint based on Californium library available at coap://[0:0:0:0:0:0:0:0]:5685.
+thingsboard  | 2026-03-24 12:11:30,977 [main] INFO  o.eclipse.leshan.server.LeshanServer - CoAP over DTLS endpoint based on Californium/Scandium library available at coaps://[0:0:0:0:0:0:0:0]:5686.
+thingsboard  | 2026-03-24 12:11:30,984 [main] INFO  o.t.s.t.l.s.DefaultLwM2mTransportService - Started LwM2M transport server.
+thingsboard  | 2026-03-24 12:11:30,989 [snmp-bootstrap-69-thread-1] INFO  o.t.s.t.snmp.SnmpTransportContext - Initializing SNMP devices sessions
+thingsboard  | 2026-03-24 12:11:30,989 [main] INFO  o.t.s.ThingsboardServerApplication - Started ThingsBoard in 33 seconds
+thingsboard  | 2026-03-24 12:11:31,866 [tb-system-info-scheduler-70-thread-1] INFO  c.d.oss.driver.api.core.uuid.Uuids - PID obtained through native call to getpid(): 272
+thingsboard  | 2026-03-24 12:11:32,264 [rule-dispatcher-0-8] INFO  o.t.s.d.s.i.s.SqlPartitioningRepository - Saving partition 1773878400000-1774483200000 for table lc_event
+thingsboard  | 2026-03-24 12:11:34,167 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [Events] queueSize [0] totalAdded [6] totalSaved [6] totalFailed [0]
+thingsboard  | 2026-03-24 12:11:34,168 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-1 [Events] queueSize [0] totalAdded [4] totalSaved [4] totalFailed [0]
+thingsboard  | 2026-03-24 12:11:34,169 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [Events] queueSize [0] totalAdded [6] totalSaved [6] totalFailed [0]
+thingsboard  | 2026-03-24 12:11:36,561 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [15] totalSaved [15] totalFailed [0]
+thingsboard  | 2026-03-24 12:11:36,607 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [15] totalSaved [15] totalFailed [0]
+thingsboard  | 2026-03-24 12:11:40,363 [git-sync-43-thread-1] INFO  o.t.s.s.sync.DefaultGitSyncService - [gateways-dashboard] Initialized repository
+thingsboard  | 2026-03-24 12:11:41,368 [git-sync-43-thread-1] INFO  o.t.s.d.resource.BaseResourceService - Updating system resource gateway-management-extension.js
+thingsboard  | 2026-03-24 12:11:41,399 [git-sync-43-thread-1] INFO  org.owasp.validator.html.Policy - Attempting to load AntiSamy policy from an input stream.
+thingsboard  | 2026-03-24 12:11:41,629 [git-sync-43-thread-1] WARN  org.owasp.validator.html.Policy - The directive "noopenerAndNoreferrerAnchors" is enabled by default, but disabled in this policy. It is recommended to leave it enabled to prevent reverse tabnabbing attacks.
+thingsboard  | 2026-03-24 12:11:41,850 [app-dispatcher-31-thread-1] WARN  o.t.server.actors.app.AppActor - Message has system tenant id: ComponentLifecycleMsg(tenantId=13814000-1dd2-11b2-8080-808080808080, entityId=82cc5a80-277a-11f1-b456-3d6768467530, event=UPDATED, oldName=null, name=null, oldProfileId=null, profileId=null, info=null)
+thingsboard  | 2026-03-24 12:11:42,130 [app-dispatcher-31-thread-1] WARN  o.t.server.actors.app.AppActor - Message has system tenant id: ComponentLifecycleMsg(tenantId=13814000-1dd2-11b2-8080-808080808080, entityId=82c8d810-277a-11f1-b456-3d6768467530, event=UPDATED, oldName=null, name=null, oldProfileId=null, profileId=null, info=null)
+thingsboard  | 2026-03-24 12:11:42,716 [git-sync-43-thread-1] INFO  o.t.s.d.resource.BaseResourceService - Updating system resource gateways_dashboard.json
+thingsboard  | 2026-03-24 12:11:42,725 [git-sync-43-thread-1] INFO  o.t.s.s.e.d.DashboardSyncService - Gateways dashboard sync completed
+thingsboard  | 2026-03-24 12:11:42,729 [app-dispatcher-31-thread-1] WARN  o.t.server.actors.app.AppActor - Message has system tenant id: ComponentLifecycleMsg(tenantId=13814000-1dd2-11b2-8080-808080808080, entityId=82dc3900-277a-11f1-b456-3d6768467530, event=UPDATED, oldName=null, name=null, oldProfileId=null, profileId=null, info=null)
+thingsboard  | 2026-03-24 12:12:25,268 [TB-Scheduling-6] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - Total timing statistics below:
+thingsboard  | 2026-03-24 12:12:25,273 [TB-Scheduling-6] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: calls: 41, failures: 0, exec time: 3979
+thingsboard  | 2026-03-24 12:12:25,274 [TB-Scheduling-6] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530] Top 3 methods by timing:
+thingsboard  | 2026-03-24 12:12:25,275 [TB-Scheduling-6] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaRelationDao.findAllByFrom(..), calls: 2, failures: 0, exec time: 1880
+thingsboard  | 2026-03-24 12:12:25,275 [TB-Scheduling-6] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaAbstractDao.findById(..), calls: 31, failures: 0, exec time: 1238
+thingsboard  | 2026-03-24 12:12:25,277 [TB-Scheduling-6] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaRuleChainDao.findRuleChainsByTenantIdAndType(..), calls: 1, failures: 0, exec time: 377
+thingsboard  | 2026-03-24 12:12:25,287 [TB-Scheduling-13] INFO  o.t.s.c.t.s.DefaultTransportService - Transport Stats: openConnections [0]
+thingsboard  | 2026-03-24 12:12:25,287 [TB-Scheduling-14] INFO  o.t.s.s.queue.TbCoreConsumerStats - Core Stats: totalMsgs = [4] sessionEvents = [0] getAttr = [0] subToAttr = [0] subToRpc = [0] toDevRpc = [0] subInfo = [0] claimDevice = [0] deviceState = [0] subMsgs = [0] deviceConnect = [0] deviceActivity = [0] deviceDisconnect = [0] deviceInactivity = [0] deviceInactivityTimeoutUpdate = [0] coreNfOther = [1] coreNfCompLfcl = [3] coreNfDevRpcRsp = [0] coreNfNfRlProc = [0] coreNfQueueUpd = [0] coreNfQueueDel = [0] coreNfSubSvc = [0] coreNfSubMgr = [0] coreNfVCRsp = [0]
+thingsboard  | 2026-03-24 12:12:25,287 [TB-Scheduling-15] INFO  o.t.s.s.queue.EdgeConsumerStats - Edge Stats: totalMsgs = [14] edgeNfs = [14] coreNfEdgeHPUpd = [0] coreNfEdgeUpd = [0] coreNfEdgeSyncReq = [0] coreNfEdgeSyncResp = [0] coreNfEdgeCompLfcl = [0]
+thingsboard  | 2026-03-24 12:12:32,430 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-03-24 12:12:32,476 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-03-24 12:12:42,431 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS] queueSize [0] totalAdded [6] totalSaved [6] totalFailed [0]
+thingsboard  | 2026-03-24 12:12:42,431 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:12:42,477 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS Latest] queueSize [0] totalAdded [6] totalSaved [6] totalFailed [0]
+thingsboard  | 2026-03-24 12:12:42,477 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:13:21,207 [TB-Scheduling-7] INFO  o.t.s.c.t.s.DefaultTransportService - Transport Stats: openConnections [0]
+thingsboard  | 2026-03-24 12:13:28,349 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-03-24 12:13:28,395 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-03-24 12:13:38,348 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:13:38,349 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:13:38,394 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:13:38,395 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:14:17,250 [TB-Scheduling-10] INFO  o.t.s.c.t.s.DefaultTransportService - Transport Stats: openConnections [0]
+thingsboard  | 2026-03-24 12:14:24,390 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-03-24 12:14:24,436 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-03-24 12:14:34,390 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:14:34,391 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:14:34,436 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:14:34,436 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:15:13,124 [TB-Scheduling-8] INFO  o.t.s.c.t.s.DefaultTransportService - Transport Stats: openConnections [0]
+thingsboard  | 2026-03-24 12:15:20,264 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-03-24 12:15:20,310 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-03-24 12:15:30,263 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:15:30,264 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:15:30,311 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-03-24 12:15:30,312 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]

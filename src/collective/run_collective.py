@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 import requests
 from tqdm import tqdm
+from datetime import datetime, timezone
+from src.thingsboard.mqtt_client import TBPublisher
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -94,6 +96,14 @@ def main():
     endpoints = load_endpoints()
     tech_acc = load_tech_accuracy()
     df = sample_test_slices(10)
+    tb_enable = os.environ.get("TB_COLLECTIVE_ENABLE", "false").lower() in ("1", "true", "yes", "on")
+    tb_token = os.environ.get("TB_COLLECTIVE_TOKEN", "").strip()
+    tb_host = os.environ.get("TB_COLLECTIVE_HOST", "localhost")
+    tb_port = int(os.environ.get("TB_COLLECTIVE_PORT", "1883"))
+    tb_pub = None
+    if tb_enable and tb_token:
+        tb_pub = TBPublisher(host=tb_host, port=tb_port, token=tb_token, client_id="collective-client")
+        tb_pub.connect()
     results_dir = os.path.join(ROOT, "results", "collective")
     os.makedirs(results_dir, exist_ok=True)
     detail_path = os.path.join(results_dir, "detail.csv")
@@ -189,6 +199,24 @@ def main():
         if pred_collective == y_true:
             correct_collective += 1
         consensus_count += consensus
+        if tb_pub is not None:
+            # average of VM inference times used in this decision
+            used_times = [resp.get("inference_time_ms", 0.0) for resp in responses.values() if resp is not None]
+            avg_infer_ms = float(np.mean(used_times)) if used_times else 0.0
+            payload = {
+                "vm_id": "COLLECTIVE",
+                "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "collective_pred": int(pred_collective),
+                "collective_confidence": float(conf_collective),
+                "consensus": int(consensus),
+                "overloaded_count": len(overloaded),
+                "avg_inference_time_ms": round(avg_infer_ms, 3),
+                "patient_id": str(r.get("subject_id", ""))
+            }
+            try:
+                tb_pub.publish_telemetry(payload)
+            except Exception:
+                pass
         rows.append({
             "slice": slice_host,
             "y_true": y_true,

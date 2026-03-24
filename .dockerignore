@@ -6,3 +6,11 @@ __pycache__
 .idea
 .git
 .gitignore
+data/
+models/
+results/
+dataset/
+tb-data/
+tb-logs/
+*.nii
+*.nii.gz

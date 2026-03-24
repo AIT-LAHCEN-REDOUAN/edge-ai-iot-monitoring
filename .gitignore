@@ -14,3 +14,7 @@ __pycache__/
 Thumbs.db
 /data/processed/
 /dataset/
+/tb-data/
+/tb-data.bak/
+/tb-logs/
+/tb-logs.bak/

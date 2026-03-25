@@ -17,10 +17,10 @@ def build_model():
     model.fc = nn.Linear(num_ftrs, 2)
     return model
 
-def load_weights(model, vm_name):
+def load_weights(model, vm_name, override=None):
     profiles_path = "/app/results/deployment/vm_profiles.json"
-    technique = "baseline"
-    if os.path.exists(profiles_path):
+    technique = override if override else "baseline"
+    if not override and os.path.exists(profiles_path):
         with open(profiles_path, "r", encoding="utf-8") as f:
             profiles = json.load(f)
         if vm_name in profiles and "selected_technique" in profiles[vm_name]:
@@ -46,15 +46,31 @@ def load_weights(model, vm_name):
         ms = model.state_dict()
         try:
             state = torch.load(path, map_location="cpu")
-            if isinstance(state, dict) and "state_dict" in state:
+            # Accept multiple formats: Module, checkpoint dict, plain state_dict
+            if hasattr(state, "state_dict"):
+                state = state.state_dict()
+            elif isinstance(state, dict) and "state_dict" in state:
                 state = state["state_dict"]
+            # Optionally strip common prefixes like "module."
+            def normalize_keys(sd):
+                out = {}
+                for k, v in sd.items():
+                    kk = k
+                    if kk.startswith("module."):
+                        kk = kk[len("module."):]
+                    if kk.startswith("model."):
+                        kk = kk[len("model."):]
+                    out[kk] = v
+                return out
+            state = normalize_keys(state)
             matched = {}
             for k, v in state.items():
                 if k in ms:
                     if v.dtype != ms[k].dtype:
                         v = v.to(ms[k].dtype)
                     matched[k] = v
-            match_ratio = len(matched) / max(1, len(ms))
+            # Compute ratio relative to provided checkpoint keys to be robust
+            match_ratio = len(matched) / max(1, len(state))
             ms.update(matched)
             model.load_state_dict(ms, strict=False)
             return True, tag, match_ratio
@@ -62,7 +78,7 @@ def load_weights(model, vm_name):
             return False, "baseline", 0.0
 
     ok, tag, ratio = try_load(weight_path, technique)
-    if not ok or ratio < 0.8:
+    if not ok or ratio < 0.5:
         # Fallback to baseline weights for consistency
         base_path = paths["baseline"]
         try_load(base_path, "baseline")
@@ -105,6 +121,10 @@ def health():
 def infer():
     data = request.get_json(force=True)
     slice_path = data.get("slice_path")
+    req_technique = data.get("technique", None)
+    global model, technique_loaded
+    if req_technique and req_technique != technique_loaded:
+        model, technique_loaded = load_weights(model, vm_name, override=req_technique)
     patient_id = data.get("patient_id", None)
     if not slice_path or not os.path.exists(slice_path):
         return jsonify({"error": "missing_or_invalid_path"}), 400

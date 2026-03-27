@@ -1,0 +1,210 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{csvsimple}
+\usepackage{adjustbox}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+\sisetup{detect-all}
+\graphicspath{{project_files/results/baseline/}{results/baseline/}{report/screenshots/}{project_files/}{./}}
+\newcommand{\imgfallback}[2]{%
+\IfFileExists{#1}{\includegraphics[width=#2]{#1}}{%
+\fbox{\parbox[c][0.3\linewidth][c]{#2}{\centering Image manquante\\\texttt{#1}}}}}
+% Fallback verbatim include (prefers Overleaf 'project_files/', else local 'results/')
+\newcommand{\verbatimfile}[1]{%
+\IfFileExists{project_files/#1}{\verbatiminput{project_files/#1}}{\verbatiminput{#1}}}
+
+\title{Projet: Inférence médicale embarquée\\\large Quantification et déploiement de modèles de deep learning sur des machines virtuelles à ressources contraintes}
+\author{ISMAIL DAHMAN \and AIT-LAHCEN REDOUAN \and HOUDA ESSAMADI \and YOUNESS TALIBI}
+\date{Module: Systèmes embarqués et objets connectés – Master Data Science\\ENS Martil\\Encadrant: Prof.\ Said Ohamouddou}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Ce rapport présente une chaîne complète d'apprentissage profond embarqué appliquée à un jeu de données médical, depuis la préparation des données jusqu'à la supervision IoT. Un modèle de base a été entraîné et évalué, puis optimisé par quantification et élagage selon huit techniques. Les modèles ont été déployés sur trois VMs contraintes, la meilleure technique par VM a été sélectionnée, et une inférence collective a été implémentée avec vote pondéré, revalidation par confiance et équilibrage de charge. La télémétrie temps réel est envoyée vers ThingsBoard via MQTT pour construire des tableaux de bord d'observation et d'alertes.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction et contexte applicatif}
+L'inférence embarquée de modèles de vision médicale subit des contraintes fortes de latence, mémoire et consommation. L'objectif est d'étudier et comparer des techniques de compression (quantification, élagage) et de valider leur impact en conditions réalistes sur trois profils matériels contraints. Enfin, une architecture d'intelligence collective combine plusieurs prédictions pour améliorer la fiabilité et la supervision opérationnelle via ThingsBoard.
+
+\section{Jeu de données et prétraitement}
+Le corpus médical sélectionné contient des volumes IRM en format NIfTI répartis en deux classes avec au moins dix mille échantillons totaux après découpe en coupes 2D. Un pipeline reproductible a été mis en place:
+\begin{itemize}
+  \item Inventaire et inspection des volumes (\texttt{src/dataset/build\_metadata.py}, \texttt{inspect\_dataset.py});
+  \item Découpage \emph{train/val/test} stratifié sujet (\texttt{split\_dataset.py});
+  \item Prétraitement volumique: normalisation, redimensionnement à \(128^3\), sauvegarde \texttt{.npy} (\texttt{preprocess\_nii.py});
+  \item Extraction de coupes \(128\times 128\) pour l'entraînement 2D (\texttt{extract\_slices.py}).
+\end{itemize}
+Les métadonnées résultantes sont stockées sous \texttt{data/metadata} et les données transformées sous \texttt{data/processed}. Les scripts garantissent la traçabilité (\texttt{processed\_volumes\_metadata.csv}, \texttt{processed\_slices\_metadata.csv}).
+
+\section{Modèle de base: architecture, résultats, comparaison littérature}
+Le modèle de base est une ResNet18 adaptée aux coupes mono-canal: la première convolution accepte 1 canal et la couche finale projette vers 2 classes. L'entraînement (\texttt{train\_baseline.py}) et l'évaluation (\texttt{evaluate\_baseline.py}) utilisent des \emph{DataLoaders} sur les coupes 2D.
+
+Extraits de résultats:
+\begin{itemize}
+  \item Meilleur checkpoint: \texttt{models/baseline/best\_model.pth};
+  \item Métriques test: voir \texttt{results/baseline/metrics.txt};
+  \item Matrice de confusion: Fig.\ref{fig:cm}.
+\end{itemize}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\linewidth]{project_files/results/baseline/confusion_matrix.png}
+  \caption{Matrice de confusion du modèle de base}
+  \label{fig:cm}
+\end{figure}
+
+Une comparaison qualitative avec la littérature sur ResNet/EfficientNet et tâches voisines montre des performances proches de l'état de l'art pour un coût de calcul modéré, ce qui en fait une base pertinente avant compression.
+
+\textbf{Métriques de test (extrait)}:
+\begin{quote}\small
+\verbatimfile{results/baseline/metrics.txt}
+\end{quote}
+
+\section{Techniques d'optimisation: description, résultats, analyse comparative}
+Huit techniques ont été implémentées:
+\begin{itemize}
+  \item Quantification: Q1 (dynamique), Q2 (PTQ statique FX), Q3 (QAT), Q4 (poids FP16), Q5 (mélange FP16);
+  \item Élagage: P1 (non structuré), P2 (structuré), P3 (magnitude).
+\end{itemize}
+Chaque technique produit des rapports sous \texttt{results/optimization/} détaillant taille, latence, débit, précision et sparsité le cas échéant. Un tableau récapitulatif est construit par \texttt{src/deployment/build\_comparison\_table.py}. L'analyse met en évidence des compromis classiques: Q4/Q5 réduisent la taille et accélèrent, Q3 offre un bon couple précision/latence CPU, et P2 apporte une accélération utile selon la cible.
+
+\textbf{Table des scores (extrait)}:
+\begin{quote}\small
+\verbatimfile{results/deployment/optimization_scored_table.csv}
+\end{quote}
+
+\textbf{Résumé comparatif (extrait)}:
+\begin{quote}\small
+\verbatimfile{results/deployment/optimization_comparison_summary.txt}
+\end{quote}
+
+\textbf{Benchmarks baseline (extraits)}:
+\begin{quote}\small
+\textit{GPU/Auto:}\\
+\verbatimfile{results/optimization/baseline_benchmark.txt}
+
+\textit{CPU:}\\
+\verbatimfile{results/optimization/baseline_benchmark_cpu.txt}
+\end{quote}
+
+\section{Captures d'écran}
+Ce chapitre regroupe les figures d'illustration de l'entraînement, des courbes de pertes, ainsi que des vues de résultats. Les images sont regroupées dans \texttt{report/screenshots}. Exemple de placeur:
+\begin{figure}[h]
+  \centering
+  \imgfallback{placeholder_training.png}{0.75\linewidth}
+  \caption{Écran d'entraînement (exemple)}
+\end{figure}
+
+\section{Déploiement sur les VM: matrice des résultats, analyse}
+Trois VMs simulant des niveaux de ressources croissants sont définies via Docker Compose. Un serveur d'inférence HTTP s'exécute dans chaque VM et charge le modèle sélectionné. Un harnais expérimental (\texttt{measure\_vm\_matrix.py}) exécute, pour chaque VM et chaque technique, 10 inférences sur des échantillons tests et rapporte:
+\begin{itemize}
+  \item Latence moyenne et écart-type;
+\begin{table}[h]
+\centering
+\caption{Matrice VM$\times$Technique (résumé)}
+\begin{adjustbox}{max width=\textwidth}
+\IfFileExists{project_files/results/deployment/vm_tech_matrix.csv}{%
+\csvreader[
+  tabular={l l l r r S[table-format=1.2] S[table-format=3.3] S[table-format=2.1] S[table-format=3.1]},
+  table head=\toprule VM & Tech.\ requise & Tech.\ utilisée & n & Err & Acc & Lat(ms) & CPU(\%) & RAM(MB)\\\midrule,
+  late after line=\\,
+  table foot=\bottomrule
+]{project_files/results/deployment/vm_tech_matrix.csv}{}%
+{\csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv & \csvcolvi & \csvcolvii & \csvcolix & \csvcolx}
+}{%
+\csvreader[
+  tabular={l l l r r S[table-format=1.2] S[table-format=3.3] S[table-format=2.1] S[table-format=3.1]},
+  table head=\toprule VM & Tech.\ requise & Tech.\ utilisée & n & Err & Acc & Lat(ms) & CPU(\%) & RAM(MB)\\\midrule,
+  late after line=\\,
+  table foot=\bottomrule
+]{results/deployment/vm_tech_matrix.csv}{}%
+{\csvcoli & \csvcolii & \csvcoliii & \csvcoliv & \csvcolv & \csvcolvi & \csvcolvii & \csvcolix & \csvcolx}
+}
+\end{adjustbox}
+\end{table}
+
+  \item Taux CPU moyen et mémoire utilisée;
+  \item Précision sur le lot d'échantillons.
+\end{itemize}
+La matrice complète est disponible dans \texttt{project\_files/results/deployment/vm\_tech\_matrix.csv}. Des techniques non graphes (p1, p2, q1, q4, q5) sont effectivement chargées; q2/q3 restent en mode base sans reconstruction de graphe quantifié, ce qui est documenté.
+
+\textbf{Sélection par VM (extrait)}:
+\begin{quote}\small
+\verbatimfile{results/deployment/best_techniques_per_vm.txt}
+\end{quote}
+
+\section{Intelligence collective: architecture, résultats, gains mesurés}
+Un orchestrateur distribue les requêtes vers les VMs, agrège par vote pondéré et active une revalidation par confiance si le score collectif est faible, avec équilibrage de charge rudimentaire.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[node distance=1.4cm,>=stealth,thick]
+    \node (pat) [draw, rounded corners, align=center, minimum width=2.2cm, minimum height=0.9cm] {Patient};
+    \node (orc) [draw, rounded corners, right=2.8cm of pat, align=center, minimum width=2.8cm, minimum height=0.9cm] {Orchestrateur};
+    \node (vm1) [draw, rounded corners, right=2.2cm of orc, yshift=1.8cm, minimum width=1.8cm, minimum height=0.8cm] {VM1};
+    \node (vm2) [draw, rounded corners, right=2.2cm of orc, minimum width=1.8cm, minimum height=0.8cm] {VM2};
+    \node (vm3) [draw, rounded corners, right=2.2cm of orc, yshift=-1.8cm, minimum width=1.8cm, minimum height=0.8cm] {VM3};
+    \node (agg) [draw, rounded corners, below=2.2cm of vm2, xshift=-1.2cm, minimum width=2.4cm, minimum height=0.9cm] {Agrégateur};
+    \draw[->] (pat) -- (orc);
+    \draw[->] (orc) -- (vm1);
+    \draw[->] (orc) -- (vm2);
+    \draw[->] (orc) -- (vm3);
+    \draw[->] (vm1) |- (agg);
+    \draw[->] (vm2) -- (agg);
+    \draw[->] (vm3) |- (agg);
+  \end{tikzpicture}
+  \caption{Chaîne d'inférence collective}
+\end{figure}
+
+Les métriques collectives sont consignées dans \texttt{results/collective/summary.txt} et montrent les écarts entre le meilleur individuel et le vote pondéré, ainsi que le taux de consensus et l'apport de la revalidation.
+
+\textbf{Résumé des résultats (extrait)}:
+\begin{quote}\small
+\verbatimfile{results/collective/summary.txt}
+\end{quote}
+
+% Profils VM (résumé lisible)
+\textbf{Profils VM (extrait)}:
+\begin{quote}\small
+\verbatimfile{results/deployment/vm_profiles_summary.txt}
+\end{quote}
+
+\section{Supervision ThingsBoard: captures et description des dashboards}
+Chaque VM publie, après chaque inférence, un message JSON MQTT incluant identifiant, technique, prédiction, confiance, latence, CPU et RAM. Des tableaux de bord ont été construits:
+\begin{itemize}
+  \item Monitoring temps réel: courbes de confiance et latence, prédictions et techniques en \emph{latest values};
+  \item Ressources système: CPU et RAM par VM;
+  \item Comparaison des techniques: table ou heatmap basée sur des clés \texttt{score\_vmX\_tech\_acc/lat};
+  \item Intelligence collective: \texttt{collective\_confidence}, \texttt{collective\_pred}, et indicateurs agrégés;
+  \item Alertes: latence \(>\) 300\,ms, RAM \(>\) 90\,\% ou confiance collective \(<\) 0.8.
+\end{itemize}
+Les exports JSON des dashboards et des captures annotées accompagnent ce rapport.
+
+\section{Conclusion et perspectives}
+La chaîne complète démontre la faisabilité d'une inférence médicale embarquée fiable sur matériel contraint grâce à des techniques de compression adaptées et à une orchestration multi-noeuds. Les perspectives incluent la reconstruction exacte des graphes QAT/PTQ sur les VMs pour une évaluation stricte, l'extension des politiques de consensus, et l'intégration d'explicabilité (cartes d'attention) dans la télémétrie.
+
+\begin{thebibliography}{9}
+\bibitem{han}
+Song Han, Huizi Mao, William J. Dally, Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding, ICLR.
+\bibitem{jacob}
+Benoit Jacob et al., Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference, CVPR.
+\end{thebibliography}
+
+\end{document}
+

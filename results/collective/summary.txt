@@ -1,5 +1,5 @@
 total=10
-collective_accuracy=0.6000
-best_individual_accuracy=0.6000
-consensus_rate=0.0000
+collective_accuracy=1.0000
+best_individual_accuracy=1.0000
+consensus_rate=1.0000
 revalidation_improvements=0

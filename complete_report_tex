@@ -1,0 +1,1465 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{newtxtext,newtxmath}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{newunicodechar}
+\newunicodechar{ }{\,}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.misc}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=black
+}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+
+% Logos (clean + no shadow)
+\noindent
+\begin{minipage}[c]{0.18\textwidth}
+  \includegraphics[width=\linewidth]{ens_logo.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.18\textwidth}
+  \raggedleft
+  \includegraphics[width=\linewidth]{ens_logo.png}
+\end{minipage}
+
+\vspace{0.8cm}
+
+\begin{center}
+
+{\Large \textbf{UNIVERSITÉ ABDELMALEK ESSADI}}\\[0.4cm]
+{\Large \textbf{ÉCOLE NORMALE SUPÉRIEURE}}\\[0.9cm]
+
+{\large Filière : \textbf{Master Science de Donnée}}\\[0.2cm]
+{\large Module : \textbf{Machine Learning Probabiliste}}\\[1.2cm]
+
+% ✅ PERFECT CENTERED SUBJECT BOX
+\noindent\makebox[\textwidth][c]{%
+\begin{tikzpicture}
+\node[
+  rounded corners=10pt,
+  fill=blue!65,
+  text=white,
+  text width=0.9\textwidth,
+  align=center,
+  inner sep=12pt
+]{
+\Large \textbf{Sujet :}\\[4pt]
+\large Modélisation Markovienne de la Consommation Énergétique d’un Bâtiment Intelligent
+};
+\end{tikzpicture}
+}
+
+\end{center}
+
+\vspace{1.5cm}
+
+% ✅ KEEP YOUR ORIGINAL INFO (unchanged)
+\begin{center}
+{\large \textbf{Réalisé Par :}}\\[0.3cm]
+{\Large \textbf{AIT-LAHCEN REDOUAN}}\\[0.8cm]
+
+{\large \textbf{Encadré Par :}}\\[0.3cm]
+{\Large \textbf{Pr. Abdellatif El Afia}}\\[1.1cm]
+
+{\large Année universitaire : \textbf{2024--2025}}\\[0.2cm]
+{\large Date : \textbf{22 mars 2026}}\\[0.5cm]
+
+\end{center}
+
+\end{titlepage}
+
+\clearpage
+
+\begin{center}
+\Huge\bfseries Table des matières
+\end{center}
+
+\vspace{1cm}
+
+\renewcommand{\arraystretch}{1.6} % �� space between lines
+\large % �� bigger font
+
+\begin{enumerate}[leftmargin=2.5em, itemsep=0.7em]
+
+  \item {Introduction : contexte, objectifs, organisation}
+
+  \item {Chapitre 1 — Acquisition des données}
+
+  \item {Chapitre 2 — Analyse exploratoire (EDA)}
+
+  \item {Chapitre 3 — Prétraitement}
+
+  \item {Chapitre 4 — Ingénierie de caractéristiques}
+
+  \item {Chapitre 5 — Discrétisation}
+
+  \item {Chapitre 6 — Chaînes de Markov en Temps Discret (DTMC)}
+
+  \item {Chapitre 7 — Chaînes de Markov en Temps Continu (CTMC)}
+
+  \item {Chapitre 8 — Modèles de Markov Cachés (HMM)}
+
+  \item {Chapitre 9 — Processus Décisionnels de Markov (MDP)}
+
+  \item {Chapitre 10 — Apprentissage par Renforcement (RL)}
+
+  \item {Chapitre 11 — Évaluation et Simulation}
+
+  \item {Chapitre 12 — Système Intelligent Final}
+
+\end{enumerate}
+
+\clearpage
+\chapter*{Introduction}
+\onehalfspacing
+
+\section*{Contexte et motivation}
+La transition énergétique et la numérisation des bâtiments rendent indispensable une gestion fine de la demande électrique. Les compteurs intelligents fournissent des séries temporelles à haute granularité permettant d'observer, d'analyser et de prédire les usages. Dans ce contexte, les modèles markoviens constituent un cadre rigoureux pour représenter la dynamique des états de consommation, raisonner sur les régimes (bas, moyen, haut, pointe) et optimiser des décisions (conserver, normal, booster) en présence d'incertitude.
+
+\section*{Problématique et objectifs}
+L'objectif général est de concevoir une chaîne complète de modélisation et de pilotage de la consommation d'un bâtiment résidentiel à partir de données de compteur :
+\begin{itemize}[leftmargin=1.5em]
+  \item Décrire et comprendre la demande : profils quotidiens, hebdomadaires et saisonniers, anomalies et parts d'usage.
+  \item Projeter la consommation continue vers des états discrets stables, exploitables par des modèles markoviens.
+  \item Apprendre et inférer des dynamiques cachées (HMM) pour capturer des régimes d'usage.
+  \item Optimiser une politique d'action (MDP) et l'apprendre par renforcement (RL) en tenant compte de coûts.
+  \item Évaluer objectivement les politiques via réplications et intervalles de confiance ; déployer la meilleure.
+\end{itemize}
+
+\section*{Données et périmètre}
+Le jeu de données \textit{Household Power Consumption} couvre plusieurs années de mesures à la minute. Les variables principales incluent la puissance active globale (kW), la puissance réactive, la tension, l'intensité et trois sous-comptages d'énergie (Wh). Pour les modèles en temps discret, les signaux sont agrégés à l'heure ; pour la CTMC, on exploite la résolution minute. La granularité, le nettoyage et les conversions d'unités sont détaillés dans les chapitres 1 à 3.
+
+\section*{Approche méthodologique}
+La démarche s'articule en douze chapitres, du brut au système final :
+\begin{enumerate}[leftmargin=1.5em,itemsep=0.3em]
+  \item \textbf{Acquisition} : lecture en flux, typage numérique, estimation des caractéristiques globales.
+  \item \textbf{EDA} : profils quotidiens, hebdomadaires et mensuels ; anomalies (3\,$\sigma$) ; parts d'usage et corrélations.
+  \item \textbf{Prétraitement} : agrégations robustes (heure/jour), normalisations stables, consolidation des jeux propres.
+  \item \textbf{Caractéristiques} : ratios et parts énergétiques, encodages de contexte.
+  \item \textbf{Discrétisation} : quartiles L/M/H/P, matrice de transitions stochastique, métriques de stabilité et d'entropie.
+  \item \textbf{DTMC} : distribution stationnaire ($\pi P=\pi$), simulation et prévision $\pi_t$.
+  \item \textbf{CTMC} : matrice génératrice $Q$, temps de séjour exponentiels, simulation des sauts (Gillespie).
+  \item \textbf{HMM} : apprentissage (Baum–Welch), décodage (Viterbi), matrices $A$ (transitions) et $B$ (émissions).
+  \item \textbf{MDP} : itération de valeur (Bellman), coûts d'action, pénalité de commutation, stationnarité par action.
+  \item \textbf{RL} : Q-learning tabulaire aligné sur l'économie MDP, exploration $\varepsilon$-gourmande.
+  \item \textbf{Évaluation} : réplications Monte-Carlo, IC sur énergie/discomfort/coût global, analyses de sensibilité.
+  \item \textbf{Système final} : sélection de la meilleure politique, simulation consolidée, rapport et artefacts de déploiement.
+\end{enumerate}
+
+\section*{Contributions et résultats}
+\begin{itemize}[leftmargin=1.5em]
+  \item Une pipeline reproductible, de l'EDA à la politique déployable, documentée par chapitres.
+  \item Une discrétisation par quartiles assurant des classes équilibrées et une matrice de transitions stable.
+  \item Un HMM catégorique cohérent : deux modes à «~hautes charges~» (P/H) et un mode à «~basses charges~» (L/M).
+  \item Une optimisation MDP intégrant coûts et pénalité de commutation ; une alternative RL alignée.
+  \item Une évaluation avec intervalles de confiance : économies significatives vs baseline ; robustesse quantifiée.
+\end{itemize}
+
+\section*{Choix techniques et bonnes pratiques}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Stochasticité} : normalisation stricte des lignes pour $P$ (DTMC/MDP/RL) et propriétés de $Q$ (CTMC).
+  \item \textbf{Robustesse} : conversions kW/Wh maîtrisées, gestion des valeurs extrêmes et des manquants, agrégations vectorisées.
+  \item \textbf{Reproductibilité} : scripts chapitrés, chemins explicites, artefacts CSV/PNG/TXT clairement nommés.
+\end{itemize}
+
+\section*{Notations et conventions}
+\begin{itemize}[leftmargin=1.5em]
+  \item $\mathcal{S}=\{L,M,H,P\}$ : états observés ; \{mode 0, mode 1, mode 2\} : états cachés.
+  \item $P$ : matrice de transitions DTMC ; $Q$ : génératrice CTMC ; $A$ : transitions HMM ; $B$ : émissions HMM ; $\pi$ : distribution.
+  \item Actions $\in\{\text{Normal},\text{Conserve},\text{Boost}\}$ ; coûts d'action et pénalité de commutation explicites.
+\end{itemize}
+
+\section*{Organisation du rapport}
+Chaque chapitre présente : (i) objectifs et hypothèses ; (ii) méthodologie et artefacts produits ; (iii) résultats clés et interprétations ; (iv) implications pour les chapitres suivants. Les références croisées aux fichiers (scripts, sorties) facilitent la vérification et la réutilisation.
+
+\vspace{0.6cm}
+\noindent La suite du document suit l'ordre présenté ci-dessus : acquisition des données (Chapitre 1), puis EDA (Chapitre 2), jusqu'au système final déployable (Chapitre 12).
+
+\clearpage
+\chapter{Acquisition des données}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Ingestions fiables et reproductibles des données brutes de comptage.
+  \item Construction d'un index temporel unique (\texttt{Datetime}) et typage numérique robuste.
+  \item Calcul de métriques de couverture (début/fin, durée) et d'échantillonnage (médiane/min/max en secondes).
+  \item Export d'artefacts décrivant le jeu (unités, plages, qualité) pour guider les chapitres suivants.
+\end{itemize}
+
+\section*{Données brutes et unités}
+Le jeu \textit{Household Power Consumption} contient des enregistrements à la minute sur plusieurs années. Les champs principaux :
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Global\_active\_power} (kW) : puissance active instantanée.
+  \item \textbf{Global\_reactive\_power} (kVAR) : puissance réactive.
+  \item \textbf{Voltage} (V), \textbf{Global\_intensity} (A).
+  \item \textbf{Sub\_metering\_1, 2, 3} (Wh par \emph{minute}) : énergie sous-comptée par intervalle de 1 minute.
+\end{itemize}
+La granularité minute est conservée pour la CTMC (Chap. 7). Les chapitres en temps discret (5--6) s'appuient sur des agrégations à l'heure/jour.
+
+\section*{Méthodologie d'acquisition}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Lecture en flux} (\texttt{chunksize}) avec \texttt{pandas.read\_csv}, fusion des colonnes \texttt{Date}+\texttt{Time} en \texttt{Datetime} (\texttt{dayfirst=true}).
+  \item \textbf{Typage} : conversion numérique (\texttt{errors=coerce}) pour \texttt{Global\_active\_power}, \texttt{...reactive...}, \texttt{Voltage}, \texttt{Global\_intensity}, \texttt{Sub\_metering\_1/2/3}.
+  \item \textbf{Index temporel} : mise en index \texttt{Datetime}, contrôle d'ordre croissant.
+  \item \textbf{Unités} : rappel explicite (kW, kVAR, V, A, Wh/min) dans la description de jeu.
+\end{itemize}
+
+\section*{Couverture et échantillonnage}
+On calcule automatiquement :
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Fenêtre temporelle} : \textit{start\_ts}, \textit{end\_ts}, \textit{duration\_days} $= (end-start)/86400$.
+  \item \textbf{Pas d'échantillonnage} : à partir des différences de \texttt{Datetime} consécutifs :
+    médiane (\textit{sampling\_median\_seconds}), minimum/maximum (détecteurs d'irrégularités).
+\end{itemize}
+Ces métriques permettent d'anticiper les agrégations (heure/jour) et de vérifier la cohérence minute.
+
+\section*{Qualité et nettoyage minimal}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Valeurs manquantes} : laissées à \texttt{NaN} après typage, traitées dans les chapitres 2--3.
+  \item \textbf{Outliers} : non tronqués à ce stade ; les seuils d'anomalie sont établis en EDA (3\,\(\sigma\)).
+  \item \textbf{Stabilité d'unités} : documentation et contrôles pour éviter les confusions kW/Wh.
+\end{itemize}
+
+\section*{Artefacts produits}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Description de jeu} : fenêtres temporelles, statistiques globales, rappel d'unités.
+  \item \textbf{Journal d'ingestion} : informations de lecture (nombre de lignes, erreurs de typage, horodatages extrêmes).
+\end{itemize}
+Ces artefacts orientent l'EDA (profils, anomalies) et le prétraitement (agrégations).
+
+\section*{Résultats indicatifs}
+Sur exécution de référence, la couverture est multi-annuelle et l'échantillonnage médian est d'environ 60\,s (résolution minute), avec quelques irrégularités mineures (pas minimum/maximum). La durée totale se compte en milliers de jours-minutes, fournissant une base robuste pour les agrégations ultérieures.
+
+\section*{Limites et précautions}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Jours incomplets / pannes} : possibles discontinuités ; prises en compte via les agrégations robustes.
+  \item \textbf{Sous-comptage partiel} : \texttt{Sub\_metering\_*} ne couvrent pas toute l'installation ; l'énergie \textit{Other} comble l'identité.
+\end{itemize}
+
+\section*{Implications pour l'EDA (Chapitre 2)}
+Les profils journaliers/hebdomadaires/mensuels, les anomalies (3\,\(\sigma\)) et les parts d'usage reposent sur la qualité d'indexation temporelle et des unités. Les métriques de couverture et d'échantillonnage servent de garde-fous pour interpréter correctement les distributions et les tendances.
+
+\clearpage
+\chapter{Analyse exploratoire (EDA)}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Caractériser les niveaux de puissance et d'énergie à l'échelle journalière.
+  \item Mettre en évidence les tendances, saisonnalités et jours atypiques (anomalies).
+  \item Décomposer l'énergie entre sous-compteurs et «\,Other\,» ; analyser les corrélations.
+\end{itemize}
+
+\section*{Jeux et artefacts}
+Agrégats journaliers et graphiques sont générés par les scripts EDA et exportés. Les figures ci-dessous sont incluses depuis Overleaf : \texttt{Project\_files/Chapter\_2/outputs}.
+
+\section*{Évolution quotidienne}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Project_files/Chapter_2/outputs/daily_mean_plot.png}
+  \caption{Moyenne quotidienne de la puissance active (kW). On observe des variations lentes et des cycles saisonniers.}
+  \label{fig:daily-mean}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Project_files/Chapter_2/outputs/daily_mean_with_anomalies.png}
+  \caption{Moyenne quotidienne avec jours d'anomalies surlignés (seuil 3\,$\sigma$). Les journées marquées signalent des pointes inhabituelles.}
+  \label{fig:daily-mean-anom}
+\end{figure}
+
+\clearpage
+\section*{Variabilité hebdomadaire}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Project_files/Chapter_2/outputs/box_mean_by_day.png}
+  \caption{Distribution des moyennes par jour de semaine (boxplot). Les week-ends présentent des niveaux plus élevés et une dispersion différente.}
+  \label{fig:box-by-day}
+\end{figure}
+
+\section*{Partage énergétique}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Project_files/Chapter_2/outputs/appliance_share_bar.png}
+  \caption{Parts d'énergie moyennes par circuit (\%). Donne une vue synthétique des contributions relatives.}
+  \label{fig:share-bar}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Project_files/Chapter_2/outputs/appliance_share_area.png}
+  \caption{Évolution temporelle des parts d'énergie (aire empilée). Permet de suivre les bascules entre circuits et «\,Other\,».}
+  \label{fig:share-area}
+\end{figure}
+
+\clearpage
+\section*{Énergie journalière et cumul}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Project_files/Chapter_2/outputs/daily_total_kWh.png}
+  \caption{Énergie totale quotidienne (kWh). Somme de \texttt{Sub\_metering\_1/2/3} et «\,Other\,».}
+  \label{fig:daily-kwh}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Project_files/Chapter_2/outputs/cumulative_kWh.png}
+  \caption{Énergie cumulée (kWh). La pente moyenne renseigne sur la consommation moyenne de long terme.}
+  \label{fig:cum-kwh}
+\end{figure}
+
+\section*{Corrélations entre agrégats}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Project_files/Chapter_2/outputs/corr_heatmap.png}
+  \caption{Matrice de corrélation (agrégats journaliers). Met en évidence les co-variations entre moyennes, maxima, sous-compteurs et «\,Other\,».}
+  \label{fig:corr}
+\end{figure}
+
+\section*{Interprétations}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Tendance et saisonnalité} : creux estivaux et hausses hivernales cohérentes avec les usages thermiques.
+  \item \textbf{Jours atypiques} : les anomalies indiquent des pointes (appareils puissants, événements) utiles pour le contrôle.
+  \item \textbf{Partages} : les parts stables témoignent d’usages réguliers ; des bascules suggèrent des changements de comportement.
+  \item \textbf{Corrélations} : relations fortes entre maxima et énergie totale ; «\,Other\,» corrélé aux usages non sous-comptés.
+\end{itemize}
+
+\clearpage
+\chapter{Prétraitement}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Construire des jeux propres et cohérents aux granularités \textbf{horaire} et \textbf{journalière}.
+  \item Assurer des conversions d’unités et dérivées stables (p.\,ex. énergie \textit{Other}).
+  \item Appliquer des \textbf{normalisations sûres} (z-score, min–max) qui restent définies en cas de variance nulle.
+  \item Préserver la traçabilité pour les chapitres de modélisation (discrétisation, DTMC/CTMC, HMM, MDP, RL).
+\end{itemize}
+
+\section*{Conversions et dérivées}
+La puissance active globale (\texttt{Global\_active\_power}) est fournie en kW par minute. L’énergie active par minute (Wh) est :
+\[
+  \text{active\_wh} = \text{Global\_active\_power} \times \frac{1000}{60}.
+\]
+L’énergie «\,Other\,» comble l’identité énergétique en complément des sous-compteurs~:
+\[
+  \text{Other\_wh} = \max\!\bigl(0,\ \text{active\_wh} - (\text{Sub\_metering\_1}+\text{Sub\_metering\_2}+\text{Sub\_metering\_3})\bigr).
+\]
+
+\section*{Agrégations robustes}
+
+\subsection*{Agrégation horaire}
+On agrège par heure pour construire des moyennes de puissance et des sommes d’énergie :
+
+\begin{align*}
+  \text{mean\_kW}^{(h)} &= \frac{1}{n_h}\sum_{t\in h}\text{Global\_active\_power}_t, \\
+  \text{std\_kW}^{(h)}  &= \sqrt{\frac{1}{n_h-1}\sum_{t\in h}
+  \Bigl(\text{Global\_active\_power}_t - \text{mean\_kW}^{(h)}\Bigr)^2}.
+\end{align*}
+
+\begin{align*}
+  \text{sub1\_Wh}^{(h)} &= \sum_{t\in h}\text{Sub\_metering\_1}_t,\\
+  \text{sub2\_Wh}^{(h)} &= \sum_{t\in h}\text{Sub\_metering\_2}_t,\\
+  \text{sub3\_Wh}^{(h)} &= \sum_{t\in h}\text{Sub\_metering\_3}_t,\\
+  \text{other\_Wh}^{(h)} &= \sum_{t\in h}\text{Other\_wh}_t.
+\end{align*}
+
+Les valeurs non numériques sont converties en \texttt{NaN} puis ignorées dans les sommes et les calculs.
+
+\subsection*{Agrégation journalière}
+Même principe au pas jour \(D\), afin d’alimenter l’EDA et la discrétisation :
+
+\begin{align*}
+  \text{mean\_kW}^{(D)} &= \frac{1}{n_D}\sum_{h\in D}\text{mean\_kW}^{(h)},\\
+  \text{std\_kW}^{(D)}  &= \frac{1}{n_D}\sum_{h\in D}\text{std\_kW}^{(h)},\\
+  \text{max\_kW}^{(D)}  &= \max_{h\in D}\text{max\_kW}^{(h)},\\
+  \text{sub1\_Wh}^{(D)} &= \sum_{h\in D}\text{sub1\_Wh}^{(h)},\\
+  \text{sub2\_Wh}^{(D)} &= \sum_{h\in D}\text{sub2\_Wh}^{(h)},\\
+  \text{sub3\_Wh}^{(D)} &= \sum_{h\in D}\text{sub3\_Wh}^{(h)},\\
+  \text{other\_Wh}^{(D)} &= \sum_{h\in D}\text{other\_Wh}^{(h)}.
+\end{align*}
+
+\section*{Normalisations sûres}
+Deux échelles sont préparées pour les chapitres suivants :
+\begin{align*}
+  &\text{z-score: } z = 
+  \begin{cases}
+    \dfrac{x-\mu}{\sigma} & \text{si } \sigma>0,\\[4pt]
+    0 & \text{sinon (variance nulle)},
+  \end{cases}
+  \\
+  &\text{min–max: } r =
+  \begin{cases}
+    \dfrac{x - x_{\min}}{x_{\max}-x_{\min}} & \text{si } x_{\max}>x_{\min},\\[4pt]
+    0.5 & \text{sinon (domaine nul)}.
+  \end{cases}
+\end{align*}
+Cette logique évite les divisions par zéro et stabilise les entrées des modèles.
+
+\section*{Contrôles de qualité}
+\begin{itemize}[leftmargin=1.5em]
+  \item Index temporel strictement croissant, sans doublons ; horodatages cohérents avec la granularité.
+  \item Comptes d’échantillons par heure/jour (\(n_h, n_D\)) pour repérer les jours incomplets.
+  \item Aucune suppression d’outliers à ce stade : le filtrage statistique intervient en EDA.
+\end{itemize}
+
+\section*{Artefacts}
+Exports \textit{propres} (CSV) aux pas \textbf{horaire} et \textbf{journalière} contenant \(\text{mean\_kW}\), \(\text{std\_kW}\), \(\text{max\_kW}\), les \(\text{sub*}\_\text{Wh}\), \(\text{other\_Wh}\), ainsi que les colonnes normalisées utiles à la modélisation.
+
+\section*{Diagramme de flux (prétraitement)}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=10mm and 14mm,
+    box/.style={
+      draw,
+      rounded corners,
+      align=center,
+      minimum width=33mm,
+      minimum height=9mm,
+      fill=gray!6
+    },
+    >={Latex[length=2.2mm]}
+  ]
+    \node[box] (raw) {Données brutes\\(minute)};
+    \node[box, right=of raw] (parse) {Parsing Date+Time\\Typage numérique};
+    \node[box, right=of parse] (other) {Conversion kW$\to$Wh\\Calcul \textit{Other\_wh}};
+    \node[box, below=of other] (aggH) {Agrégation\\\textbf{horaire}};
+    \node[box, right=of aggH] (aggD) {Agrégation\\\textbf{journalière}};
+    \node[box, below=of aggD] (norm) {Normalisations\\z-score / min--max};
+    \node[box, right=of norm] (out) {Exports\\(CSV propres)};
+
+    \draw[->] (raw) -- (parse);
+    \draw[->] (parse) -- (other);
+    \draw[->] (other) -- (aggH);
+    \draw[->] (aggH) -- (aggD);
+    \draw[->] (aggD) -- (norm);
+    \draw[->] (norm) -- (out);
+  \end{tikzpicture}%
+  }
+  \caption{Chaîne de prétraitement : du signal minute aux jeux propres agrégés et normalisés.}
+  \label{fig:preproc-flow}
+\end{figure}
+
+\section*{Interprétations et liens}
+\begin{itemize}[leftmargin=1.5em]
+  \item Les \textbf{agrégations} servent l’EDA et la discrétisation (quartiles L/M/H/P) en garantissant des statistiques stables.
+  \item Les \textbf{normalisations} facilitent l’apprentissage (HMM, MDP, RL) et la comparaison inter-périodes.
+  \item Le \textbf{flux} documenté rend les étapes auditables et reproductibles, clé pour l’industrialisation.
+\end{itemize}
+
+\clearpage
+\chapter{Ingénierie de caractéristiques}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Définir des variables dérivées \textbf{interprétables} et \textbf{stables} pour la discrétisation, HMM, MDP et RL.
+  \item Construire des \textbf{parts d’énergie} par circuit, des \textbf{ratios de charge} et des \textbf{encodages de contexte}.
+  \item Garantir des formules \textbf{numériquement sûres} (gestion des divisions par zéro).
+\end{itemize}
+
+\section*{Caractéristiques dérivées (formules)}
+Pour un jour \(D\), l’énergie totale est
+\[
+E_{\text{tot}}^{(D)}=\text{sub1\_Wh}^{(D)}+\text{sub2\_Wh}^{(D)}+\text{sub3\_Wh}^{(D)}+\text{other\_Wh}^{(D)}.
+\]
+Les \textbf{parts} (proportions) sont
+\[
+\text{share}_{k}^{(D)}=
+\begin{cases}
+\dfrac{\text{sub}k\_\text{Wh}^{(D)}}{E_{\text{tot}}^{(D)}} & \text{si } E_{\text{tot}}^{(D)}>0,\\[6pt]
+0 & \text{sinon},
+\end{cases}
+\quad k\in\{1,2,3,\text{other}\}.
+\]
+Le \textbf{ratio de pointe} repose sur la puissance maximale journalière~:
+\[
+\text{peak\_ratio}^{(D)}=
+\begin{cases}
+\dfrac{\text{max\_kW}^{(D)}}{\text{mean\_kW}^{(D)}} & \text{si } \text{mean\_kW}^{(D)}>0,\\[6pt]
+1 & \text{sinon}.
+\end{cases}
+\]
+Enfin, le \textbf{taux de couverture horaire} est défini par
+\[
+\text{cov}^{(D)}=\frac{n_H^{(D)}}{24},
+\]
+où \(n_H^{(D)}\) est le nombre d’heures valides dans \(D\).
+
+\section*{Encodages de contexte}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Jour de semaine} (one-hot) : Monday\ldots Sunday.
+  \item \textbf{Mois} (one-hot) : Janvier\ldots Décembre ou \(\text{YYYY--MM}\) discret.
+  \item \textbf{Weekend / Jour férié (facultatif)} : indicateurs binaires.
+  \item \textbf{Heure de la journée} (pour l’horaire) : 0–23 (one-hot ou sinus/cosinus).
+\end{itemize}
+
+\section*{Taxonomie (diagramme)}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=6mm and 14mm,
+    cat/.style={draw, rounded corners, align=center, minimum width=36mm, minimum height=9mm, fill=gray!10},
+    sub/.style={draw, rounded corners, align=center, minimum width=32mm, minimum height=8mm, fill=gray!4},
+    >={Latex[length=2.2mm]}
+  ]
+    \node[cat] (feat) {Caractéristiques};
+    \node[sub, below left=of feat] (shares) {Parts d'énergie \\ (sub1, sub2, sub3, other)};
+    \node[sub, below=of feat] (ratios) {Ratios de charge \\ (peak\_ratio, etc.)};
+    \node[sub, below right=of feat] (ctx) {Contexte \\ (jour, mois, weekend, heure)};
+
+    \node[sub, below=of shares] (safe) {Sécurité numérique \\ (\(E_{\text{tot}}>0\), \(\text{mean\_kW}>0\))};
+    \node[sub, below=of ratios] (norms) {Échelles \\ (brut, z-score, min--max)};
+    \node[sub, below=of ctx] (usage) {Usage modèle \\ (Discrétisation, HMM, MDP, RL)};
+
+    \draw[->] (feat) -- (shares);
+    \draw[->] (feat) -- (ratios);
+    \draw[->] (feat) -- (ctx);
+    \draw[->] (shares) -- (safe);
+    \draw[->] (ratios) -- (norms);
+    \draw[->] (ctx) -- (usage);
+  \end{tikzpicture}%
+  }
+  \caption{Taxonomie des caractéristiques : parts, ratios, contexte, avec garde‑fous numériques et usages en aval.}
+  \label{fig:feature-taxonomy}
+\end{figure}
+
+\section*{Chaîne de construction (diagramme)}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=8mm and 12mm,
+    box/.style={draw, rounded corners, align=center, minimum width=36mm, minimum height=9mm, fill=gray!6},
+    >={Latex[length=2.2mm]}
+  ]
+    \node[box] (agg) {Jeux agrégés\\(horaire / journalier)};
+    \node[box, right=of agg] (deriv) {Dérivées \\ (shares, peak\_ratio, cov)};
+    \node[box, right=of deriv] (scale) {Normalisations \\ (z-score / min--max)};
+    \node[box, right=of scale] (out) {Jeux \textit{features}\\(CSV prêts modèle)};
+
+    \draw[->] (agg) -- (deriv);
+    \draw[->] (deriv) -- (scale);
+    \draw[->] (scale) -- (out);
+  \end{tikzpicture}%
+  }
+  \caption{Chaîne des \textit{features} : agrégats \(\rightarrow\) dérivées \(\rightarrow\) échelles \(\rightarrow\) exports.}
+  \label{fig:feature-pipeline}
+\end{figure}
+
+\section*{Artefacts et intégration}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{CSV} enrichis avec \(\text{share}_{k}\), \(\text{peak\_ratio}\), \(\text{cov}\) et encodages de contexte.
+  \item Colonnes normalisées (z-score / min--max) prêtes pour l’entraînement/évaluation.
+  \item Documentation de schéma (noms, unités, domaines) pour traçabilité.
+\end{itemize}
+
+\section*{Interprétations}
+\begin{itemize}[leftmargin=1.5em]
+  \item Les \textbf{parts} mettent en évidence la structure de charge ; utiles pour la lecture métier et les politiques MDP/RL.
+  \item Les \textbf{ratios} quantifient la \emph{pointe} relative, indicateurs essentiels de flexibilité.
+  \item Les \textbf{encodages} capturent le contexte temporel (saisonnalité/jours) et améliorent la lisibilité des modèles.
+\end{itemize}
+
+\clearpage
+\chapter{Discrétisation}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Transformer la variable continue \(\text{mean\_kW}\) en \textbf{états discrets} \( \{L,M,H,P\} \) via des quartiles.
+  \item Construire la \textbf{matrice de transitions} d’une chaîne de Markov en temps discret (DTMC) sur ces états.
+  \item Mesurer la \textbf{stabilité} (diagonale), la \textbf{dispersion} (entropie) et la \textbf{longueur moyenne de run}.
+\end{itemize}
+
+\section*{Quartiles et étiquetage}
+On définit les seuils \(Q_{25}, Q_{50}, Q_{75}\) sur la distribution de \(\text{mean\_kW}\). Les classes sont :
+\[
+(-\infty,Q_{25}] \to L,\quad (Q_{25},Q_{50}] \to M,\quad (Q_{50},Q_{75}] \to H,\quad (Q_{75},+\infty) \to P.
+\]
+Les observations \textit{exactement} sur un seuil sont rangées dans la \textbf{classe supérieure} pour éviter les collisions.
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    scale=1,
+    every node/.style={font=\small}
+  ]
+    \draw[-] (0,0) -- (14,0);
+    \node[below] at (0,0) {$-\infty$};
+    \node[below] at (14,0) {$+\infty$};
+    \draw[thick] (3,0.2) -- (3,-0.2) node[below] {$Q_{25}$};
+    \draw[thick] (7,0.2) -- (7,-0.2) node[below] {$Q_{50}$};
+    \draw[thick] (11,0.2) -- (11,-0.2) node[below] {$Q_{75}$};
+    \node[above] at (1.5,0) {L};
+    \node[above] at (5,0) {M};
+    \node[above] at (9,0) {H};
+    \node[above] at (12.5,0) {P};
+    \draw[|-|] (0,0.8) -- (3,0.8);
+    \draw[|-|] (3,0.8) -- (7,0.8);
+    \draw[|-|] (7,0.8) -- (11,0.8);
+    \draw[|-|] (11,0.8) -- (14,0.8);
+  \end{tikzpicture}%
+  }
+  \caption{Binning par quartiles de \(\text{mean\_kW}\) vers \( \{L,M,H,P\}\).}
+  \label{fig:discr-bins}
+\end{figure}
+
+\section*{Estimation de la matrice de transitions}
+À partir de la séquence d’états \((X_t)\), on compte \(N(i\to j)\) (état courant \(i\), suivant \(j\)), puis on normalise par ligne :
+\[
+P(i\to j) = \frac{N(i\to j)}{\sum_{j'} N(i\to j')},\qquad \sum_{j} P(i\to j) = 1.
+\]
+La dernière observation n’ayant pas de successeur est exclue du comptage. La matrice est réindexée dans l’ordre \(\{L,M,H,P\}\).
+
+\section*{Propriétés et métriques}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Stochasticité} : chaque ligne de \(P\) somme à 1.
+  \item \textbf{Stabilité (diagonale)} : \(P(i\to i)\) \(\uparrow\) implique des runs plus longs ; longueur moyenne \(\approx \frac{1}{1-P(i\to i)}\).
+  \item \textbf{Entropie de ligne} : \(H(i) = -\sum_j P(i\to j)\log P(i\to j)\) ; faible entropie \(\Rightarrow\) transitions concentrées.
+  \item \textbf{Information mutuelle} (indicative) : dépendance temporelle \(I(X_t;X_{t+1})\) \(>\,0\) utile à la modélisation.
+\end{itemize}
+
+\section*{Exemple numérique}
+\[
+P \approx
+\begin{pmatrix}
+0.678 & 0.205 & 0.102 & 0.016\\
+0.219 & 0.489 & 0.202 & 0.091\\
+0.097 & 0.243 & 0.415 & 0.245\\
+0.006 & 0.064 & 0.282 & 0.648
+\end{pmatrix},\quad
+\sum_{j} P_{ij}=1.
+\]
+La diagonale élevée pour \(L\) et \(P\) traduit une forte adhérence ; \(M\) et \(H\) favorisent davantage le mélange.
+
+\section*{Artefacts et vérifications}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{states\_hourly.csv} : \texttt{timestamp\_hour}, \texttt{mean\_kW}, \texttt{state\_id}, \texttt{state\_label}.
+  \item \texttt{transitions\_hourly.csv} : \texttt{from\_state}, \texttt{to\_state}, \texttt{count}, \texttt{row\_prob}.
+  \item Lignes de \(P\) normalisées (\(\sum_j=1\)) ; diagonale raisonnable ; entropies cohérentes.
+\end{itemize}
+
+\clearpage
+\chapter{Chaîne de Markov en Temps Discret (DTMC)}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Formaliser la dynamique des états discrets \( \{L, M, H, P\} \) par une DTMC.
+  \item Définir et calculer la \textbf{distribution stationnaire} \( \pi \) telle que \( \pi P = \pi \).
+  \item Simuler des trajectoires futures et \textbf{prévoir} \( \pi_t \) par itération \( \pi_{t+1}=\pi_t P \).
+\end{itemize}
+
+\section*{Définitions mathématiques}
+Soit une chaîne \((X_t)_{t\geq 0}\) à espace d’états fini \(\mathcal{S}=\{L,M,H,P\}\) et matrice de transitions \(P\in\mathbb{R}^{4\times 4}\).
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Propriété de Markov} : \(\Pr(X_{t+1}=j\mid X_t=i, X_{t-1},\ldots)=\Pr(X_{t+1}=j\mid X_t=i)=P(i\to j)\).
+  \item \textbf{Stochasticité des lignes} : \(\sum_{j\in\mathcal{S}} P(i\to j)=1\) pour tout \(i\).
+  \item \textbf{Transitions à \(n\) pas} : \(P^{(n)} = P^n\) (formule de Chapman–Kolmogorov).
+  \item \textbf{Distribution à l’instant \(t\)} : \(\pi_t\in\Delta(\mathcal{S})\) vérifie \(\pi_{t+1}=\pi_t P\).
+\end{itemize}
+
+\section*{Stationnarité, ergodicité et convergence}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Distribution stationnaire} : \( \pi\in\Delta(\mathcal{S}) \) telle que \( \pi P = \pi \) (vecteur propre gauche associé à \( \lambda=1 \)).
+  \item \textbf{Ergodicité} (finie) : si la chaîne est \textit{irréductible} (tous les états communiquent) et \textit{apériodique}, alors \( \pi \) existe, est unique et \(\pi_t\to \pi\).
+  \item \textbf{Retour moyen} : pour un état \(i\) récurrent positif, \( \mathbb{E}_i[T_i^+] = 1/\pi_i\).
+  \item \textbf{Mélange} : la vitesse de convergence dépend du \textit{SLEM} \(|\lambda_2|\) (\(\lambda_1=1\ge|\lambda_2|\ge\cdots\)); grand \((1-|\lambda_2|)\) \(\Rightarrow\) mélange rapide.
+\end{itemize}
+
+\section*{Diagramme d’états (schéma conceptuel)}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=20mm and 30mm,
+    state/.style={circle, draw, align=center, minimum size=10mm, fill=gray!10},
+    >={Latex[length=2.2mm]}
+  ]
+    \node[state] (L) {L};
+    \node[state, right=of L] (M) {M};
+    \node[state, right=of M] (H) {H};
+    \node[state, right=of H] (P) {P};
+
+    \draw[->] (L) edge[loop above] node[above]{\(P(L\to L)\)} (L);
+    \draw[->] (M) edge[loop above] node[above]{\(P(M\to M)\)} (M);
+    \draw[->] (H) edge[loop above] node[above]{\(P(H\to H)\)} (H);
+    \draw[->] (P) edge[loop above] node[above]{\(P(P\to P)\)} (P);
+
+    \draw[->] (L) -- node[above]{\(P(L\to M)\)} (M);
+    \draw[->] (M) -- node[above]{\(P(M\to H)\)} (H);
+    \draw[->] (H) -- node[above]{\(P(H\to P)\)} (P);
+    \draw[->] (M) -- node[below]{\(P(M\to L)\)} (L);
+    \draw[->] (H) -- node[below]{\(P(H\to M)\)} (M);
+    \draw[->] (P) -- node[below]{\(P(P\to H)\)} (H);
+  \end{tikzpicture}%
+  }
+  \caption{Graphe conceptuel d’une DTMC sur \(\{L,M,H,P\}\) (poids indicatifs).}
+  \label{fig:dtmc-graph}
+\end{figure}
+
+\section*{Mise en œuvre dans le projet}
+\paragraph{Construction de \(P\).} À partir de \texttt{transitions\_hourly.csv}, on pivote \(\texttt{from\_state}\times \texttt{to\_state}\) et on \textbf{normalise les lignes}, puis on réindexe \(\{L,M,H,P\}\). Si seules des \(\texttt{count}\) existent, on convertit en probabilités par ligne.
+
+\paragraph{Distribution initiale \(\pi_0\).} Estimée empiriquement depuis \texttt{states\_hourly.csv} (fréquences par \(\{L,M,H,P\}\)).
+
+\paragraph{Stationnaire \(\pi\).} Résolution par \textbf{vecteur propre gauche} de \(P^\top\) associé à \(\lambda=1\), avec projection positive et renormalisation ; repli \textbf{méthode de puissance} si l’eigen est numérique instable.
+
+\paragraph{Simulation.} À partir d’un état initial, on utilise la \textbf{CDF de ligne} et un tirage \(U\sim \mathcal{U}(0,1)\) pour échantillonner l’état suivant (recherche binaire).
+
+\paragraph{Prévision \(\pi_t\).} Itération \(\pi_{t+1}=\pi_t P\) pour obtenir l’évolution de la distribution sur un horizon donné.
+
+\section*{Artefacts et contrôles}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{transition\_matrix.csv} : \(P\) (ordre \(\{L,M,H,P\}\)).
+  \item \texttt{stationary\_distribution.csv} : \(\pi\) stationnaire.
+  \item \texttt{simulation\_path.csv} : chemin simulé.
+  \item \texttt{distribution\_forecast.csv} : \(\pi_t\) pour \(t=1..T\).
+  \item \texttt{dtmc\_summary.txt} : \(\pi\) et \(\pi_{\text{emp}}\), écart et remarques.
+\end{itemize}
+
+\section*{Exemple (résultats)}
+Pour la matrice \(P\) du Chapitre 5, la stationnarité estimée est quasi uniforme \((\approx 0.25\) par état\().\) La prévision \(\pi_t\) converge en quelques pas vers \(\pi\), confirmant l’ergodicité (irréductibilité et apériodicité visibles via des off‑diagonales non nulles et diagonales positives).
+
+\section*{Pipeline DTMC (diagramme)}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=8mm and 12mm,
+    box/.style={draw, rounded corners, align=center, minimum width=36mm, minimum height=9mm, fill=gray!6},
+    >={Latex[length=2.2mm]}
+  ]
+    \node[box] (build) {Construction de \(P\)\\(comptages \(\to\) normalisation)};
+    \node[box, right=of build] (pi0) {Distribution \(\pi_0\)\\(empirique)};
+    \node[box, below=of build] (stat) {Stationnaire \(\pi\)\\(\(\pi P=\pi\))};
+    \node[box, right=of stat] (sim) {Simulation\\(CDF par ligne)};
+    \node[box, right=of pi0] (fore) {Prévision \(\pi_t\)\\(\(\pi_{t+1}=\pi_t P\))};
+
+    \draw[->] (build) -- (stat);
+    \draw[->] (build) -- (fore);
+    \draw[->] (pi0) -- (sim);
+    \draw[->] (pi0) -- (fore);
+  \end{tikzpicture}%
+  }
+  \caption{Chaîne DTMC : matrice \(P\), \(\pi_0\), \(\pi\) stationnaire, simulation et prévision.}
+  \label{fig:dtmc-pipeline}
+\end{figure}
+
+\clearpage
+\chapter{Chaîne de Markov en Temps Continu (CTMC)}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Modéliser la dynamique continue des états \(\{L,M,H,P\}\) via une \textbf{matrice génératrice} \(Q\).
+  \item Définir les \textbf{temps de séjour} (exponentiels) et les probabilités de saut.
+  \item Simuler des trajectoires par l’algorithme de \textbf{Gillespie} et produire des résumés robustes.
+\end{itemize}
+
+\section*{Rappels théoriques}
+Une CTMC sur \(\mathcal{S}\) est définie par \(Q=(q_{ij})\) vérifiant :
+\begin{itemize}[leftmargin=1.5em]
+  \item \(q_{ij}\ge 0\) pour \(i\ne j\) (taux de saut \(i\to j\)) ; \(q_{ii}<0\).
+  \item \(\sum_{j} q_{ij}=0\) (somme de ligne nulle).
+  \item \textbf{Temps de séjour} en \(i\) : \(T_i\sim\text{Exp}(\lambda_i)\) avec \(\lambda_i=-q_{ii}\) et \( \mathbb{E}[T_i]=1/\lambda_i = -1/q_{ii}\).
+  \item \textbf{Chaîne embarquée} (aux sauts) : \(P^*(i\to j)=q_{ij}/\lambda_i\) pour \(j\ne i\).
+\end{itemize}
+Équation de Kolmogorov (avant) pour la distribution \(\pi(t)\) :
+\[
+  \frac{d}{dt}\pi(t)=\pi(t)Q,\qquad \pi(t)=\pi(0)\,e^{tQ}.
+\]
+Stationnarité (long terme) : \(\pi Q=0\), \(\sum_i \pi_i=1\). \textbf{Uniformisation} (outil numérique) : si \(\Lambda\ge\max_i \lambda_i\), \(P^u=I+Q/\Lambda\) et
+\[
+  \pi(t)=\sum_{k=0}^{\infty} e^{-\Lambda t}\frac{(\Lambda t)^k}{k!}\,\pi(0)\,(P^u)^k.
+\]
+
+\section*{Schéma conceptuel}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=22mm and 28mm,
+    state/.style={circle, draw, align=center, minimum size=10mm, fill=gray!10},
+    >={Latex[length=2.2mm]}
+  ]
+    \node[state] (L) {L};
+    \node[state, right=of L] (M) {M};
+    \node[state, right=of M] (H) {H};
+    \node[state, right=of H] (P) {P};
+
+    \draw[->] (L) edge[loop above] node[above]{\(-q_{LL}\)} (L);
+    \draw[->] (M) edge[loop above] node[above]{\(-q_{MM}\)} (M);
+    \draw[->] (H) edge[loop above] node[above]{\(-q_{HH}\)} (H);
+    \draw[->] (P) edge[loop above] node[above]{\(-q_{PP}\)} (P);
+
+    \draw[->] (L) -- node[above]{\(q_{LM}\)} (M);
+    \draw[->] (M) -- node[above]{\(q_{MH}\)} (H);
+    \draw[->] (H) -- node[above]{\(q_{HP}\)} (P);
+    \draw[->] (M) -- node[below]{\(q_{ML}\)} (L);
+    \draw[->] (H) -- node[below]{\(q_{HM}\)} (M);
+    \draw[->] (P) -- node[below]{\(q_{PH}\)} (H);
+  \end{tikzpicture}%
+  }
+  \caption{CTMC sur \(\{L,M,H,P\}\) : taux de sortie \(-q_{ii}\) (boucles) et taux de saut \(q_{ij}\).}
+  \label{fig:ctmc-graph}
+\end{figure}
+
+\section*{Mise en œuvre dans le projet}
+\paragraph{Discrétisation des états.} Les états \(\{L,M,H,P\}\) sont obtenus via \texttt{qcut} (quartiles) sur \texttt{Global\_active\_power} minute.
+
+\paragraph{Estimation de \(Q\).} Pour chaque état \(i\) :
+\[
+  q_{ij}=\frac{N(i\to j)}{T_i}\ (i\ne j),\qquad q_{ii}=-\sum_{j\ne i}q_{ij},
+\]
+où \(N(i\to j)\) est le nombre de sauts observés \(i\to j\) et \(T_i\) le \emph{temps total passé} dans \(i\) (en minutes).
+
+\paragraph{Simulation (Gillespie).} À l’état courant \(i\) :
+\begin{enumerate}[leftmargin=1.5em,itemsep=0.2em]
+  \item Tirer \(\Delta t \sim \text{Exp}(\lambda_i)\) avec \(\lambda_i=-q_{ii}\).
+  \item Choisir le prochain état \(j\) selon \(P^*(i\to j)=q_{ij}/\lambda_i\).
+  \item Avancer le temps \(t\leftarrow t+\Delta t\) et itérer tant que \(t<\text{horizon}\).
+\end{enumerate}
+La trajectoire continue est ensuite \textbf{ré-échantillonnée à la minute} (fusion « asof »).
+
+\section*{Artefacts et résultats}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{generator\_matrix.csv} : matrice \(Q\) (ordre \(\{L,M,H,P\}\)).
+  \item \texttt{ctmc\_simulation\_minute.csv} : trajectoire simulée au pas minute.
+  \item \texttt{ctmc\_summary.txt} : seuils quartiles, \textbf{minutes passées par état} et \textbf{temps de séjour moyens} \(-1/q_{ii}\).
+\end{itemize}
+Exemple : \(Q\) estimée présente \(-q_{PP}\) plus faible (séjours plus longs en \(P\)), et \(q_{HP}\) dominant (sauts \(H\to P\) fréquents), en cohérence avec les usages.
+
+\section*{Pipeline CTMC (diagramme)}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=8mm and 12mm,
+    box/.style={draw, rounded corners, align=center, minimum width=38mm, minimum height=9mm, fill=gray!6},
+    >={Latex[length=2.2mm]}
+  ]
+    \node[box] (disc) {Discrétisation minute \\ (\(L,M,H,P\) par quartiles)};
+    \node[box, right=of disc] (rates) {Estimation \(Q\) \\ (\(N(i\to j)/T_i\), \(\sum q_{ij}=0\))};
+    \node[box, below=of rates] (soj) {Temps de séjour \\ \(-1/q_{ii}\)};
+    \node[box, right=of soj] (sim) {Simulation (Gillespie) \\ \& ré-échantillonnage minute};
+    \node[box, right=of rates] (sum) {Résumé \\ (holding times, sojourns)};
+
+    \draw[->] (disc) -- (rates);
+    \draw[->] (rates) -- (soj);
+    \draw[->] (soj) -- (sim);
+    \draw[->] (rates) -- (sum);
+  \end{tikzpicture}%
+  }
+  \caption{Chaîne CTMC : discrétisation, estimation de \(Q\), temps de séjour, simulation et résumé.}
+  \label{fig:ctmc-pipeline}
+\end{figure}
+
+\clearpage
+\chapter{Modèles de Markov Cachés (HMM)}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Modéliser des \textbf{modes cachés} de fonctionnement expliquant les observations \(\{L,M,H,P\}\).
+  \item Estimer \(\lambda=(A,B,\pi_0)\) par \textbf{Baum–Welch} (EM) et décoder par \textbf{Viterbi}.
+  \item Délivrer des matrices \(A\) (transitions) et \(B\) (émissions) interprétables.
+\end{itemize}
+
+\section*{Définition du HMM}
+Paramètres \(\lambda=(A,B,\pi_0)\) :
+\begin{itemize}[leftmargin=1.5em]
+  \item \(A[i,j]=\Pr(s_{t+1}=j\mid s_t=i)\) (stochastique par ligne),
+  \item \(B[i,o]=\Pr(o_t=o\mid s_t=i)\) pour \(o\in\{L,M,H,P\}\),
+  \item \(\pi_0[i]=\Pr(s_0=i)\).
+\end{itemize}
+Vraisemblance : \(P(\mathbf{O}\mid\lambda)=\sum_{\mathbf{s}}P(\mathbf{O},\mathbf{s}\mid\lambda)\).
+
+\section*{Forward–Backward (mise à l’échelle)}
+\[
+\alpha_0(i)=\pi_0[i]\,B[i,o_0],\quad
+\alpha_{t+1}(j)=\Bigl[\sum_{i}\alpha_t(i)\,A[i,j]\Bigr]B[j,o_{t+1}],
+\]
+\[
+\beta_T(i)=1,\quad
+\beta_t(i)=\sum_j A[i,j]\,B[j,o_{t+1}]\,\beta_{t+1}(j).
+\]
+Facteurs d’échelle (ou espace log) utilisés pour la stabilité numérique.
+
+\section*{Viterbi (décodage)}
+\[
+\delta_0(i)=\log \pi_0[i]+\log B[i,o_0],\quad
+\delta_{t+1}(j)=\max_i\bigl(\delta_t(i)+\log A[i,j]\bigr)+\log B[j,o_{t+1}],
+\]
+avec \(\psi_{t+1}(j)=\arg\max_i(\cdot)\) et rétro‑propagation depuis \(s_T=\arg\max_i\delta_T(i)\).
+
+\section*{Baum–Welch (EM)}
+\(\gamma_t(i)=\Pr(s_t=i\mid\mathbf{O},\lambda)\), \(\xi_t(i,j)=\Pr(s_t=i,s_{t+1}=j\mid\mathbf{O},\lambda)\) et
+\[
+A[i,j]=\frac{\sum_t \xi_t(i,j)}{\sum_t \gamma_t(i)},\quad
+B[i,o]=\frac{\sum_{t:o_t=o}\gamma_t(i)}{\sum_t\gamma_t(i)},\quad
+\pi_0[i]=\gamma_0(i).
+\]
+
+\section*{Schéma HMM}
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    x=1cm,y=1cm,
+    hid/.style={circle, draw, minimum size=10mm, inner sep=0pt, fill=gray!10},
+    obs/.style={rectangle, draw, rounded corners, minimum width=1.9cm, minimum height=0.85cm, align=center, fill=gray!4},
+    >={Latex[length=2mm]}
+  ]
+    % Hidden states
+    \node[hid] (s0) at (0,0) {$s_0$};
+    \node[hid] (s1) at (2.2,0) {$s_1$};
+    \node[hid] (s2) at (4.4,0) {$s_2$};
+    \node[hid] (s3) at (6.6,0) {$s_3$};
+
+    % Observation nodes
+    \node[obs] (o0) at (0,-1.6) {$o_0$};
+    \node[obs] (o1) at (2.2,-1.6) {$o_1$};
+    \node[obs] (o2) at (4.4,-1.6) {$o_2$};
+    \node[obs] (o3) at (6.6,-1.6) {$o_3$};
+
+    % Hidden transitions
+    \draw[->] (s0) -- node[above] {$A$} (s1);
+    \draw[->] (s1) -- (s2);
+    \draw[->] (s2) -- (s3);
+
+    % Emissions
+    \draw[->] (s0) -- node[left,pos=0.5] {$B$} (o0);
+    \draw[->] (s1) -- (o1);
+    \draw[->] (s2) -- (o2);
+    \draw[->] (s3) -- (o3);
+  \end{tikzpicture}
+  \caption{Chaîne cachée \(s_t\) générant les observations \(o_t\), avec \(o_t \in \{L,M,H,P\}\), via la matrice d’émission \(B\).}
+  \label{fig:hmm-graph}
+\end{figure}
+
+\section*{Mise en œuvre dans le projet}
+
+\section*{Mise en œuvre dans le projet}
+\paragraph{Observations.} \(\{L,M,H,P\}\) (discrétisation horaire) mappées vers \(\{0,1,2,3\}\) pour \texttt{hmmlearn}.
+\paragraph{Modèle.} HMM \textbf{catégorique} avec \(K=3\) modes (\texttt{CategoricalHMM}); compatibilité: paramètre \texttt{implementation} optionnel, \texttt{n\_features} défini si requis.
+\paragraph{Apprentissage/décodage.} EM pour \(A,B,\pi_0\); Viterbi pour le chemin le plus probable; segments et résumés (jour/semaine).
+\paragraph{Exports.} \texttt{hmm\_transition\_matrix.csv}, \texttt{hmm\_emission\_matrix.csv}, \texttt{hmm\_initial\_distribution.csv}, \texttt{hmm\_modes\_hourly.csv}, \texttt{hmm\_mode\_segments.csv}, \texttt{hmm\_summary.txt}.
+
+\section*{Pipeline HMM}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=8mm and 12mm,
+    box/.style={draw, rounded corners, align=center, minimum width=38mm, minimum height=9mm, fill=gray!6},
+    >={Latex[length=2.2mm]}
+  ]
+    \node[box] (obs) {Observations \\ \(\{L,M,H,P\}\) (horaire)};
+    \node[box, right=of obs] (em) {EM (Baum--Welch) \\ \(\Rightarrow A,B,\pi_0\)};
+    \node[box, right=of em] (vit) {Décodage \\ (Viterbi)};
+    \node[box, right=of vit] (rep) {Rapports \\ matrices \& segments};
+    \draw[->] (obs) -- (em);
+    \draw[->] (em) -- (vit);
+    \draw[->] (vit) -- (rep);
+  \end{tikzpicture}%
+  }
+  \caption{Observations discrètes \(\to\) apprentissage \((A,B,\pi_0)\) \(\to\) décodage \(\to\) rapports.}
+  \label{fig:hmm-pipeline}
+\end{figure}
+
+\clearpage
+\chapter{Processus Décisionnels de Markov (MDP)}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Définir une \textbf{politique optimale} pour minimiser la puissance attendue en tenant compte des \textbf{coûts d’action}.
+  \item Intégrer une \textbf{pénalité de commutation} (changement d’action) et comparer aux politiques sans pénalité.
+  \item Simuler la politique optimale et \textbf{comparer} à une baseline (Always Normal) ; analyser les \textbf{stationnaires par action}.
+\end{itemize}
+
+\section*{Formulation MDP}
+MDP \((\mathcal{S},\mathcal{A},P,R,\gamma)\) avec :
+\begin{itemize}[leftmargin=1.5em]
+  \item \(\mathcal{S}=\{\text{mode}_0,\text{mode}_1,\text{mode}_2\}\) (modes cachés HMM),
+  \item \(\mathcal{A}=\{\text{Normal},\text{Conserve},\text{Boost}\}\),
+  \item \(P[a][s,s']\) : matrice de transitions sous l’action \(a\),
+  \item \(R(s)=-\mathbb{E}[\text{kW}\mid s]\) : récompense négative de la puissance attendue,
+  \item coût d’action \(c(a)\ge 0\), \(\gamma\in(0,1)\).
+\end{itemize}
+Opérateur de Bellman (sans pénalité de commutation) :
+\[
+T(V)(s)=\max_{a\in\mathcal{A}}\Bigl\{\,R(s)-c(a)+\gamma\sum_{s'}P[a][s,s']\,V(s')\,\Bigr\}.
+\]
+Itération de valeur : \(V_{k+1}=T(V_k)\), puis \(\pi^*(s)=\arg\max_a\{\cdots\}\).
+
+\paragraph{Pénalité de commutation.}
+État étendu \((\ell a,s)\) où \(\ell a\) est la dernière action. Mise à jour :
+\[
+V_{k+1}(\ell a,s)=\max_{a\in\mathcal{A}}\Bigl\{R(s)-c(a)-\mathbf{1}_{a\ne \ell a}\cdot \text{penalty}+\gamma\sum_{s'}P[a][s,s']\,V_k(a,s')\Bigr\}.
+\]
+Une politique état‑seul peut ensuite être dérivée (agrégation) pour le reporting.
+
+\section*{Construction des transitions par action}
+À partir de \(A\) (transitions HMM), on construit un \textbf{tenseur} \(P[a]\) par redistribution contrôlée par \(\alpha\) :
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Normal} : \(P[\text{Normal}]=A\),
+  \item \textbf{Conserve} : déplacer une fraction \(\alpha\) vers un mode «\,sobre\,» (p.\,ex. \(\text{mode}_2\)),
+  \item \textbf{Boost} : déplacer \(\alpha\) vers un mode «\,haut\,» (p.\,ex. \(\text{mode}_0\)).
+\end{itemize}
+Chaque ligne est \textbf{clippée} et \textbf{renormalisée}; repli vers \(A\) si une ligne devient nulle.
+
+\section*{Stationnaires par action et simulation}
+Pour chaque \(a\), \(\pi_a\) vérifie \(\pi_a P[a]=\pi_a\) (résolution par vecteur propre gauche ou méthode de puissance). On calcule l’énergie stationnaire \(\mathbb{E}_a[\text{kW}]=\pi_a\cdot \mathbb{E}[\text{kW}\mid s]\).
+La simulation compare \textbf{baseline Normal} et \textbf{politique optimale} (moyenne kW, coûts, etc.).
+
+\section*{Mise en œuvre dans le projet}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Entrées} : matrices \(A,B,\pi_0\) du HMM normalisées ; \(\mathbb{E}[\text{kW}\mid s]\) dérivée de \(B\) et des niveaux \(\{L,M,H,P\}\).
+  \item \textbf{Coûts} : \(c(\text{Normal}){=}0\), \(c(\text{Conserve}){>}0\), \(c(\text{Boost}){>}0\) ; pénalité de commutation optionnelle.
+  \item \textbf{Résolution} : itération de valeur vectorisée ; version étendue pour la pénalité.
+  \item \textbf{Analyses} : stationnaires \(\pi_a\) et simulations longueurs égales (heures) pour baseline vs optimale.
+\end{itemize}
+
+\section*{Artefacts}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{mdp\_policy.csv} : action optimale par mode, valeurs et kW attendus,
+  \item \texttt{mdp\_policy\_simulation.csv} : trajectoire sous politique optimale,
+  \item \texttt{mdp\_policy\_simulation\_normal.csv} : baseline (Always Normal),
+  \item \texttt{mdp\_transitions\_*.csv} : matrices \(P[a]\),
+  \item \texttt{mdp\_stationary\_*.csv} : distributions \(\pi_a\),
+  \item \texttt{mdp\_summary.txt} : synthèse (gains vs baseline, stationnaires par action).
+\end{itemize}
+
+\section*{Exemple (résultats)}
+Politique optimale typique : \(\text{mode}_0\to \text{Normal}\), \(\text{mode}_1\to \text{Conserve}\), \(\text{mode}_2\to \text{Conserve}\). Moyenne kW optimale \(\approx 1.01\) vs baseline \(\approx 1.19\). Stationnaires par action cohérentes : \(\text{Conserve}\) déplace l’occupation vers \(\text{mode}_2\) (kW plus bas).
+
+\section*{Pipeline MDP (diagramme)}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=8mm and 12mm,
+    box/.style={draw, rounded corners, align=center, minimum width=38mm, minimum height=9mm, fill=gray!6},
+    >={Latex[length=2.2mm]}
+  ]
+    \node[box] (in) {Entrées HMM \\ \(A,B,\pi_0,\ \mathbb{E}[\text{kW}\mid s]\)};
+    \node[box, right=of in] (tensor) {Tenseur \(P[a]\) \\ (Normal/Conserve/Boost)};
+    \node[box, below=of tensor] (vi) {Itération de valeur \\ (coûts, \(\gamma\), pénalité optionnelle)};
+    \node[box, right=of vi] (pol) {Politique \(\pi^*\) \\ (par mode)};
+    \node[box, below=of pol] (stat) {Stationnaires \(\pi_a\) \\ \(\pi_a P[a]=\pi_a\)};
+    \node[box, right=of pol] (sim) {Simulation \\ (baseline vs \(\pi^*\))};
+    \draw[->] (in) -- (tensor);
+    \draw[->] (tensor) -- (vi);
+    \draw[->] (vi) -- (pol);
+    \draw[->] (tensor) -- (stat);
+    \draw[->] (pol) -- (sim);
+  \end{tikzpicture}%
+  }
+  \caption{Chaîne MDP : construction des \(P[a]\), optimisation (\(\pi^*\)), stationnaires par action et simulation.}
+  \label{fig:mdp-pipeline}
+\end{figure}
+
+\clearpage
+\chapter{Apprentissage par Renforcement (RL)}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Apprendre une \textbf{politique} via \textbf{Q‑learning} sur les mêmes états/actions que le MDP.
+  \item Aligner la \textbf{récompense} sur l’économie d’énergie et les \textbf{coûts d’action} (\(+\) pénalité de commutation optionnelle).
+  \item Comparer la politique RL à la politique MDP sur des \textbf{simulations} et des \textbf{métriques} cohérentes.
+\end{itemize}
+
+\section*{Environnement RL}
+États \(\mathcal{S}=\{\text{mode}_0,\text{mode}_1,\text{mode}_2\}\) (issus du HMM), actions \(\mathcal{A}=\{\text{Normal},\text{Conserve},\text{Boost}\}\). Les transitions sont décrites par un \textbf{tenseur} \(P[a][s,s']\) (déduit de \(A\) comme au Chapitre 9). La récompense :
+\[
+  R(s,a)= -\,\mathbb{E}[\text{kW}\mid s]\ -\ c(a)\ -\ \mathbf{1}_{a\ne \ell a}\cdot \text{penalty},
+\]
+où \(\ell a\) est la dernière action (pour la pénalité optionnelle). \(\gamma\in(0,1)\) est le facteur d’actualisation.
+
+\section*{Q‑learning (tabulaire)}
+Mise à jour \textbf{hors‑politique} :
+\[
+  Q_{t+1}(s,a)=Q_t(s,a)+\alpha_t\Bigl[r+\gamma\max_{a'}Q_t(s',a')-Q_t(s,a)\Bigr],
+\]
+avec exploration \(\varepsilon\)-gourmande (\(\varepsilon\) décroissant) et \(\alpha_t\) pas d’apprentissage. Sous \textbf{GLIE} (exploration infinie, \(\sum\alpha_t=\infty,\ \sum\alpha_t^2<\infty\)), le Q‑table converge vers \(Q^*\) en environnement stationnaire et tabulaire.
+
+\section*{Mise en œuvre dans le projet}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Environnement} \(\texttt{EnergyEnv}\) : transitions \(P[a]\) normalisées, \(\mathbb{E}[\text{kW}\mid s]\), coûts \(c(a)\), \texttt{switch\_penalty} optionnelle.
+  \item \textbf{Exploration} : \(\varepsilon\)-gourmand avec \(\varepsilon_{\text{start}}\to \varepsilon_{\text{end}}\) et décroissance (\(\varepsilon \leftarrow \max(\varepsilon_{\text{end}},\,\varepsilon\cdot \text{decay})\)).
+  \item \textbf{Boucle d’apprentissage} : \(N_{\text{episodes}}\) épisodes, \(T\) pas/épisode ; mise à jour Q à chaque transition \((s,a,r,s')\).
+  \item \textbf{Politique apprise} : \(\pi_{\text{RL}}(s)=\arg\max_a Q(s,a)\) ; comparaison avec \(\pi_{\text{MDP}}\).
+\end{itemize}
+
+\section*{Artefacts}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{rl\_q\_values.csv} : table \(Q(s,a)\),
+  \item \texttt{rl\_policy.csv} : meilleure action par mode,
+  \item \texttt{rl\_training\_log.csv} : récompense totale par épisode (suivi d’apprentissage).
+\end{itemize}
+
+\section*{Exemple (résultats)}
+Une politique RL typique aligne \(\text{mode}_1\) sur \textbf{Conserve} et conserve \textbf{Normal} pour \(\text{mode}_0\) ; pour \(\text{mode}_2\), elle peut préférer \textbf{Normal} si l’exploration/les coûts déplacent l’optimum local. Les valeurs \(Q\) reflètent la pénalisation par coûts et pénalité de commutation.
+
+\section*{Pipeline RL (diagramme)}
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    node distance=10mm and 14mm,
+    box/.style={
+      draw,
+      rounded corners,
+      align=center,
+      minimum width=36mm,
+      minimum height=9mm,
+      fill=gray!6
+    },
+    >={Latex[length=2mm]}
+  ]
+
+    \node[box] (env) {Environnement\\
+    $P[a],\, \mathbb{E}[\text{kW}\mid s],\, c(a)$};
+
+    \node[box, right=of env] (loop) {Boucle Q-learning\\
+    $\varepsilon$-gourmand};
+
+    \node[box, right=of loop] (qtab) {Table\\
+    $Q(s,a)$};
+
+    \node[box, right=of qtab] (pol) {Politique RL\\
+    $\pi_{\text{RL}}(s)=\arg\max_a Q$};
+
+    \node[box, below=of pol] (rep) {Rapports\\
+    \texttt{rl\_policy}, \texttt{rl\_q\_values}, \texttt{log}};
+
+    \draw[->] (env) -- (loop);
+    \draw[->] (loop) -- (qtab);
+    \draw[->] (qtab) -- (pol);
+    \draw[->] (pol) -- (rep);
+
+  \end{tikzpicture}
+  }
+  \caption{Chaîne RL : environnement aligné MDP $\rightarrow$ apprentissage Q-learning $\rightarrow$ politique RL $\rightarrow$ rapports.}
+  \label{fig:rl-pipeline}
+\end{figure}
+
+\section*{Bonnes pratiques}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Stabilité} : normaliser \(P[a]\), vérifier \(\sum_{s'}P[a][s,s']=1\) ; bornes sur \(Q\) et \(\alpha\).
+  \item \textbf{Exploration} : décroissance \(\varepsilon\) ni trop rapide (sous‑exploration) ni trop lente (variance).
+  \item \textbf{Cohérence} : même économie que le MDP (récompense \(R\) identique) pour comparabilité directe.
+\end{itemize}
+
+\clearpage
+\chapter{Évaluation et Simulation}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item Évaluer \textbf{Baseline}, \textbf{MDP} et \textbf{RL} sur un horizon (p.\,ex. 168 h) avec \textbf{réplications} Monte‑Carlo.
+  \item Calculer des \textbf{intervalles de confiance} (IC) sur l’énergie, le «\,discomfort\,» et le \textbf{coût global}.
+  \item Étudier la \textbf{sensibilité} aux paramètres (\(\alpha\), coûts, pénalité de commutation).
+\end{itemize}
+
+\section*{Cadre d’évaluation}
+Scénarios testés : \(\mathcal{C}=\{\text{Baseline (Always Normal)},\ \text{MDP},\ \text{RL}\}\).
+Pour chaque réplication \(r\in\{1,\ldots,n\}\) et scénario \(c\in\mathcal{C}\), on simule une trajectoire de longueur \(T\) et on agrège, par heure \(t\) :
+\[
+  \text{energy}_{t}=\mathbb{E}[\text{kW}\mid s_t],\quad
+  \text{action\_cost}_{t}=c(a_t),\quad
+  \text{switch\_penalty}_{t}=\mathbf{1}_{a_t\ne a_{t-1}}\cdot \text{penalty},
+\]
+\[
+  \text{discomfort}_{t}=\beta_H\cdot \Pr(H\mid s_t)+\beta_P\cdot \Pr(P\mid s_t),
+\quad
+  \text{overall}_{t}=\text{energy}_{t}+\text{action\_cost}_{t}+\text{switch\_penalty}_{t}.
+\]
+Les totaux sur l’horizon \(T\) sont sommés selon la métrique.
+
+\section*{Intervalles de confiance (IC)}
+Pour une métrique \(X\) (énergie, discomfort, overall) mesurée sur \(n\) réplications :
+\[
+  \bar{X}=\frac{1}{n}\sum_{r=1}^{n}X^{(r)},\quad
+  \text{IC}_{1-\alpha}:\ \bar{X}\ \pm\ z_{1-\alpha/2}\,\frac{s_X}{\sqrt{n}},
+\]
+avec \(z_{0.975}\approx1.96\) pour 95 % et \(s_X\) l’écart‑type empirique des \(X^{(r)}\). Pour les \(\%\) d’économies, on applique la même formule sur \(\text{Savings\%}^{(r)}\).
+
+\section*{Économies relatives}
+\[
+  \text{Savings\%}^{(r)}=\frac{E_{\text{base}}^{(r)}-E_{\text{scen}}^{(r)}}{E_{\text{base}}^{(r)}}\times 100.
+\]
+On rapporte \(\bar{\text{Savings\%}}\) et son IC normal.
+
+\section*{Sensibilité}
+Balayer des grilles (p.\,ex. \(\alpha\in\{0.1,0.2,0.3\}\), \(c(\text{Conserve})\), \(\text{penalty}\)) et enregistrer \(\text{Savings\%}\), \(\text{Overall}\), \(\text{Discomfort}\) pour comparer la robustesse des scénarios.
+
+\section*{Mise en œuvre dans le projet}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Entrées} : \(A,B,\pi_0\) normalisés ; \(\mathbb{E}[\text{kW}\mid s]\), coûts d’évaluation \(c_{\text{eval}}\), \(\text{penalty}\), \(\alpha\).
+  \item \textbf{Scénarios} : Baseline (Normal), MDP (politique du Chap. 9), RL (politique du Chap. 10).
+  \item \textbf{Réplications} : \(n\) indépendantes ; agrégation des métriques et calcul d’IC.
+  \item \textbf{Sensibilité} : boucles sur \(\alpha\), \(c_{\text{eval}}(\text{Conserve})\), \(\text{penalty}\) ; résumé global.
+\end{itemize}
+
+\section*{Artefacts}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{evaluation\_summary\_alpha*\_cons*\_sw*.csv} : moyennes et ICs par scénario,
+  \item \texttt{performance\_report\_alpha*\_cons*\_sw*.txt} : synthèse lisible (énergies, économies \%),
+  \item \texttt{sensitivity\_summary.csv} : agrégat multi‑configurations,
+  \item \texttt{sim\_trace\_baseline\_rep0.csv}, \texttt{sim\_trace\_mdp\_rep0.csv}, \texttt{sim\_trace\_rl\_rep0.csv} : traces de validation.
+\end{itemize}
+
+\section*{Exemple (résultats)}
+Sur une configuration type (\(\alpha=0.2,\ c_{\text{eval}}(\text{Conserve})=0.05,\ \text{penalty}=0\), 168 h, \(n=50\)) :
+\[
+  E_{\text{Baseline}}\approx 187.99\ \text{kWh}\ [181.65,194.33],\quad
+  E_{\text{MDP}}\approx 154.90\ \text{kWh}\ [150.34,159.46],\quad
+  E_{\text{RL}}\approx 161.00\ \text{kWh}\ [156.54,165.46],
+\]
+\[
+  \text{Savings\%}_{\text{MDP}}\approx 17.07\%\ [14.89\%,19.26\%],\quad
+  \text{Savings\%}_{\text{RL}}\approx 13.88\%\ [11.97\%,15.79\%].
+\]
+Les différences de \textbf{discomfort} restent modérées et documentées par IC.
+
+\section*{Pipeline d’évaluation (diagramme)}
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    node distance=10mm and 16mm,
+    box/.style={
+      draw,
+      rounded corners,
+      align=center,
+      minimum width=36mm,
+      minimum height=9mm,
+      fill=gray!6
+    },
+    >={Latex[length=2mm]}
+  ]
+
+    % Top row
+    \node[box] (in) {Entrées\\
+    $A,B,\pi_0,\alpha,c_{\text{eval}},\text{penalty}$};
+
+    \node[box, right=of in] (scen) {Scénarios\\
+    Baseline / MDP / RL};
+
+    \node[box, right=of scen] (rep) {Réplications\\
+    $r=1..n$};
+
+    % Middle row
+    \node[box, below=of scen] (agg) {Agrégation\\
+    énergie, discomfort};
+
+    \node[box, right=of agg] (ci) {IC\\
+    $\bar{X}\pm z\,s/\sqrt{n}$};
+
+    % Bottom row
+    \node[box, below=of ci] (out) {Rapports\\
+    performance};
+
+    % Side branch
+    \node[box, below=of in] (sens) {Sensibilité\\
+    $\alpha, c,$ penalty};
+
+    % Arrows main flow
+    \draw[->] (in) -- (scen);
+    \draw[->] (scen) -- (rep);
+    \draw[->] (rep) -- (agg);
+    \draw[->] (agg) -- (ci);
+    \draw[->] (ci) -- (out);
+
+    % Sensitivity branch
+    \draw[->] (scen) -- (sens);
+    \draw[->] (sens) -- (out);
+
+  \end{tikzpicture}
+  \caption{Chaîne d’évaluation : scénarios $\rightarrow$ réplications $\rightarrow$ agrégation $\rightarrow$ IC $\rightarrow$ rapports, avec analyse de sensibilité.}
+  \label{fig:evaluation-pipeline}
+\end{figure}
+
+\clearpage
+\chapter{Système Final Déployable}
+\onehalfspacing
+
+\section*{Objectifs}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Sélectionner} la meilleure politique (MDP ou RL) sur la base des résultats d’évaluation (énergie, discomfort, coût global).
+  \item \textbf{Déployer} la politique et \textbf{simuler} un horizon long (p.\,ex. 4 semaines) pour confirmer les gains.
+  \item \textbf{Produire} un rapport final synthétique et les artefacts exportés (politique, trace, résumé).
+\end{itemize}
+
+\section*{Méthodologie}
+\paragraph{Candidats.} \(\mathcal{C}=\{\pi_{\text{Baseline}},\pi_{\text{MDP}},\pi_{\text{RL}}\}\). On simule chaque candidat sur \(T\) pas et on agrège les métriques.
+\paragraph{Sélection.} Deux stratégies :
+\begin{enumerate}[leftmargin=1.5em,itemsep=0.2em]
+  \item \textbf{Pilotée par l’évaluation} : choisir le scénario au meilleur compromis (\(\text{Savings\%}\) élevé, \(\text{Overall}\) et \(\text{Discomfort}\) maîtrisés), en s’appuyant sur les ICs.
+  \item \textbf{Score simple} (secours) : \(\text{Score}=\text{Savings\%}-\lambda\cdot \max(0,\Delta\text{Discomfort\%})\) avec \(\lambda\in[0,1]\).
+\end{enumerate}
+\paragraph{Simulation finale.} À partir de \(\pi_{\star}\) (gagnante), on génère une \textbf{trace} longue au pas horaire et on calcule énergie totale, économies \% et indicateurs de confort.
+
+\section*{Artefacts}
+\begin{itemize}[leftmargin=1.5em]
+  \item \texttt{final\_deployed\_policy.csv} : politique gagnante (action par mode) et source (MDP/RL),
+  \item \texttt{final\_system\_simulation.csv} : trace simulée (heure, mode, action, energy, discomfort),
+  \item \texttt{final\_system\_report.txt} : résumé exécutif (énergie gagnante, baseline, économies kWh et \%).
+\end{itemize}
+
+\section*{Exemple (résultats)}
+Sur 4 semaines (\(T=672\) h), la politique MDP gagne : énergie \(\approx 603.81\ \text{kWh}\) vs baseline \(\approx 692.18\ \text{kWh}\), soit \(\approx 12.77\%\) d’économies. Les actions par mode : \(\text{mode}_0=\text{Normal}\), \(\text{mode}_1=\text{Conserve}\), \(\text{mode}_2=\text{Conserve}\).
+
+\section*{Pipeline final (diagramme)}
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    node distance=10mm and 14mm,
+    box/.style={
+      draw,
+      rounded corners,
+      align=center,
+      minimum width=34mm,
+      minimum height=9mm,
+      fill=gray!6
+    },
+    >={Latex[length=2mm]}
+  ]
+
+    % Top row
+    \node[box] (eval) {Entrées\\résumés \& ICs};
+    \node[box, right=of eval] (cand) {Candidats\\Baseline / MDP / RL};
+    \node[box, right=of cand] (sel) {Sélection\\meilleur scénario};
+
+    % Middle row
+    \node[box, below=of cand] (deploy) {Déploiement\\$\pi_\star$};
+    \node[box, right=of deploy] (sim) {Simulation longue\\trace horaire};
+
+    % Bottom row
+    \node[box, below=of sim] (report) {Rapport final\\énergie, gains};
+
+    % Arrows
+    \draw[->] (eval) -- (cand);
+    \draw[->] (cand) -- (sel);
+    \draw[->] (sel) -- (deploy);
+    \draw[->] (deploy) -- (sim);
+    \draw[->] (sim) -- (report);
+
+  \end{tikzpicture}
+  \caption{Système final : sélection $\rightarrow$ déploiement $\rightarrow$ simulation $\rightarrow$ rapport.}
+  \label{fig:final-pipeline}
+\end{figure}
+
+\section*{Interprétations}
+\begin{itemize}[leftmargin=1.5em]
+  \item La sélection guidée par les ICs rend la décision \textbf{robuste} aux aléas de simulation.
+  \item Les gains consolidés (kWh et \%) confirment l’intérêt opérationnel de la politique \(\pi_{\star}\).
+  \item La traçabilité (politique exportée + trace complète) facilite \textbf{l’audit} et l’industrialisation.
+\end{itemize}
+
+\clearpage
+\chapter*{Conclusion générale}
+\onehalfspacing
+
+Ce travail a conçu et documenté une chaîne complète de \textbf{modélisation markovienne} pour la consommation énergétique d’un bâtiment, depuis l’acquisition jusqu’au \textbf{système final déployable}. Les données minute ont été profilées et agrégées (heures/jours), puis \textbf{discrétisées} en états \(\{L,M,H,P\}\) pour bâtir des modèles \textbf{DTMC/CTMC} et un \textbf{HMM} catégorique révélant des régimes cachés cohérents (modes dominés par P/H ou L/M). Sur cette base, un \textbf{MDP} a optimisé une politique en intégrant des \textbf{coûts d’action} (et une pénalité de commutation optionnelle), tandis qu’un \textbf{RL tabulaire} (Q‑learning) a appris une politique compétitive. L’\textbf{évaluation} multi‑réplication avec \textbf{ICs} a quantifié les gains ; la \textbf{sélection} a conduit à un déploiement consolidé affichant \(\approx 12.77\%\) d’économies sur 4 semaines par rapport à la baseline.
+
+\section*{Bilan}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Données \& EDA} : ingestion robuste, couverture/échantillonnage contrôlés ; profils et anomalies (3\(\sigma\)) clarifient tendances et jours atypiques.
+  \item \textbf{Prétraitement} : agrégations heure/jour, conversions kW\(\to\)Wh et énergie \textit{Other}, \textbf{normalisations sûres} (z‑score/min–max).
+  \item \textbf{Discrétisation} : quartiles L/M/H/P équilibrés, matrice de transitions \(P\) stochastique, métriques de stabilité/entropie.
+  \item \textbf{DTMC/CTMC} : stationnarité \(\pi P=\pi\), convergence (\(|\lambda_2|\)) et \textbf{temps de séjour} via \(Q\) (Gillespie).
+  \item \textbf{HMM} : \(\lambda=(A,B,\pi_0)\) appris par EM, Viterbi pour segments ; modes cohérents (P/H vs L/M).
+  \item \textbf{MDP} : valeur optimale (Bellman) avec coûts et pénalité de commutation ; \textbf{stationnaires par action} et simulation baseline vs optimale.
+  \item \textbf{RL} : Q‑learning aligné sur l’économie MDP ; politique apprise proche de l’optimum selon l’exploration.
+  \item \textbf{Évaluation} : réplications, \textbf{ICs} et \textbf{sensibilité} (alpha/coûts/pénalité) ; gains significatifs et robustes.
+  \item \textbf{Final} : politique MDP gagnante (\(\approx 12.77\%\) d’économies) déployée avec traçabilité (politique/trace/rapport).
+\end{itemize}
+
+\section*{Limites et perspectives}
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Seuils} : quartiles globaux simples ; envisager des seuils \textbf{saisonniers} ou des quantiles robustes en cas de dérive.
+  \item \textbf{HMM} : augmenter \(K\), valider par critères d’information ; lissage (pseudo‑comptes) et cross‑validation des segments.
+  \item \textbf{MDP} : \textbf{calibrage} fin des coûts et de la pénalité ; objectif \textbf{multi‑critères} (énergie vs discomfort) et sensibilité.
+  \item \textbf{RL} : davantage d’épisodes, schémas d’\(\varepsilon\) adaptés, \textbf{approximation de fonction} (réseaux) pour mieux généraliser.
+  \item \textbf{CTMC} : modèles \textbf{non homogènes} (taux variables) ou uniformisation outillée ; estimation par fenêtres temporelles.
+  \item \textbf{Opérationnel} : intégration \textbf{temps réel} (délais, contraintes d’activation), \textbf{monitoring} continu des gains.
+\end{itemize}
+
+\section*{Livrables et traçabilité}
+\begin{itemize}[leftmargin=1.5em]
+  \item Scripts et \textbf{artefacts} (CSV/PNG/TXT) par chapitre ; \textbf{rapports} intermédiaires et final.
+  \item \textbf{Politiques} (MDP/RL) et \textbf{traces} de simulation exportées pour audit.
+  \item Diagrammes (prétraitement, DTMC/CTMC, HMM, MDP, RL, évaluation, final) documentant le flux complet.
+\end{itemize}
+
+\vspace{0.6cm}
+En synthèse, la chaîne proposée fournit une base \textbf{fiable, interprétable et mesurable} pour piloter la demande énergétique ; elle conjugue rigueur mathématique (Markov, HMM, MDP/RL) et \textbf{évaluation statistique} (ICs), ouvrant la voie à un déploiement industriel avec suivi et adaptation.
+
+\clearpage
+\chapter*{Références}
+\onehalfspacing
+
+\section*{Général et données}
+\begin{itemize}[leftmargin=1.5em]
+  \item Hebrail, S., \& Berard, A. (2012). Individual Household Electric Power Consumption (UCI ML Repository). \url{https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption}
+\end{itemize}
+
+\section*{Discrétisation et statistiques}
+\begin{itemize}[leftmargin=1.5em]
+  \item Dougherty, J., Kohavi, R., \& Sahami, M. (1995). Supervised and Unsupervised Discretization of Continuous Features. KDD-95. \url{https://www.aaai.org/Papers/KDD/1995/KDD95-040.pdf}
+
+\end{itemize}
+
+\section*{DTMC / CTMC}
+\begin{itemize}[leftmargin=1.5em]
+  \item Aldous, D., \& Fill, J. A. (2002). Reversible Markov Chains and Random Walks on Graphs. \url{https://www.stat.berkeley.edu/~aldous/RWG/book.html}
+\end{itemize}
+
+\section*{HMM}
+\begin{itemize}[leftmargin=1.5em]
+  \item Stamp, M. (2002). A Revealing Introduction to Hidden Markov Models. \url{https://www.cs.sjsu.edu/~stamp/RUA/HMM.pdf}
+\end{itemize}
+
+\section*{MDP}
+\begin{itemize}[leftmargin=1.5em]
+  \item MDP  .
+  \url{https://pub.math.leidenuniv.nl/~kallenberglcm/Lecture-notes-MDP.pdf}
+\end{itemize}
+
+\section*{Apprentissage par renforcement}
+\begin{itemize}[leftmargin=1.5em]
+  \item Sutton, R. S., \& Barto, A. G. (2018). Reinforcement Learning: An Introduction (2e). \url{http://incompleteideas.net/book/RLbook2020.pdf}
+\end{itemize}
+
+
+\end{document}

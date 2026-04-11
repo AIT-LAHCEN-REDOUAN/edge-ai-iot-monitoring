@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   thingsboard:
     image: thingsboard/tb-postgres
@@ -17,22 +19,19 @@ services:
     build: .
     image: iot_project-collective:latest
     container_name: collective_container
-    command: sh -c "sleep 90 && python scripts/vm_server.py"
+    command: sh -c "sleep 60 && python -m src.collective.run_collective"
     environment:
       VM_NAME: collective
       PORT: 5000
-      TB_ENABLE: "true"
-      TB_HOST: "thingsboard"
-      TB_PORT: 1883
-      TB_TOKEN: "i2d4b9rpmz3lq23ba65h"
+      TB_COLLECTIVE_ENABLE: "true"
+      TB_COLLECTIVE_HOST: "thingsboard"
+      TB_COLLECTIVE_PORT: 1883
+      TB_COLLECTIVE_TOKEN: "i2d4b9rpmz3lq23ba65h"
     cpus: 1.0
     mem_limit: 512m
+    working_dir: /app
     volumes:
-      - ./scripts:/app/scripts
-      - ./src:/app/src
-      - ./data:/app/data
-      - ./models:/app/models
-      - ./results:/app/results
+      - .:/app
     ports:
       - "5004:5000"
     depends_on:
@@ -42,7 +41,7 @@ services:
     build: .
     image: iot_project-vm1:latest
     container_name: vm1_container
-    command: sh -c "sleep 90 && python scripts/vm_server.py"
+    command: sh -c "sleep 60 && python scripts/vm_server.py"
     environment:
       VM_NAME: vm1
       PORT: 5000
@@ -52,12 +51,9 @@ services:
       TB_TOKEN: "kczfivwiy2puv85bo25m"
     cpus: 1.0
     mem_limit: 512m
+    working_dir: /app
     volumes:
-      - ./scripts:/app/scripts
-      - ./src:/app/src
-      - ./data:/app/data
-      - ./models:/app/models
-      - ./results:/app/results
+      - .:/app
     ports:
       - "5001:5000"
     depends_on:
@@ -67,7 +63,7 @@ services:
     build: .
     image: iot_project-vm2:latest
     container_name: vm2_container
-    command: sh -c "sleep 90 && python scripts/vm_server.py"
+    command: sh -c "sleep 60 && python scripts/vm_server.py"
     environment:
       VM_NAME: vm2
       PORT: 5000
@@ -77,12 +73,9 @@ services:
       TB_TOKEN: "2y0hh6kn5m23lqiu974y"
     cpus: 2.0
     mem_limit: 1024m
+    working_dir: /app
     volumes:
-      - ./scripts:/app/scripts
-      - ./src:/app/src
-      - ./data:/app/data
-      - ./models:/app/models
-      - ./results:/app/results
+      - .:/app
     ports:
       - "5002:5000"
     depends_on:
@@ -92,7 +85,7 @@ services:
     build: .
     image: iot_project-vm3:latest
     container_name: vm3_container
-    command: sh -c "sleep 90 && python scripts/vm_server.py"
+    command: sh -c "sleep 60 && python scripts/vm_server.py"
     environment:
       VM_NAME: vm3
       PORT: 5000
@@ -102,12 +95,9 @@ services:
       TB_TOKEN: "89144o4e8h1oradxl20e"
     cpus: 2.0
     mem_limit: 2048m
+    working_dir: /app
     volumes:
-      - ./scripts:/app/scripts
-      - ./src:/app/src
-      - ./data:/app/data
-      - ./models:/app/models
-      - ./results:/app/results
+      - .:/app
     ports:
       - "5003:5000"
     depends_on:

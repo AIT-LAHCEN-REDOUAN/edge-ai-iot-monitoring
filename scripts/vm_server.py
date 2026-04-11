@@ -1,4 +1,14 @@
 import os
+import sys
+
+# ✅ FIX IMPORT PATH (works in Docker + Windows)
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+
+# ===============================
+# IMPORTS
+# ===============================
 import json
 import time
 import numpy as np
@@ -8,6 +18,7 @@ from flask import Flask, request, jsonify
 import psutil
 from torchvision import models as tv_models
 from datetime import datetime, timezone
+
 from src.thingsboard.mqtt_client import TBPublisher
 
 def build_model():

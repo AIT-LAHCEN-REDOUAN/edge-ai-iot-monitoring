@@ -2,34 +2,34 @@
 
 VM1 (highly constrained / size-speed priority)
 Selected technique: q3_qat
-Score: 0.885373
+Score: 0.887659
 Size (MB): 10.7809
 Accuracy: 0.990530
 Avg image time (sec): 0.001545
 
 VM2 (balanced profile)
 Selected technique: q3_qat
-Score: 0.901750
+Score: 0.903710
 Size (MB): 10.7809
 Accuracy: 0.990530
 Avg image time (sec): 0.001545
 
 VM3 (accuracy-first profile)
 Selected technique: q3_qat
-Score: 0.934500
+Score: 0.935806
 Size (MB): 10.7809
 Accuracy: 0.990530
 Avg image time (sec): 0.001545
 
 === FULL SCORED TABLE ===
               technique device_context  effective_size_mb  accuracy  avg_image_time_sec  size_score  speed_score  accuracy_score  vm1_score  vm2_score  vm3_score
-           baseline_cpu            cpu            42.6916  0.987013            0.003811    0.000022     0.148474             0.0   0.051976   0.044549   0.029699
-           baseline_gpu            gpu            42.6916  0.987013            0.000188    0.000022     0.986355             0.0   0.345234   0.295913   0.197275
-q1_dynamic_quantization            cpu            42.6899  0.987013            0.004189    0.000075     0.061055             0.0   0.021403   0.018339   0.012226
-       q2_static_ptq_fx            cpu            10.7801  0.987013            0.001170    1.000000     0.759251             0.0   0.715738   0.527775   0.351850
-                 q3_qat            cpu            10.7809  0.990530            0.001545    0.999975     0.672525             1.0   0.885373   0.901750   0.934500
-         q4_weight_only            cpu            21.3633  0.987013            0.003434    0.668365     0.235661             0.0   0.383246   0.271208   0.180805
+           baseline_cpu            cpu            42.6916  0.987013            0.003811    0.000022     0.165458             0.0   0.057920   0.049644   0.033096
+           baseline_gpu            gpu            42.6916  0.987013            0.000188    0.000022     0.986627             0.0   0.345329   0.295995   0.197330
+q1_dynamic_quantization            cpu            42.6899  0.987013            0.004249    0.000075     0.066183             0.0   0.023198   0.019878   0.013252
+       q2_static_ptq_fx            cpu            10.7801  0.987013            0.001170    1.000000     0.764053             0.0   0.717418   0.529216   0.352811
+                 q3_qat            cpu            10.7809  0.990530            0.001545    0.999975     0.679057             1.0   0.887659   0.903710   0.935806
+         q4_weight_only            cpu            21.3633  0.987013            0.003434    0.668365     0.250907             0.0   0.388582   0.275782   0.183854
      q5_mixed_precision            gpu            21.3644  0.987013            0.000129    0.668331     1.000000             0.0   0.650749   0.500499   0.333666
-p1_unstructured_pruning            cpu            42.6923  0.987013            0.004453    0.000000     0.000000             0.0   0.000000   0.000000   0.000000
-  p2_structured_pruning            cpu            42.6920  0.987013            0.004261    0.000009     0.044403             0.0   0.015545   0.013324   0.008883
-   p3_magnitude_pruning            cpu            42.6919  0.987013            0.004286    0.000013     0.038622             0.0   0.013523   0.011590   0.007727
+p1_unstructured_pruning            cpu            42.6923  0.987013            0.004541    0.000000     0.000000             0.0   0.000000   0.000000   0.000000
+  p2_structured_pruning            cpu            42.6920  0.987013            0.004261    0.000009     0.063463             0.0   0.022216   0.019042   0.012695
+   p3_magnitude_pruning            cpu            42.6919  0.987013            0.004286    0.000013     0.057797             0.0   0.020235   0.017343   0.011562

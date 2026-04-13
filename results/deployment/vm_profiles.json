@@ -9,7 +9,7 @@
         "accuracy": 0.99053,
         "avg_image_time_sec": 0.001545,
         "throughput_img_sec": 647.38,
-        "selection_score": 0.885372622840672
+        "selection_score": 0.8876587099817044
     },
     "vm2": {
         "profile_name": "balanced",
@@ -21,7 +21,7 @@
         "accuracy": 0.99053,
         "avg_image_time_sec": 0.001545,
         "throughput_img_sec": 647.38,
-        "selection_score": 0.901750111187645
+        "selection_score": 0.9037096144513872
     },
     "vm3": {
         "profile_name": "accuracy_first",
@@ -33,6 +33,6 @@
         "accuracy": 0.99053,
         "avg_image_time_sec": 0.001545,
         "throughput_img_sec": 647.38,
-        "selection_score": 0.9345000741250968
+        "selection_score": 0.935806409634258
     }
 }

@@ -10,6 +10,6 @@ Size reduction (MB): 0.0017
 Compression ratio: 1.0000
 
 Q1 test accuracy: 0.987013
-Average batch inference time (sec): 0.268068
-Average image inference time (sec): 0.004189
-Throughput (images/sec): 238.75
+Average batch inference time (sec): 0.271908
+Average image inference time (sec): 0.004249
+Throughput (images/sec): 235.37

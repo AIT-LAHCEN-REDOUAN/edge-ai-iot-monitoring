@@ -16,9 +16,9 @@ Total weights: 11171266
 Measured sparsity: 0.299742
 
 Fine-tuning epochs: 2
-Fine-tuning time (sec): 111.73
+Fine-tuning time (sec): 121.84
 
 P1 test accuracy: 0.987013
-Average batch inference time (sec): 0.285021
-Average image inference time (sec): 0.004453
-Throughput (images/sec): 224.55
+Average batch inference time (sec): 0.290607
+Average image inference time (sec): 0.004541
+Throughput (images/sec): 220.23

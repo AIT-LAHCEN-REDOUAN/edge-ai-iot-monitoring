@@ -1,0 +1,15 @@
+=== Q2 STATIC PTQ FX REPORT ===
+
+Device: cpu
+Baseline model path: D:\github\IOT_Project\models\baseline\best_model.pth
+Q2 FX model path: D:\github\IOT_Project\models\optimized\q2_static_ptq_fx_model.pth
+
+Baseline model size (MB): 42.6916
+Q2 FX model size (MB): 10.7801
+Size reduction (MB): 31.9115
+Compression ratio: 3.9602
+
+Q2 FX test accuracy: 0.987013
+Average batch inference time (sec): 0.074879
+Average image inference time (sec): 0.001170
+Throughput (images/sec): 854.71

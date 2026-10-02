@@ -1,0 +1,24 @@
+=== P3 MAGNITUDE PRUNING REPORT ===
+
+Training device: cuda
+Evaluation device: cpu
+Baseline model path: D:\github\IOT_Project\models\baseline\best_model.pth
+P3 model path: D:\github\IOT_Project\models\optimized\p3_magnitude_pruned_model.pth
+
+Baseline model size (MB): 42.6916
+P3 model size (MB): 42.6919
+Size reduction (MB): -0.0003
+Compression ratio: 1.0000
+
+Magnitude prune amount target: 0.30
+Zero weights: 3348499
+Total weights: 11171266
+Measured sparsity: 0.299742
+
+Fine-tuning epochs: 2
+Fine-tuning time (sec): 114.39
+
+P3 test accuracy: 0.987013
+Average batch inference time (sec): 0.274324
+Average image inference time (sec): 0.004286
+Throughput (images/sec): 233.30

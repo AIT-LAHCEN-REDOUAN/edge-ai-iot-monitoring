@@ -1,0 +1,19 @@
+=== Q3 FAST QAT REPORT ===
+
+Training device: cuda
+Evaluation device: cpu
+Baseline model path: D:\github\IOT_Project\models\baseline\best_model.pth
+Q3 model path: D:\github\IOT_Project\models\optimized\q3_qat_model.pth
+
+Baseline model size (MB): 42.6916
+Q3 model size (MB): 10.7809
+Size reduction (MB): 31.9108
+Compression ratio: 3.9599
+
+QAT fine-tuning epochs: 2
+QAT total training time (sec): 148.11
+
+Q3 test accuracy: 0.990530
+Average batch inference time (sec): 0.098860
+Average image inference time (sec): 0.001545
+Throughput (images/sec): 647.38

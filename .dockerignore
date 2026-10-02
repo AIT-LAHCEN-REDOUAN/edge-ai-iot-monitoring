@@ -1,0 +1,16 @@
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.idea
+.git
+.gitignore
+data/
+models/
+results/
+dataset/
+tb-data/
+tb-logs/
+*.nii
+*.nii.gz

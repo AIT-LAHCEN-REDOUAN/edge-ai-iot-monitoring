@@ -1,0 +1,257 @@
+PS D:\github\IOT_Project> & d:/github/IOT_Project/.venv/Scripts/Activate.ps1
+(.venv) PS D:\github\IOT_Project> 
+(.venv) PS D:\github\IOT_Project> docker compose logs -n 50 vm1
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:52] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:52] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:52] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:53] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:53] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:53] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:53] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:53] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:53] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:53] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:54] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:54] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:54] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:54] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:54] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:54] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:54] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:55] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:55] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:55] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:55] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:56] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:56] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:56] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:56] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:56] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:56] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:56] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:57] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:57] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:57] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:57] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:57] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:58] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:58] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:58] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:58] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:58] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:58] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:58] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:59] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:59] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:59] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:59] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:59] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:52:59] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:53:00] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:53:00] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:53:00] "POST /infer HTTP/1.1" 200 -
+vm1_container  | 172.18.0.1 - - [11/Apr/2026 17:53:00] "POST /infer HTTP/1.1" 200 -
+(.venv) PS D:\github\IOT_Project> docker compose logs -n 50 vm2
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:09] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:10] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:11] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:12] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+vm2_container  | 172.18.0.1 - - [11/Apr/2026 17:53:13] "POST /infer HTTP/1.1" 200 -
+(.venv) PS D:\github\IOT_Project> docker compose logs -n 50 vm3
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:21] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:22] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:22] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:22] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:22] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:22] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:22] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:22] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:23] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:23] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:23] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:23] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:23] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:24] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+vm3_container  | 172.18.0.1 - - [11/Apr/2026 17:53:25] "POST /infer HTTP/1.1" 200 -
+(.venv) PS D:\github\IOT_Project> docker compose logs -n 100 thingsboard
+thingsboard  | 2026-04-11 17:51:17,292 [main] WARN  o.e.l.s.c.e.c.CoapsServerEndpointFactory - PskStore should be automatically set by Leshan. Using a custom implementation is not advised.
+thingsboard  | 2026-04-11 17:51:17,292 [main] INFO  o.e.c.s.d.InMemoryReadWriteLockConnectionStore - Created new InMemoryConnectionStore [capacity: 150000, connection expiration threshold: 1800s]
+thingsboard  | 2026-04-11 17:51:17,293 [main] INFO  o.e.c.c.network.RandomTokenGenerator - using tokens of 8 bytes in length
+thingsboard  | 2026-04-11 17:51:17,293 [main] INFO  o.e.c.core.network.CoapEndpoint - [LWM2M Server-coaps://0.0.0.0:5686] CoapEndpoint uses lwm2m correlation
+thingsboard  | 2026-04-11 17:51:17,294 [main] INFO  o.e.c.c.network.stack.BlockwiseLayer - [LWM2M Server-coaps://0.0.0.0:5686] BlockwiseLayer uses MAX_MESSAGE_SIZE=1024, PREFERRED_BLOCK_SIZE=1024, BLOCKWISE_STATUS_LIFETIME=300000, MAX_RESOURCE_BODY_SIZE=268435456, BLOCKWISE_STRICT_BLOCK2_OPTION=true
+thingsboard  | 2026-04-11 17:51:17,303 [main] INFO  o.t.s.t.l.s.DefaultLwM2mTransportService - Starting LwM2M transport server...
+thingsboard  | 2026-04-11 17:51:17,305 [main] INFO  o.e.californium.core.CoapServer - Starting server
+thingsboard  | 2026-04-11 17:51:17,308 [main] INFO  o.e.c.elements.UDPConnector - UDPConnector starts up 2 sender threads and 2 receiver threads
+thingsboard  | 2026-04-11 17:51:17,310 [main] INFO  o.e.c.elements.UDPConnector - UDPConnector listening on /[0:0:0:0:0:0:0:0]:5685, recv buf = 106496, send buf = 106496, recv packet size = 2048
+thingsboard  | 2026-04-11 17:51:17,311 [main] INFO  o.e.c.core.network.CoapEndpoint - [LWM2M Server-coap://0.0.0.0:5685] Started endpoint at coap://[0:0:0:0:0:0:0:0]:5685
+thingsboard  | 2026-04-11 17:51:17,312 [main] INFO  o.e.c.scandium.DTLSConnector - multiple network interfaces, using smallest MTU [IPv4 1500, IPv6 1280]
+thingsboard  | 2026-04-11 17:51:17,313 [DTLS-Receiver-0-/[0:0:0:0:0:0:0:0]:5686] INFO  o.e.c.scandium.DTLSConnector - Starting worker thread [DTLS-Receiver-0-/[0:0:0:0:0:0:0:0]:5686]
+thingsboard  | 2026-04-11 17:51:17,313 [main] INFO  o.e.c.scandium.DTLSConnector - DTLSConnector listening on /[0:0:0:0:0:0:0:0]:5686, recv buf = 106496, send buf = 106496, recv packet size = 16490, MTU = IPv4 1500 / IPv6 1280      
+thingsboard  | 2026-04-11 17:51:17,314 [DTLS-Receiver-1-/[0:0:0:0:0:0:0:0]:5686] INFO  o.e.c.scandium.DTLSConnector - Starting worker thread [DTLS-Receiver-1-/[0:0:0:0:0:0:0:0]:5686]
+thingsboard  | 2026-04-11 17:51:17,314 [main] INFO  o.e.c.core.network.CoapEndpoint - [LWM2M Server-coaps://0.0.0.0:5686] Started endpoint at coaps://[0:0:0:0:0:0:0:0]:5686
+thingsboard  | 2026-04-11 17:51:17,315 [main] INFO  o.eclipse.leshan.server.LeshanServer - LWM2M server started.    
+thingsboard  | 2026-04-11 17:51:17,315 [main] INFO  o.eclipse.leshan.server.LeshanServer - CoAP over UDP endpoint based on Californium library available at coap://[0:0:0:0:0:0:0:0]:5685.
+thingsboard  | 2026-04-11 17:51:17,316 [main] INFO  o.eclipse.leshan.server.LeshanServer - CoAP over DTLS endpoint based on Californium/Scandium library available at coaps://[0:0:0:0:0:0:0:0]:5686.
+thingsboard  | 2026-04-11 17:51:17,319 [main] INFO  o.t.s.t.l.s.DefaultLwM2mTransportService - Started LwM2M transport server.
+thingsboard  | 2026-04-11 17:51:17,320 [snmp-bootstrap-69-thread-1] INFO  o.t.s.t.snmp.SnmpTransportContext - Initializing SNMP devices sessions
+thingsboard  | 2026-04-11 17:51:17,320 [main] INFO  o.t.s.ThingsboardServerApplication - Started ThingsBoard in 30 seconds
+thingsboard  | 2026-04-11 17:51:17,911 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage] Managing following partitions:
+thingsboard  | 2026-04-11 17:51:17,911 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.4]: 0 entities
+thingsboard  | 2026-04-11 17:51:17,912 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.8]: 1 entities
+thingsboard  | 2026-04-11 17:51:17,912 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.0]: 0 entities
+thingsboard  | 2026-04-11 17:51:17,912 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.3]: 1 entities
+thingsboard  | 2026-04-11 17:51:17,913 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.7]: 0 entities
+thingsboard  | 2026-04-11 17:51:17,913 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.2]: 0 entities
+thingsboard  | 2026-04-11 17:51:17,913 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.6]: 0 entities
+thingsboard  | 2026-04-11 17:51:17,914 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.5]: 0 entities
+thingsboard  | 2026-04-11 17:51:17,914 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.1]: 0 entities
+thingsboard  | 2026-04-11 17:51:17,914 [DbCallbackExecutorService-0-1] INFO  o.t.s.s.p.AbstractPartitionBasedService - [API Usage][tb_core.9]: 0 entities
+thingsboard  | 2026-04-11 17:51:18,226 [rule-dispatcher-0-8] INFO  o.t.s.d.s.i.s.SqlPartitioningRepository - Saving partition 1775692800000-1776297600000 for table lc_event
+thingsboard  | 2026-04-11 17:51:18,749 [rule-dispatcher-0-5] INFO  c.d.oss.driver.api.core.uuid.Uuids - PID obtained through native call to getpid(): 22
+thingsboard  | 2026-04-11 17:51:23,573 [git-sync-43-thread-1] INFO  o.t.s.s.sync.DefaultGitSyncService - [gateways-dashboard] Initialized repository
+thingsboard  | 2026-04-11 17:51:24,379 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [Events] queueSize [0] totalAdded [6] totalSaved [6] totalFailed [0]
+thingsboard  | 2026-04-11 17:51:24,380 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-1 [Events] queueSize [0] totalAdded [6] totalSaved [6] totalFailed [0]
+thingsboard  | 2026-04-11 17:51:24,380 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [Events] queueSize [0] totalAdded [4] totalSaved [4] totalFailed [0]
+thingsboard  | 2026-04-11 17:51:24,464 [git-sync-43-thread-1] INFO  o.t.s.d.resource.BaseResourceService - Updating system resource gateway-management-extension.js
+thingsboard  | 2026-04-11 17:51:24,473 [git-sync-43-thread-1] INFO  org.owasp.validator.html.Policy - Attempting to load AntiSamy policy from an input stream.
+thingsboard  | 2026-04-11 17:51:24,581 [git-sync-43-thread-1] WARN  org.owasp.validator.html.Policy - The directive "noopenerAndNoreferrerAnchors" is enabled by default, but disabled in this policy. It is recommended to leave it enabled to prevent reverse tabnabbing attacks.
+thingsboard  | 2026-04-11 17:51:24,702 [app-dispatcher-31-thread-1] WARN  o.t.server.actors.app.AppActor - Message has system tenant id: ComponentLifecycleMsg(tenantId=13814000-1dd2-11b2-8080-808080808080, entityId=82cc5a80-277a-11f1-b456-3d6768467530, event=UPDATED, oldName=null, name=null, oldProfileId=null, profileId=null, info=null)
+thingsboard  | 2026-04-11 17:51:24,953 [app-dispatcher-31-thread-1] WARN  o.t.server.actors.app.AppActor - Message has system tenant id: ComponentLifecycleMsg(tenantId=13814000-1dd2-11b2-8080-808080808080, entityId=82c8d810-277a-11f1-b456-3d6768467530, event=UPDATED, oldName=null, name=null, oldProfileId=null, profileId=null, info=null)
+thingsboard  | 2026-04-11 17:51:25,323 [git-sync-43-thread-1] INFO  o.t.s.d.resource.BaseResourceService - Updating system resource gateways_dashboard.json
+thingsboard  | 2026-04-11 17:51:25,331 [git-sync-43-thread-1] INFO  o.t.s.s.e.d.DashboardSyncService - Gateways dashboard sync completed
+thingsboard  | 2026-04-11 17:51:25,355 [app-dispatcher-31-thread-1] WARN  o.t.server.actors.app.AppActor - Message has system tenant id: ComponentLifecycleMsg(tenantId=13814000-1dd2-11b2-8080-808080808080, entityId=82dc3900-277a-11f1-b456-3d6768467530, event=UPDATED, oldName=null, name=null, oldProfileId=null, profileId=null, info=null)
+thingsboard  | 2026-04-11 17:51:26,267 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-04-11 17:51:26,311 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-04-11 17:51:32,310 [http-nio-0.0.0.0-9090-exec-1] INFO  o.a.tomcat.util.http.parser.Cookie - A cookie header was received [g_state={"i_l":0,"i_ll":1770394731860,"i_b":"qvuVMfAoBJR90t7yHK9vU/6aRVl8Jmmt1t9ECCbX03c","i_e":{"enable_itp_optimization":0}};] that contained an invalid cookie. That cookie will be ignored.
+thingsboard  |  Note: further occurrences of this error will be logged at DEBUG level.
+thingsboard  | 2026-04-11 17:51:32,318 [http-nio-0.0.0.0-9090-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+thingsboard  | 2026-04-11 17:51:32,318 [http-nio-0.0.0.0-9090-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+thingsboard  | 2026-04-11 17:51:32,323 [http-nio-0.0.0.0-9090-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+thingsboard  | 2026-04-11 17:51:34,047 [http-nio-0.0.0.0-9090-exec-7] INFO  o.t.s.c.plugin.TbWebSocketHandler - [82df9460-277a-11f1-b456-3d6768467530][8360ab40-277a-11f1-b456-3d6768467530][dd048934-45ed-43e4-a428-f2dec411ac04][927558b5-8442-6f6d-0da2-91c72984d15f] Session established from address: /172.18.0.1:42086
+thingsboard  | 2026-04-11 17:51:36,166 [TB-Scheduling-15] INFO  o.t.s.s.s.DefaultTbEntityDataSubscriptionService - Stats: regularQueryInvocationCnt = [7], regularQueryInvocationTime = [26], dynamicQueryCnt = [0] dynamicQueryInvocationCnt = [0], dynamicQueryInvocationTime = [0], alarmQueryInvocationCnt = [0], alarmQueryInvocationTime = [0]        
+thingsboard  | 2026-04-11 17:52:00,157 [http-nio-0.0.0.0-9090-exec-4] INFO  o.t.s.c.plugin.TbWebSocketHandler - [82df9460-277a-11f1-b456-3d6768467530][8360ab40-277a-11f1-b456-3d6768467530][dd048934-45ed-43e4-a428-f2dec411ac04] Session is closed
+thingsboard  | 2026-04-11 17:52:00,860 [http-nio-0.0.0.0-9090-exec-7] INFO  o.t.s.c.plugin.TbWebSocketHandler - [82df9460-277a-11f1-b456-3d6768467530][8360ab40-277a-11f1-b456-3d6768467530][1f28041a-e99d-4b1c-8fe6-f89fa9a50bc8][4bab7f96-a629-dbee-b235-35c54933142d] Session established from address: /172.18.0.1:50648
+thingsboard  | 2026-04-11 17:52:16,134 [TB-Scheduling-16] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - Total timing statistics below:
+thingsboard  | 2026-04-11 17:52:16,135 [TB-Scheduling-16] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: calls: 72, failures: 0, exec time: 2724
+thingsboard  | 2026-04-11 17:52:16,136 [TB-Scheduling-16] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530] Top 3 methods by timing:
+thingsboard  | 2026-04-11 17:52:16,138 [TB-Scheduling-16] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaAbstractDao.findById(..), calls: 36, failures: 0, exec time: 1492
+thingsboard  | 2026-04-11 17:52:16,138 [TB-Scheduling-16] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaApiUsageStateDao.findApiUsageStateByEntityId(..), calls: 2, failures: 0, exec time: 247
+thingsboard  | 2026-04-11 17:52:16,138 [TB-Scheduling-16] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaRuleChainDao.findRuleChainsByTenantIdAndType(..), calls: 1, failures: 0, exec time: 168
+thingsboard  | 2026-04-11 17:52:16,146 [TB-Scheduling-11] INFO  o.t.s.s.queue.EdgeConsumerStats - Edge Stats: totalMsgs = [14] edgeNfs = [14] coreNfEdgeHPUpd = [0] coreNfEdgeUpd = [0] coreNfEdgeSyncReq = [0] coreNfEdgeSyncResp = [0] coreNfEdgeCompLfcl = [0]
+thingsboard  | 2026-04-11 17:52:16,147 [TB-Scheduling-1] INFO  o.t.s.c.t.s.DefaultTransportService - Transport Stats: openConnections [0]
+thingsboard  | 2026-04-11 17:52:16,147 [TB-Scheduling-10] INFO  o.t.s.s.queue.TbCoreConsumerStats - Core Stats: totalMsgs = [4] sessionEvents = [0] getAttr = [0] subToAttr = [0] subToRpc = [0] toDevRpc = [0] subInfo = [0] claimDevice = [0] deviceState = [0] subMsgs = [0] deviceConnect = [0] deviceActivity = [0] deviceDisconnect = [0] deviceInactivity = [0] deviceInactivityTimeoutUpdate = [0] coreNfOther = [1] coreNfCompLfcl = [3] coreNfDevRpcRsp = [0] coreNfNfRlProc = [0] coreNfQueueUpd = [0] coreNfQueueDel = [0] coreNfSubSvc = [0] coreNfSubMgr = [0] coreNfVCRsp = [0]      
+thingsboard  | 2026-04-11 17:52:26,248 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-04-11 17:52:26,292 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-04-11 17:52:31,213 [http-nio-0.0.0.0-9090-exec-6] INFO  o.t.s.c.plugin.TbWebSocketHandler - [82df9460-277a-11f1-b456-3d6768467530][8360ab40-277a-11f1-b456-3d6768467530][1f28041a-e99d-4b1c-8fe6-f89fa9a50bc8] Session is closed
+thingsboard  | 2026-04-11 17:52:32,017 [http-nio-0.0.0.0-9090-exec-2] INFO  o.t.s.c.plugin.TbWebSocketHandler - [82df9460-277a-11f1-b456-3d6768467530][8360ab40-277a-11f1-b456-3d6768467530][bcc637bf-ddba-4da1-b1ae-8102f7e7b328][86e5bd93-463f-ee6f-cf74-c8590a37d5da] Session established from address: /172.18.0.1:48640
+thingsboard  | 2026-04-11 17:52:56,236 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-04-11 17:52:56,237 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-04-11 17:52:56,280 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-04-11 17:52:56,281 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-04-11 17:53:04,373 [http-nio-0.0.0.0-9090-exec-3] INFO  o.t.s.c.plugin.TbWebSocketHandler - [82df9460-277a-11f1-b456-3d6768467530][8360ab40-277a-11f1-b456-3d6768467530][bcc637bf-ddba-4da1-b1ae-8102f7e7b328] Session is closed
+thingsboard  | 2026-04-11 17:53:05,244 [http-nio-0.0.0.0-9090-exec-7] INFO  o.t.s.c.plugin.TbWebSocketHandler - [82df9460-277a-11f1-b456-3d6768467530][8360ab40-277a-11f1-b456-3d6768467530][ddff87aa-66d0-426e-8546-eda203e9583f][8ea1b0cb-b476-c755-db28-2ce3b4fca42f] Session established from address: /172.18.0.1:55544
+thingsboard  | 2026-04-11 17:53:16,116 [TB-Scheduling-15] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - Total timing statistics below:
+thingsboard  | 2026-04-11 17:53:16,118 [TB-Scheduling-15] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: calls: 6, failures: 0, exec time: 36
+thingsboard  | 2026-04-11 17:53:16,119 [TB-Scheduling-15] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530] Top 3 methods by timing:
+thingsboard  | 2026-04-11 17:53:16,119 [TB-Scheduling-15] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaUserCredentialsDao.findByUserId(..), calls: 2, failures: 0, exec time: 18       
+thingsboard  | 2026-04-11 17:53:16,119 [TB-Scheduling-15] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaAbstractDao.findById(..), calls: 2, failures: 0, exec time: 10
+thingsboard  | 2026-04-11 17:53:16,120 [TB-Scheduling-15] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaNotificationDao.countUnreadByDeliveryMethodAndRecipientId(..), calls: 2, failures: 0, exec time: 8
+thingsboard  | 2026-04-11 17:53:16,124 [TB-Scheduling-11] INFO  o.t.s.c.t.s.DefaultTransportService - Transport Stats: openConnections [0]
+thingsboard  | 2026-04-11 17:53:26,225 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-04-11 17:53:26,269 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-04-11 17:53:31,878 [http-nio-0.0.0.0-9090-exec-5] INFO  o.t.s.c.plugin.TbWebSocketHandler - [82df9460-277a-11f1-b456-3d6768467530][8360ab40-277a-11f1-b456-3d6768467530][ddff87aa-66d0-426e-8546-eda203e9583f] Session is closed
+thingsboard  | 2026-04-11 17:53:32,776 [http-nio-0.0.0.0-9090-exec-7] INFO  o.t.s.c.plugin.TbWebSocketHandler - [82df9460-277a-11f1-b456-3d6768467530][8360ab40-277a-11f1-b456-3d6768467530][20ae3aa0-ced5-401c-a028-e98d983d148c][9daa387b-9fe5-41f2-f16a-9f3cb5b8ed8c] Session established from address: /172.18.0.1:52946
+thingsboard  | 2026-04-11 17:53:56,214 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-04-11 17:53:56,214 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-04-11 17:53:56,258 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-0 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-04-11 17:53:56,258 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [2] totalSaved [2] totalFailed [0]
+thingsboard  | 2026-04-11 17:54:16,101 [TB-Scheduling-1] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - Total timing statistics below:
+thingsboard  | 2026-04-11 17:54:16,102 [TB-Scheduling-1] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: calls: 3, failures: 0, exec time: 7
+thingsboard  | 2026-04-11 17:54:16,102 [TB-Scheduling-1] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530] Top 3 methods by timing:
+thingsboard  | 2026-04-11 17:54:16,102 [TB-Scheduling-1] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaAbstractDao.findById(..), calls: 1, failures: 0, exec time: 3
+thingsboard  | 2026-04-11 17:54:16,102 [TB-Scheduling-1] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaUserCredentialsDao.findByUserId(..), calls: 1, failures: 0, exec time: 2
+thingsboard  | 2026-04-11 17:54:16,103 [TB-Scheduling-1] INFO  o.t.s.dao.aspect.SqlDaoCallsAspect - [82df9460-277a-11f1-b456-3d6768467530]: method: JpaNotificationDao.countUnreadByDeliveryMethodAndRecipientId(..), calls: 1, failures: 0, exec time: 2
+thingsboard  | 2026-04-11 17:54:16,106 [TB-Scheduling-11] INFO  o.t.s.c.t.s.DefaultTransportService - Transport Stats: openConnections [0]
+thingsboard  | 2026-04-11 17:54:26,206 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+thingsboard  | 2026-04-11 17:54:26,250 [sql-log-2-thread-1] INFO  o.t.s.dao.sql.TbSqlBlockingQueue - Queue-2 [TS Latest] queueSize [0] totalAdded [7] totalSaved [7] totalFailed [0]
+(.venv) PS D:\github\IOT_Project> 

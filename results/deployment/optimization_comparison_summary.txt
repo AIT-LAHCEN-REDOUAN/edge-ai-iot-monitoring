@@ -1,0 +1,19 @@
+=== OPTIMIZATION COMPARISON SUMMARY ===
+Total techniques parsed: 10
+Best CPU throughput: q2_static_ptq_fx (854.71 img/s)
+Best CPU accuracy: q3_qat (0.990530)
+Best GPU throughput: q5_mixed_precision (7764.18 img/s)
+Smallest model/checkpoint: q2_static_ptq_fx (10.7801 MB)
+
+=== FULL TABLE PREVIEW ===
+              technique       family device_context  effective_size_mb  accuracy  avg_batch_time_sec  avg_image_time_sec  throughput_img_sec  peak_gpu_memory_mb  sparsity  compression_ratio  finetune_time_sec                                                                   source_file
+           baseline_cpu     baseline            cpu            42.6916  0.987013            0.243888            0.003811              262.42                 NaN       NaN                NaN                NaN         D:\github\IOT_Project\results\optimization\baseline_benchmark_cpu.txt
+           baseline_gpu     baseline            gpu            42.6916  0.987013            0.012023            0.000188             5323.26              182.79       NaN                NaN                NaN             D:\github\IOT_Project\results\optimization\baseline_benchmark.txt
+q1_dynamic_quantization quantization            cpu            42.6899  0.987013            0.271908            0.004249              235.37                 NaN       NaN             1.0000                NaN D:\github\IOT_Project\results\optimization\q1_dynamic_quantization_report.txt
+       q2_static_ptq_fx quantization            cpu            10.7801  0.987013            0.074879            0.001170              854.71                 NaN       NaN             3.9602                NaN        D:\github\IOT_Project\results\optimization\q2_static_ptq_fx_report.txt
+                 q3_qat quantization            cpu            10.7809  0.990530            0.098860            0.001545              647.38                 NaN       NaN             3.9599             148.11                  D:\github\IOT_Project\results\optimization\q3_qat_report.txt
+         q4_weight_only quantization            cpu            21.3633  0.987013            0.219783            0.003434              291.20                 NaN       NaN             1.9984                NaN          D:\github\IOT_Project\results\optimization\q4_weight_only_report.txt
+     q5_mixed_precision quantization            gpu            21.3644  0.987013            0.008243            0.000129             7764.18              126.80       NaN             1.9983                NaN      D:\github\IOT_Project\results\optimization\q5_mixed_precision_report.txt
+p1_unstructured_pruning      pruning            cpu            42.6923  0.987013            0.290607            0.004541              220.23                 NaN  0.299742             1.0000             121.84 D:\github\IOT_Project\results\optimization\p1_unstructured_pruning_report.txt
+  p2_structured_pruning      pruning            cpu            42.6920  0.987013            0.272728            0.004261              234.67                 NaN  0.199265             1.0000             112.62   D:\github\IOT_Project\results\optimization\p2_structured_pruning_report.txt
+   p3_magnitude_pruning      pruning            cpu            42.6919  0.987013            0.274324            0.004286              233.30                 NaN  0.299742             1.0000             114.39    D:\github\IOT_Project\results\optimization\p3_magnitude_pruning_report.txt

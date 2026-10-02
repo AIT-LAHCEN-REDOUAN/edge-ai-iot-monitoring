@@ -1,0 +1,13 @@
+numpy
+pandas
+scipy
+nibabel
+tqdm
+scikit-learn
+matplotlib
+torch
+torchvision
+flask
+psutil
+requests
+paho-mqtt

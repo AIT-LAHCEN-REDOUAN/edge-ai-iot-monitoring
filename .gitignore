@@ -1,0 +1,6 @@
+/data
+*.pyc
+/tb-data
+/tb-logs
+*.npy
+/data
